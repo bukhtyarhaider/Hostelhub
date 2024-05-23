@@ -2,7 +2,6 @@
  * Props for the CustomButton component.
  */
 export interface CustomButtonProps {
-
   /**
    * The text content of the button.
    */
@@ -22,6 +21,11 @@ export interface CustomButtonProps {
    * Boolean for extraWidth of the button.
    */
   extraWidth?: boolean;
+
+  /**
+   * Boolean to disable the button.
+   */
+  isDisabled?: boolean;
 
   /**
    * Event handler for the button click.

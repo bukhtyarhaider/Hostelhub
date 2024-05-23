@@ -7,14 +7,17 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   variant,
   size,
   extraWidth,
+  isDisabled,
   onClick,
 }) => {
   const buttonClassName = `${styles["custom-button"]}  ${styles[variant]} ${
     styles[size]
-  } ${extraWidth ? styles["extra-width"] : ""}`;
+  } ${extraWidth ? styles["extra-width"] : ""} ${
+    styles[isDisabled ? "isDisabled" : ""]
+  }`;
 
   return (
-    <button className={buttonClassName} onClick={onClick}>
+    <button className={buttonClassName} onClick={onClick} disabled={isDisabled}>
       {title}
     </button>
   );
