@@ -7,7 +7,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
   placeholder,
   isDisabled,
   value,
-  setValue,
   label,
   onChange,
 }) => {
@@ -25,10 +24,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
         value={value}
         disabled={isDisabled}
         onChange={(e) => {
-          setValue(e.target.value);
-          if (onChange) {
-            onChange(e);
-          }
+          onChange(e);
         }}
       />
     </div>
