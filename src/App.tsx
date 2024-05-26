@@ -1,5 +1,7 @@
+import "./main.scss";
+
 function App() {
-  return <></>;
+  return <div className="app-container"></div>;
 }
 
 export default App;
