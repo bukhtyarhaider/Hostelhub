@@ -46,8 +46,10 @@
 @media screen and (max-width: 767px) {
   .adCardContainer {
     @include flex(column, start, center);
-
+    padding: 0 20px;
     .imageContainer {
+      height: 100%;
+      width: 100%;
       .imgWrapper {
         width: 100%;
         height: auto;

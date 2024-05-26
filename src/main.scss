@@ -102,8 +102,12 @@ body {
   position: relative;
 }
 
-.ant-drawer-wrapper-body {
-  background: var(--background) !important;
+.ant-drawer .ant-drawer-content {
+  background: #003b95 !important;
+
+  button {
+    background-color: white;
+  }
 }
 
 .ant-drawer-header {
@@ -118,8 +122,9 @@ body {
 }
 .ant-drawer-close {
   position: absolute;
-  top: 32px;
   right: 10px;
+  color: white !important;
+  background-color: transparent !important;
 
   .anticon {
     color: var(--red) !important;

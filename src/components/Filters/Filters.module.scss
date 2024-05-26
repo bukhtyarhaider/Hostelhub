@@ -1,0 +1,48 @@
+@import "../../mixins";
+.filtersContainer {
+  padding: 20px 60px;
+  .imgContainer {
+    @include flex(column, center, center);
+    color: var(--secondary-text);
+    margin-top: 100px;
+    background-image: url("../../assets//images//header-cover.png");
+    background-size: cover; // Ensures the image covers the entire container
+    background-position: center; // Centers the image within the container
+    background-repeat: no-repeat; // Prevents the image from repeating
+    height: 390px;
+    width: 100%;
+    border-radius: 4px;
+
+    h2 {
+      font-size: 58px;
+      font-weight: 700;
+      line-height: 50px;
+      padding-bottom: 40px;
+    }
+
+    .fieldsWrapper {
+      @include flex(row, center, center);
+      gap: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .filtersContainer {
+    padding: 20px 0px;
+    .imgContainer {
+      @include flex(column, center, center);
+      margin-top: 40px;
+
+      h2 {
+        font-size: 28px;
+        font-weight: 600;
+      }
+
+      .fieldsWrapper {
+        @include flex(column, center, center);
+        gap: 20px;
+      }
+    }
+  }
+}

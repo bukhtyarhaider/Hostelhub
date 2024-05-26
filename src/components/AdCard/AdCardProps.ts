@@ -7,12 +7,12 @@ export interface AdCardProps {
   /**
    * The title of the card.
    */
-  title?: string;
+  title: string;
 
   /**
    * The description of the card.
    */
-  description?: string;
+  description: string;
 
   /**
    * The URL of the image to be displayed on the card.

@@ -1,0 +1,14 @@
+@import "../../mixins";
+.homeContainer {
+  .cardsContainer {
+    padding: 0px 60px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .homeContainer {
+    .cardsContainer {
+      padding: 0px;
+    }
+  }
+}

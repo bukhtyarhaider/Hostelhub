@@ -13,9 +13,11 @@
 .outline {
   color: var(--blue);
   border: 1.5px solid var(--blue);
+  background-color: var(--background);
   &:hover {
-    background-color: var(--blue);
     color: var(--secondary-text);
+    border: 1.5px solid var(--background);
+    background-color: var(--blue);
   }
 }
 
@@ -49,6 +51,7 @@
 .medium {
   height: 40px;
   font-size: 14px;
+  font-weight: 500;
 }
 
 .small {
