@@ -13,8 +13,8 @@ const Footer = () => {
           </div>
         </div>
         <div className={styles.socialIconsContainer}>
-          {socialIcons.map((social) => (
-            <div className={styles.iconWrapper}>
+          {socialIcons.map((social, index) => (
+            <div key={index} className={styles.iconWrapper}>
               <Link to={social.url}>
                 <img src={social.icon} />
               </Link>

@@ -11,16 +11,14 @@ const Home = () => {
 
       <div className={homeStyles.cardsContainer}>
         {adCardsData.map((item, index) => (
-          <>
-            {index === 3 ? (
+          <div key={index}>
+            {index === 3 && (
               <CTA
                 primaryText="Sign in, search more"
                 secondaryText="Unlock hundreds of new hostels with just a single Sign Up!"
                 onPrimaryBtn={() => {}}
                 onSecondaryBtn={() => {}}
               />
-            ) : (
-              <></>
             )}
             <AdCard
               title={item.title}
@@ -29,7 +27,7 @@ const Home = () => {
               location={item.location}
               onShowDetails={() => {}}
             />
-          </>
+          </div>
         ))}
       </div>
     </div>
