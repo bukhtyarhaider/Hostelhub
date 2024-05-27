@@ -5,14 +5,34 @@ import styles from "./Navbar.module.scss";
 import { logo } from "../../assets";
 import CustomButton from "../CustomButton/CustomButton";
 import { Link } from "react-router-dom";
-import { NavBarProps } from "./NavbarProps";
+import { NavBarProps, ProfileMenuItem } from "./NavbarProps";
 
-const NavBar: React.FC<NavBarProps> = ({ navItems, authUser }) => {
+const NavBar: React.FC<NavBarProps> = ({
+  navItems,
+  authUser,
+  profileMenu,
+  onSignIn,
+  onResgister,
+}) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const toggleDrawer = () => {
     setOpenDrawer(!openDrawer);
   };
+
+  const getProfileMenu = (menu: ProfileMenuItem[]) => {
+    return menu?.map((item, index) => ({
+      label: (
+        <Link to={item.to} className={styles.profileItem} key={index}>
+          <p>{item.label}</p>
+          <img src={item.iconSrc} onContextMenu={(e) => e.preventDefault()} />
+        </Link>
+      ),
+      onClick: item.onClick,
+      key: index.toString(),
+    }));
+  };
+
   return (
     <div className={styles.navBarContainer}>
       <div className={styles.logoContainer}>
@@ -48,7 +68,7 @@ const NavBar: React.FC<NavBarProps> = ({ navItems, authUser }) => {
 
           <Dropdown
             menu={{
-              items: authUser.menu,
+              items: getProfileMenu(profileMenu ?? []),
               selectable: true,
             }}
           >
@@ -60,8 +80,18 @@ const NavBar: React.FC<NavBarProps> = ({ navItems, authUser }) => {
         </div>
       ) : (
         <div className={styles.buttons}>
-          <CustomButton title="Sign In" variant="outline" size="medium" />
-          <CustomButton title="Register" variant="outline" size="medium" />
+          <CustomButton
+            title="Sign In"
+            variant="outline"
+            size="medium"
+            onClick={onSignIn}
+          />
+          <CustomButton
+            title="Register"
+            variant="outline"
+            size="medium"
+            onClick={onResgister}
+          />
         </div>
       )}
 
@@ -87,7 +117,7 @@ const NavBar: React.FC<NavBarProps> = ({ navItems, authUser }) => {
 
               <Dropdown
                 menu={{
-                  items: authUser.menu,
+                  items: getProfileMenu(profileMenu ?? []),
                   selectable: true,
                 }}
               >

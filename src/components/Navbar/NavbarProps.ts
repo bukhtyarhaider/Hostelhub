@@ -1,22 +1,26 @@
-import { ReactNode } from "react";
 /**
  * Interface for a menu item.
  */
-interface MenuItem {
+export interface ProfileMenuItem {
   /**
-   * The label of the menu item, which can be a React node (JSX element).
+   * The URL to navigate to when the menu item is clicked.
    */
-  label: ReactNode;
+  to: string;
 
   /**
-   * The onclick handler function for the menu item.
+   * The label of the menu item.
    */
-  onclick: () => void;
+  label: string;
 
   /**
-   * A unique key for the menu item.
+   * The source URL for the icon of the menu item.
    */
-  key: string;
+  iconSrc: string;
+
+  /**
+   * Optional click handler for the menu item.
+   */
+  onClick?: () => void;
 }
 
 /**
@@ -32,12 +36,8 @@ export interface AuthUser {
    * The image of the user.
    */
   image: string;
-
-  /**
-   * An array of menu items associated with the user.
-   */
-  menu: MenuItem[];
 }
+
 /**
  * Interface for the Navbar component props.
  */
@@ -45,10 +45,25 @@ export interface NavBarProps {
   /**
    * An array of navigation items, each containing a name and URL.
    */
-  navItems?: { name: string; url: string }[];
+  navItems: { name: string; url: string }[];
 
   /**
-   * A boolean indicating whether the user is authenticated.
+   * The authenticated user object.
    */
-  authUser?: AuthUser;
+  authUser: AuthUser | undefined;
+
+  /**
+   * An array of profile menu items.
+   */
+  profileMenu: ProfileMenuItem[];
+
+  /**
+   * Optional click handler for the register action.
+   */
+  onResgister?: () => void;
+
+  /**
+   * Optional click handler for the sign-in action.
+   */
+  onSignIn?: () => void;
 }
