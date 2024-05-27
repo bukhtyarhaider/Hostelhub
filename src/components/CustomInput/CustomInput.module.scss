@@ -1,4 +1,5 @@
 @import "../../mixins";
+
 .customInputContainer {
   @include flex(column, center, start);
 
@@ -17,6 +18,27 @@
     background-color: var(--background);
     font-size: 14px;
     font-weight: 400;
+    width: 100%; // Ensure the input takes full width within its container
+  }
+
+  @media (max-width: 768px) {
+    input {
+      min-width: 300px; // Adjust minimum width for tablets
+    }
+  }
+
+  @media (max-width: 480px) {
+    input {
+      min-width: 100%; // Adjust minimum width for mobile devices
+    }
+
+    label {
+      font-size: 12px; // Adjust label font size for smaller screens
+    }
+
+    input {
+      font-size: 12px; // Adjust input font size for smaller screens
+    }
   }
 }
 
