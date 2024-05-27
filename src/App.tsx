@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { AuthUser } from "./components/Navbar/NavbarProps";
-import styles from './components/Navbar/Navbar.module.scss'
+import styles from "./components/Navbar/Navbar.module.scss";
 import "./main.scss";
 import Home from "./pages/Home/Home";
 import { arrowRight, logoutIcon } from "./assets";
@@ -9,7 +9,7 @@ import { navItems } from "./content";
 import Footer from "./components/Footer/Footer";
 
 const user: AuthUser = {
-  name: "Bukhtyar",
+  name: "user",
   image: "https://picsum.photos/200",
   menu: [
     {
