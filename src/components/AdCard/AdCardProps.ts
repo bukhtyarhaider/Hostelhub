@@ -1,5 +1,3 @@
-import { CustomButtonProps } from "../CustomButton/CustomButtonProps";
-
 /**
  * Props for the AdCard component.
  */
@@ -27,5 +25,5 @@ export interface AdCardProps {
   /**
    * Properties for the show details button.
    */
-  showDetailsBtn: CustomButtonProps;
+  onShowDetails:()=> void;
 }

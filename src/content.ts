@@ -22,11 +22,6 @@ export const adCardsData = [
     image: "https://picsum.photos/200",
     description:
       "Lorem ipsum dolor sit amet consectetur. Tristique leo sollicitudin volutpat nunc ac. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.",
-    showDetailsBtn: {
-      title: "Show Details",
-      variant: "filled",
-      size: "medium",
-    },
   },
   {
     title: "Downing Street Hostel",
@@ -34,11 +29,6 @@ export const adCardsData = [
     image: "https://picsum.photos/200",
     description:
       "Lorem ipsum dolor sit amet consectetur. Tristique leo sollicitudin volutpat nunc ac. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.",
-    showDetailsBtn: {
-      title: "Show Details",
-      variant: "filled",
-      size: "medium",
-    },
   },
   {
     title: "Downing Street Hostel",
@@ -46,11 +36,6 @@ export const adCardsData = [
     image: "https://picsum.photos/200",
     description:
       "Lorem ipsum dolor sit amet consectetur. Tristique leo sollicitudin volutpat nunc ac. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.",
-    showDetailsBtn: {
-      title: "Show Details",
-      variant: "filled",
-      size: "medium",
-    },
   },
   {
     title: "Downing Street Hostel",
@@ -58,11 +43,6 @@ export const adCardsData = [
     image: "https://picsum.photos/200",
     description:
       "Lorem ipsum dolor sit amet consectetur. Tristique leo sollicitudin volutpat nunc ac. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.",
-    showDetailsBtn: {
-      title: "Show Details",
-      variant: "filled",
-      size: "medium",
-    },
   },
   {
     title: "Downing Street Hostel",
@@ -70,11 +50,6 @@ export const adCardsData = [
     image: "https://picsum.photos/200",
     description:
       "Lorem ipsum dolor sit amet consectetur. Tristique leo sollicitudin volutpat nunc ac. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.",
-    showDetailsBtn: {
-      title: "Show Details",
-      variant: "filled",
-      size: "medium",
-    },
   },
   {
     title: "Downing Street Hostel",
@@ -82,11 +57,6 @@ export const adCardsData = [
     image: "https://picsum.photos/200",
     description:
       "Lorem ipsum dolor sit amet consectetur. Tristique leo sollicitudin volutpat nunc ac. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.",
-    showDetailsBtn: {
-      title: "Show Details",
-      variant: "filled",
-      size: "medium",
-    },
   },
 ];
 
