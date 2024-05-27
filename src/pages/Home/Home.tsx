@@ -16,14 +16,8 @@ const Home = () => {
               <CTA
                 primaryText="Sign in, search more"
                 secondaryText="Unlock hundreds of new hostels with just a single Sign Up!"
-                primaryBtn={{
-                  title: "Sign In",
-                  onClick: () => {},
-                }}
-                secondaryBtn={{
-                  title: "Register",
-                  onClick: () => {},
-                }}
+                onPrimaryBtn={() => {}}
+                onSecondaryBtn={() => {}}
               />
             ) : (
               <></>
@@ -33,7 +27,7 @@ const Home = () => {
               description={item.description}
               image={item.image}
               location={item.location}
-              showDetailsBtn={item.showDetailsBtn}
+              onShowDetails={() => {}}
             />
           </>
         ))}
