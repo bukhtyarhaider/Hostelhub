@@ -3,10 +3,12 @@
 .adCardContainer {
   @include flex(row, start, center);
   margin-bottom: 40px;
+
   .imageContainer {
     .imgWrapper {
       width: 240px;
       height: 217px;
+
       img {
         height: 100%;
         width: 100%;
@@ -19,12 +21,14 @@
     @include flex(column, center, start);
     padding-left: 20px;
     gap: 10px;
+
     .title {
       font-size: 20px;
       font-weight: 700;
       line-height: 28px;
       color: var(--pale-blue);
     }
+
     .link {
       font-family: var(--secondaryFont);
       font-size: 12px;
@@ -43,13 +47,14 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) { 
   .adCardContainer {
     @include flex(column, start, center);
     padding: 0 20px;
+
     .imageContainer {
-      height: 100%;
       width: 100%;
+
       .imgWrapper {
         width: 100%;
         height: auto;
@@ -57,7 +62,21 @@
     }
 
     .contentContainer {
-      padding: 20px;
+      padding: 20px 0;
+      width: 100%;
+
+      .title {
+        font-size: 18px;
+        line-height: 26px;
+      }
+
+      .link {
+        font-size: 14px;
+      }
+
+      .description {
+        font-size: 16px;
+      }
     }
   }
 }
