@@ -17,7 +17,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   }`;
 
   return (
-    <button className={buttonClassName} onClick={onClick} disabled>
+    <button className={buttonClassName} onClick={onClick} disabled={disabled}>
       {title}
     </button>
   );
