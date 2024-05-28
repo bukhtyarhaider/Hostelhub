@@ -5,13 +5,14 @@ import { CustomInputProps } from "./CustomInputProps";
 const CustomInput: React.FC<CustomInputProps> = ({
   type,
   placeholder,
-  isDisabled,
+  disabled,
   value,
   label,
   onChange,
+  ...rest
 }) => {
   const inputClassName = `${styles["customInputContainer"]} ${
-    isDisabled ? styles["isDisabled"] : ""
+    disabled ? styles["isDisabled"] : ""
   }`;
 
   return (
@@ -22,10 +23,11 @@ const CustomInput: React.FC<CustomInputProps> = ({
         type={type}
         placeholder={placeholder}
         value={value}
-        disabled={isDisabled}
+        disabled={disabled}
         onChange={(e) => {
           onChange(e);
         }}
+        {...rest}
       />
     </div>
   );

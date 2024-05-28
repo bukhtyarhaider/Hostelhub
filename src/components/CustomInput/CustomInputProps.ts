@@ -1,7 +1,10 @@
+import React from "react";
+
 /**
  * Props for the CustomInput component.
  */
-export interface CustomInputProps {
+export interface CustomInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * The type of the input field.
    */
@@ -15,7 +18,7 @@ export interface CustomInputProps {
   /**
    * Boolean to disable the input field.
    */
-  isDisabled?: boolean;
+  disabled?: boolean;
 
   /**
    * The value of the input field.
@@ -25,7 +28,7 @@ export interface CustomInputProps {
   /**
    * The label text for the input field.
    */
-  label: string;
+  label?: string;
 
   /**
    * Event handler for the input change.

@@ -25,7 +25,7 @@ export interface CustomButtonProps {
   /**
    * Boolean to disable the button.
    */
-  isDisabled?: boolean;
+  disabled?: boolean;
 
   /**
    * Event handler for the button click.

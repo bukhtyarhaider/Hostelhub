@@ -1,0 +1,204 @@
+@import "../../mixins";
+
+.navBarContainer {
+  @include flex(row, space-between, center);
+  padding: 30px 100px;
+  position: absolute;
+  background-color: var(--blue);
+  z-index: 1;
+  right: 0;
+  left: 0;
+  .logoContainer {
+    z-index: 1;
+    animation: slideInFromLeft 1s;
+    @include slideFromLeft;
+    .logoWrapper {
+      width: 115px;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  .menuIcon {
+    position: relative;
+    display: none;
+    cursor: pointer;
+    z-index: 1;
+
+    .menuBar1,
+    .menuBar2,
+    .menuBar3 {
+      position: absolute;
+      background-color: var(--background);
+      height: 2px !important;
+      width: 100% !important;
+    }
+
+    .menuBar1 {
+      top: 4px;
+    }
+    .menuBar2 {
+      bottom: 8px;
+    }
+    .menuBar3 {
+      bottom: 2px;
+    }
+  }
+
+  .menuContainer {
+    z-index: 1;
+    ul {
+      margin: 0;
+      padding: 0;
+      @include flex(row, center, center);
+      gap: 32px;
+
+      li {
+        list-style: none;
+        display: flex;
+        a,
+        .active {
+          position: relative;
+          display: block;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 24px;
+          transition: transform 0.5s;
+        }
+
+        a {
+          color: var(--secondary-text);
+          &:hover {
+            color: var(--grey-100);
+          }
+        }
+
+        .active {
+          color: var(--grey-100);
+        }
+      }
+    }
+  }
+}
+
+.buttons {
+  @include flex(row, center, center);
+  gap: 10px;
+  animation: slideInFromTop 1s;
+  @include slideFromTop;
+}
+
+.menuContainerMobile {
+  @include flex(column, center, center);
+
+  ul {
+    @include flex(column, center, center);
+    list-style: none;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+    width: 100% !important;
+    cursor: pointer;
+    .active {
+      color: #ff0090;
+    }
+
+    a {
+      color: #fff;
+      cursor: pointer;
+      font-weight: 500;
+      width: 100% !important;
+      li {
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #1c1c45;
+        @include flex(row, center, center);
+      }
+    }
+
+    li:hover {
+      a {
+        color: #e91e27;
+      }
+    }
+  }
+}
+
+.profile,
+.profileMobileView {
+  @include flex(row, end, center);
+  .profilePicWrapper {
+    height: 32px;
+    width: 32px;
+    img {
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  .nameWrapper {
+    padding-left: 10px;
+    @include flex(row, center, center);
+    color: white;
+    p {
+      padding-right: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.profileItem {
+  @include flex(row, space-between, center);
+
+  p {
+    margin: 0;
+    padding-right: 10px;
+  }
+
+  img {
+    height: 15px;
+    width: 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navBarContainer {
+    padding: 20px;
+
+    .logoContainer {
+      .logoWrapper {
+        width: 90px;
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+
+    .menuIcon {
+      width: 20px;
+      height: 20px;
+      display: flex !important;
+      z-index: 1;
+    }
+
+    .buttons {
+      display: none;
+    }
+
+    .menuContainer {
+      display: none;
+    }
+  }
+
+  .profile {
+    display: none;
+  }
+
+  .profileMobileView {
+    padding-bottom: 20px;
+  }
+}

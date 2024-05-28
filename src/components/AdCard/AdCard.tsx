@@ -8,7 +8,7 @@ const AdCard: React.FC<AdCardProps> = ({
   title,
   location,
   description,
-  showDetailsBtn,
+  onShowDetails,
 }) => {
   return (
     <div className={styles.adCardContainer}>
@@ -21,7 +21,13 @@ const AdCard: React.FC<AdCardProps> = ({
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.link}>{location}</p>
         <p className={styles.description}>{description}</p>
-        <CustomButton extraWidth {...showDetailsBtn} />
+        <CustomButton
+          title="Show Details"
+          variant="filled"
+          extraWidth
+          onClick={onShowDetails}
+          size="small"
+        />
       </div>
     </div>
   );
