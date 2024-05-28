@@ -4,6 +4,7 @@ import { CustomInputProps } from "./CustomInputProps";
 
 const CustomInput: React.FC<CustomInputProps> = ({
   type,
+  name,
   placeholder,
   disabled,
   value,
@@ -13,6 +14,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
 }) => {
   const inputClassName = `${styles["customInputContainer"]} ${
     disabled ? styles["isDisabled"] : ""
+  } ${name === "submit" ? styles["submitButton"] : ""} ${
+    name === "cancel" ? styles["cancelButton"] : ""
   }`;
 
   return (

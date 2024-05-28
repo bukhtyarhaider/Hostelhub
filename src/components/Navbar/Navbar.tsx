@@ -150,8 +150,18 @@ const NavBar: React.FC<NavBarProps> = ({
           </div>
         ) : (
           <div className={styles.buttons}>
-            <CustomButton title="Sign In" variant="outline" size="medium" />
-            <CustomButton title="Register" variant="outline" size="medium" />
+            <CustomButton
+              title="Sign In"
+              variant="outline"
+              size="medium"
+              onClick={onSignIn}
+            />
+            <CustomButton
+              title="Register"
+              variant="outline"
+              size="medium"
+              onClick={onResgister}
+            />
           </div>
         )}
       </Drawer>
