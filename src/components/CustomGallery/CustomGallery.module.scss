@@ -1,0 +1,184 @@
+@import "../../mixins";
+
+.CustomGalleryContainer {
+  padding-top: 60px;
+
+  .top {
+    @include flex(row, center, center);
+    gap: 20px;
+    .imageContainer {
+      .imageWrapper {
+        width: 600px;
+        height: 480px;
+
+        img {
+          height: 100%;
+          width: 100%;
+          border-radius: 10px;
+        }
+      }
+    }
+
+    .contentContainer {
+      @include flex(column, center, space-between);
+      gap: 20px;
+      .topContent {
+        @include flex(column, center, space-between);
+        gap: 40px;
+        .profileCard,
+        .LocationCard {
+          width: 544px;
+          height: 123px;
+          padding: 24px 31px;
+          border-radius: 4px;
+          border: 1px solid #d8dfe0;
+        }
+
+        .profileCard {
+          @include flex(row, center, center);
+          .profile {
+            @include flex(row, center, center);
+            width: 189px;
+            height: 75px;
+
+            .profilePicWrapper {
+              width: 68px;
+              height: 68px;
+
+              img {
+                height: 100%;
+                width: 100%;
+                border-radius: 50%;
+              }
+            }
+
+            .profileContent {
+              padding-left: 10px;
+              h2 {
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 21px;
+                color: #002f34;
+              }
+
+              p {
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 21px;
+                color: #002f34;
+              }
+            }
+          }
+        }
+
+        .LocationCard {
+          h2 {
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 26px;
+            color: #002f34;
+            padding-bottom: 15px;
+          }
+
+          p {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 23.94px;
+            color: #002f34;
+
+            span {
+              padding-right: 10px;
+            }
+          }
+        }
+      }
+
+      .imagesList {
+        @include flex(row, center, center);
+        gap: 20px;
+        .imgWrapper {
+          width: 168px;
+          height: 169px;
+          cursor: pointer;
+          border-radius: 10px;
+          overflow: hidden;
+
+          img {
+            height: 100%;
+            width: 100%;
+            border-radius: 10px;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: 0.5s ease-in-out;
+            transition: 0.5s ease-in-out;
+
+            &:hover {
+              -webkit-transform: scale(1.1);
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .bottom {
+    padding: 30px 0;
+    .title {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 59.92px;
+      color: #002f34;
+    }
+
+    .subTitle {
+      padding-top: 10px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      color: #48505e;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .CustomGalleryContainer {
+    padding-top: 60px;
+
+    .top {
+      @include flex(column-reverse, center, center);
+
+      .imageContainer {
+        .imageWrapper {
+          width: 100%;
+        }
+      }
+
+      .contentContainer {
+        width: 100%;
+        .topContent {
+          gap: 15px;
+          .profileCard,
+          .LocationCard {
+            width: 100%;
+          }
+        }
+
+        .imagesList {
+          flex-wrap: wrap;
+          .imgWrapper {
+            width: 110px;
+            height: 110px;
+          }
+        }
+      }
+    }
+
+    .bottom {
+      .title {
+        font-size: 32px;
+        line-height: 50px;
+      }
+    }
+  }
+}
