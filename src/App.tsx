@@ -37,11 +37,11 @@ function App() {
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
-  const showSignInModal = () => {
+  const toggleSignInModal = () => {
     setIsSignInModalOpen(!isSignInModalOpen);
   };
 
-  const showRegisterModal = () => {
+  const toggleRegisterModal = () => {
     setIsRegisterModalOpen(!isRegisterModalOpen);
   };
 
@@ -52,23 +52,23 @@ function App() {
         authUser={undefined}
         profileMenu={menuItem}
         onResgister={() => {
-          showRegisterModal();
+          toggleRegisterModal();
         }}
         onSignIn={() => {
-          showSignInModal();
+          toggleSignInModal();
         }}
       />
       <Home />
       <Footer />
       <Login
         isSignInModalOpen={isSignInModalOpen}
-        showSignInModal={showSignInModal}
-        showRegisterModal={showRegisterModal}
+        showSignInModal={toggleSignInModal}
+        showRegisterModal={toggleRegisterModal}
       />
       <Register
         isSignInModalOpen={isRegisterModalOpen}
-        showRegisterModal={showRegisterModal}
-        showSignInModal={showSignInModal}
+        showRegisterModal={toggleRegisterModal}
+        showSignInModal={toggleSignInModal}
       />
     </div>
   );

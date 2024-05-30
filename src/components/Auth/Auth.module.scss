@@ -49,6 +49,11 @@
       }
     }
 
+    .errorMessage {
+      color: #ed2034;
+      font-size: 14px;
+    }
+
     .buttons {
       @include flex(column, start, center);
       width: 100%;

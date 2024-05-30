@@ -21,9 +21,8 @@ const Login: React.FC<LoginProps> = ({
 
   const onSignIn = (e: React.FormEvent) => {
     e.preventDefault();
-    // onSignIn Handle sign-in logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
+
+    // TODO: onSignIn Handle sign-in logic here
   };
 
   return (
