@@ -1,14 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../Auth.module.scss";
-import { Modal } from "antd";
+import { Modal, Button } from "antd";
 import CustomInput from "../../CustomInput/CustomInput";
 import { Link } from "react-router-dom";
-
-interface LoginProps {
-  isSignInModalOpen: boolean;
-  showSignInModal: () => void;
-  showRegisterModal: () => void;
-}
+import { LoginProps } from "./LoginProps";
 
 /**
  * Login component renders a login modal.
@@ -21,11 +16,19 @@ const Login: React.FC<LoginProps> = ({
   showSignInModal,
   showRegisterModal,
 }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSignIn = (e: React.FormEvent) => {
+    e.preventDefault();
+    // onSignIn Handle sign-in logic here
+    console.log("Email:", email);
+    console.log("Password:", password);
+  };
+
   return (
     <Modal
-      title=""
       open={isSignInModalOpen}
-      onOk={showSignInModal}
       onCancel={showSignInModal}
       centered
       footer={null}
@@ -37,22 +40,24 @@ const Login: React.FC<LoginProps> = ({
           Welcome back! Please enter your details.
         </p>
 
-        <form>
+        <form onSubmit={onSignIn}>
           <CustomInput
-            type="text"
+            type="email"
             name="email"
-            value={""}
+            value={email}
             label="Email"
             placeholder="Enter your email"
-            onChange={() => {}}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <CustomInput
             type="password"
             name="password"
-            value={""}
+            value={password}
             label="Password"
             placeholder="Enter your password"
-            onChange={() => {}}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
 
           <div className={styles.checks}>
@@ -67,34 +72,24 @@ const Login: React.FC<LoginProps> = ({
             </div>
           </div>
 
-          <CustomInput
-            type="submit"
-            name="submit"
-            value="Sign in"
-            onSubmit={() => {}}
-          />
+          <div className={styles.buttons}>
+            <Button type="primary" htmlType="submit">
+              Sign in
+            </Button>
+            <Button onClick={showSignInModal}>Cancel</Button>
+          </div>
 
-          <CustomInput
-            type="submit"
-            name="cancel"
-            value="Cancel"
-            onClick={(e) => {
-              e.preventDefault();
-              showSignInModal();
-            }}
-          />
-
-          <div className={styles.swithWrapper}>
+          <div className={styles.switchWrapper}>
             <p>Don’t have an account?</p>
-            <div
-              className={styles.button}
+            <Button
+              type="link"
               onClick={() => {
                 showSignInModal();
                 showRegisterModal();
               }}
             >
               Register
-            </div>
+            </Button>
           </div>
         </form>
       </div>
