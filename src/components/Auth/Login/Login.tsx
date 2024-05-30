@@ -81,15 +81,15 @@ const Login: React.FC<LoginProps> = ({
 
           <div className={styles.switchWrapper}>
             <p>Don’t have an account?</p>
-            <Button
-              type="link"
+            <div
+              className={styles.button}
               onClick={() => {
                 showSignInModal();
                 showRegisterModal();
               }}
             >
               Register
-            </Button>
+            </div>
           </div>
         </form>
       </div>

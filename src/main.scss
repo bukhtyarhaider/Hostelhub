@@ -147,3 +147,13 @@ body {
 .is-visible {
   opacity: 1;
 }
+
+.ant-btn {
+  width: 100% !important;
+  height: 46px !important;
+  margin-top: 10px;
+}
+
+.ant-btn-primary {
+  background-color: #003b95;
+}

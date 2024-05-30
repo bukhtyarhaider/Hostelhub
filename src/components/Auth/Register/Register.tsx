@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../Auth.module.scss";
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 import CustomInput from "../../CustomInput/CustomInput";
 
 interface RegisterProps {
@@ -64,24 +64,14 @@ const Register: React.FC<RegisterProps> = ({
             onChange={() => {}}
           />
 
-          <CustomInput
-            type="submit"
-            name="submit"
-            value="Register"
-            onSubmit={() => {}}
-          />
+          <div className={styles.buttons}>
+            <Button type="primary" htmlType="submit">
+              Register
+            </Button>
+            <Button onClick={showRegisterModal}>Cancel</Button>
+          </div>
 
-          <CustomInput
-            type="submit"
-            name="cancel"
-            value="Cancel"
-            onClick={(e) => {
-              e.preventDefault();
-              showRegisterModal();
-            }}
-          />
-
-          <div className={styles.swithWrapper}>
+          <div className={styles.switchWrapper}>
             <p>Already have an account?</p>
             <div
               className={styles.button}

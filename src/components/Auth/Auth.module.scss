@@ -49,7 +49,12 @@
       }
     }
 
-    .swithWrapper {
+    .buttons {
+      @include flex(column, start, center);
+      width: 100%;
+    }
+
+    .switchWrapper {
       padding-top: 20px;
       @include flex(row, start, center);
 
