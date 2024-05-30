@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { locationIcon } from "../../assets";
 import styles from "./CustomGallery.module.scss";
+import { locationIcon } from "../../../../assets";
 
 const CustomGallery = ({ title, subTitle, images }) => {
   const [galleryImages, setGalleryImages] = useState<string[]>(images);

@@ -20,10 +20,11 @@
   justify-content: center;
   height: 100%;
   min-height: 100vh;
-  background-color: var(--background);
+  background-color: var(--grey-background);
 
   /* Colors */
   --background: #ffffff;
+  --grey-background: #f5f7fa;
   --primary-text: #1a1a1a;
   --secondary-text: #ffffff;
   --grey-100: #858d9d;
@@ -58,7 +59,7 @@
 body {
   height: 100%;
   margin: 0;
-  background-color: var(--background);
+  background-color: var(--grey-background);
   h1,
   h2,
   h3,
@@ -98,7 +99,7 @@ body {
   width: 100%;
   min-height: 100vh;
   color: var(--primary-text);
-  background-color: var(--background);
+  background-color: var(--grey-background);
   position: relative;
 }
 

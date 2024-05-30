@@ -6,6 +6,9 @@ import { arrowRight, logoutIcon } from "./assets";
 import NavBar from "./components/Navbar/Navbar";
 import { navItems } from "./content";
 import Footer from "./components/Footer/Footer";
+import { Route, Routes, useLocation } from "react-router-dom";
+import Router from "./Router";
+import { useEffect } from "react";
 
 const menuItem = [
   {
@@ -32,17 +35,33 @@ const authUser: AuthUser = {
 };
 
 function App() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
   return (
     <div className="app-container">
-      <NavBar
-        navItems={navItems}
-        authUser={authUser ?? undefined}
-        profileMenu={menuItem}
-        onResgister={() => {}}
-        onSignIn={() => {}}
-      />
-      <Home />
-      <Footer />
+      <Routes>
+        <Route
+          path="/*"
+          element={
+            <>
+              <NavBar
+                navItems={navItems}
+                authUser={authUser ?? undefined}
+                profileMenu={menuItem}
+                onResgister={() => {}}
+                onSignIn={() => {}}
+              />
+              <Router authUser={authUser} />
+              <Footer />
+            </>
+          }
+        />
+        <Route path="*" element={<Home />} />
+      </Routes>
     </div>
   );
 }
