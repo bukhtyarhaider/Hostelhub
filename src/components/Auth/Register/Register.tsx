@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import styles from "../Auth.module.scss";
 import { Button, Modal } from "antd";
 import CustomInput from "../../CustomInput/CustomInput";
-
-interface RegisterProps {
-  isSignInModalOpen: boolean;
-  showSignInModal: () => void;
-  showRegisterModal: () => void;
-}
+import { RegisterProps } from "./RegisterProps";
 
 const Register: React.FC<RegisterProps> = ({
   isSignInModalOpen,
