@@ -18,11 +18,27 @@ const Login: React.FC<LoginProps> = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<string>("");
+
+  const validate = () => {
+    let newErrors = "";
+    if (!/\S+@\S+\.\S+/.test(email)) newErrors = "Email is invalid";
+
+    if (password.length < 8) newErrors = "Password length is less then 8";
+
+    return newErrors;
+  };
 
   const onSignIn = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // TODO: onSignIn Handle sign-in logic here
+    const validationErrors = validate();
+    if (validationErrors) {
+      setErrors(validationErrors);
+    } else {
+      setErrors("");
+      // TODO: onSignIn Handle sign-in logic here
+    }
   };
 
   return (
@@ -58,6 +74,8 @@ const Login: React.FC<LoginProps> = ({
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
+          <div className={styles.errorMessage}>{errors}</div>
 
           <div className={styles.checks}>
             <div className={styles.remember}>

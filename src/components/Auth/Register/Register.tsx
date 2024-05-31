@@ -34,7 +34,7 @@ const Register: React.FC<RegisterProps> = ({
     return newErrors;
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const onRegister = (e: React.FormEvent) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
@@ -60,7 +60,7 @@ const Register: React.FC<RegisterProps> = ({
           Welcome! Please enter your details to create an account.
         </p>
 
-        <form onSubmit={handleRegister}>
+        <form onSubmit={onRegister}>
           <CustomInput
             type="text"
             name="name"
