@@ -7,7 +7,9 @@ import { navItems } from "./content";
 import Footer from "./components/Footer/Footer";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Router from "./Router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Login from "./components/Auth/Login/Login";
+import Register from "./components/Auth/Register/Register";
 
 const menuItem = [
   {
@@ -36,10 +38,20 @@ export const authUser: AuthUser = {
 
 function App() {
   const { pathname } = useLocation();
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  const toggleSignInModal = () => {
+    setIsSignInModalOpen(!isSignInModalOpen);
+  };
+
+  const toggleRegisterModal = () => {
+    setIsRegisterModalOpen(!isRegisterModalOpen);
+  };
 
   return (
     <div className="app-container">
@@ -52,16 +64,35 @@ function App() {
                 navItems={navItems}
                 authUser={authUser ?? undefined}
                 profileMenu={menuItem}
-                onResgister={() => {}}
-                onSignIn={() => {}}
+                onResgister={() => {
+                  toggleRegisterModal();
+                }}
+                onSignIn={() => {
+                  toggleSignInModal();
+                }}
               />
-              <Router authUser={authUser} />
+              <Router
+                authUser={authUser ?? undefined}
+                toggleRegisterModal={toggleRegisterModal}
+                toggleSignInModal={toggleSignInModal}
+              />
               <Footer />
             </>
           }
         />
         <Route path="*" element={<Home />} />
       </Routes>
+
+      <Login
+        isSignInModalOpen={isSignInModalOpen}
+        showSignInModal={toggleSignInModal}
+        showRegisterModal={toggleRegisterModal}
+      />
+      <Register
+        isSignInModalOpen={isRegisterModalOpen}
+        showRegisterModal={toggleRegisterModal}
+        showSignInModal={toggleSignInModal}
+      />
     </div>
   );
 }

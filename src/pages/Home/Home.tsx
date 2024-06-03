@@ -7,7 +7,7 @@ import CTA from "../../components/CTA/CTA";
 import NoHostelFound from "../../components/NoHotelFound/NoHotelFound";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ authUser, toggleRegisterModal, toggleSignInModal }) => {
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState<AdCardItem[]>(adCardsData);
 
@@ -38,12 +38,16 @@ const Home = () => {
         {filteredData.length > 0 ? (
           filteredData.map((item, index) => (
             <div key={index}>
-              {index === 3 && (
+              {index === 3 && !authUser && (
                 <CTA
                   primaryText="Sign in, search more"
                   secondaryText="Unlock hundreds of new hostels with just a single Sign Up!"
-                  onPrimaryBtn={() => {}}
-                  onSecondaryBtn={() => {}}
+                  onPrimaryBtn={() => {
+                    toggleSignInModal();
+                  }}
+                  onSecondaryBtn={() => {
+                    toggleRegisterModal();
+                  }}
                 />
               )}
               <AdCard
