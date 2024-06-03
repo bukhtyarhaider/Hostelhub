@@ -107,6 +107,7 @@ export const adCardsData: AdCard[] = [
   },
 ];
 
+// TODO : Dummy data just for testing
 export const hostelDetailsTableData: DataType[] = [
   {
     key: 1,
@@ -118,7 +119,7 @@ export const hostelDetailsTableData: DataType[] = [
     roomPricePerSeat: "Rs. 14,000",
   },
   {
-    key: 1,
+    key: 2,
     roomNumber: "DH-01",
     roomType: "Bunker Room",
     numberOfBeds: "04",
@@ -127,7 +128,7 @@ export const hostelDetailsTableData: DataType[] = [
     roomPricePerSeat: "Rs. 14,000",
   },
   {
-    key: 1,
+    key: 3,
     roomNumber: "DH-01",
     roomType: "Bunker Room",
     numberOfBeds: "04",
@@ -136,7 +137,7 @@ export const hostelDetailsTableData: DataType[] = [
     roomPricePerSeat: "Rs. 14,000",
   },
   {
-    key: 1,
+    key: 4,
     roomNumber: "DH-01",
     roomType: "Bunker Room",
     numberOfBeds: "04",
@@ -145,7 +146,7 @@ export const hostelDetailsTableData: DataType[] = [
     roomPricePerSeat: "Rs. 14,000",
   },
   {
-    key: 1,
+    key: 5,
     roomNumber: "DH-01",
     roomType: "Bunker Room",
     numberOfBeds: "04",
@@ -154,7 +155,7 @@ export const hostelDetailsTableData: DataType[] = [
     roomPricePerSeat: "Rs. 14,000",
   },
   {
-    key: 1,
+    key: 6,
     roomNumber: "DH-01",
     roomType: "Bunker Room",
     numberOfBeds: "04",

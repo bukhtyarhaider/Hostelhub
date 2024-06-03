@@ -5,20 +5,56 @@ import DetailsTable from "./components/DetailsTable/DetailsTable";
 import HowToBook from "./components/HowToBook/HowToBook";
 import {
   adCardsData,
-  AdCard as AdCardItem,
+  AdCard as IAdCard,
   hostelDetailsDescriptionData,
   hostelDetailsTableData,
   howToBookData,
 } from "../../content";
 import AdCard from "../../components/AdCard/AdCard";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const HostelDetails = ({ authUser }) => {
+  const navigate = useNavigate();
   const { id } = useParams();
-  console.log("Hostel ID from params:", id);
 
-  const [filteredData, setFilteredData] = useState<AdCardItem[]>(adCardsData);
+  const getSimilarHostels = (
+    hostelId: string | undefined,
+    hostelData: IAdCard[]
+  ): IAdCard[] => {
+    if (!hostelId) {
+      return [];
+    }
+
+    const targetHostel = hostelData.find(
+      (hostel) => hostel.id.toString() === hostelId
+    );
+
+    if (!targetHostel) {
+      return [];
+    }
+
+    // Extract the city name from the location (assumes the format is "Area, City")
+    const targetCity = targetHostel.location.split(", ").pop();
+
+    // Filter hostels with the same location but different ID
+    // TODO : Filter the data bases of Type and
+    const similarHostels = hostelData.filter(
+      (hostel) =>
+        hostel.location.split(", ").pop() === targetCity &&
+        hostel.id.toString() !== hostelId
+    );
+
+    return similarHostels;
+  };
+
+  const [similarData, setSimilarData] = useState<IAdCard[]>([]);
+
+  useEffect(() => {
+    const similarHostels = getSimilarHostels(id?.toString(), adCardsData);
+    setSimilarData(similarHostels);
+  }, [id]);
+
   const tabsMenuData = [
     {
       label: "Details & Description",
@@ -44,7 +80,7 @@ const HostelDetails = ({ authUser }) => {
       children: <HowToBook howToBookData={howToBookData} />,
     },
   ];
-  
+
   return (
     <>
       <div className={styles.hostelDetailsContainer}>
@@ -62,21 +98,27 @@ const HostelDetails = ({ authUser }) => {
         <Tabs defaultActiveKey="1" items={tabsMenuData} />
       </div>
 
-      <h2 className={styles.heading}>More Hostels Like This</h2>
+      {similarData.length > 0 && (
+        <>
+          <h2 className={styles.heading}>More Hostels Like This</h2>
 
-      <div className={styles.cardsContainer}>
-        {filteredData.slice(0, 2).map((item, index) => (
-          <div key={index}>
-            <AdCard
-              title={item.title}
-              description={item.description}
-              image={item.image}
-              location={item.location}
-              onShowDetails={() => {}}
-            />
+          <div className={styles.cardsContainer}>
+            {similarData.slice(0, 2).map((item, index) => (
+              <div key={index}>
+                <AdCard
+                  title={item.title}
+                  description={item.description}
+                  image={item.image}
+                  location={item.location}
+                  onShowDetails={() => {
+                    navigate(`/hostel-details/${item.id}`);
+                  }}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </>
   );
 };
