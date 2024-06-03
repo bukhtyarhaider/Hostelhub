@@ -1,11 +1,13 @@
 import { AuthUser } from "./components/Navbar/NavbarProps";
-
 import "./main.scss";
 import Home from "./pages/Home/Home";
 import { arrowRight, logoutIcon } from "./assets";
 import NavBar from "./components/Navbar/Navbar";
 import { navItems } from "./content";
 import Footer from "./components/Footer/Footer";
+import { useState } from "react";
+import Login from "./components/Auth/Login/Login";
+import Register from "./components/Auth/Register/Register";
 
 const menuItem = [
   {
@@ -32,17 +34,42 @@ const authUser: AuthUser = {
 };
 
 function App() {
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+
+  const toggleSignInModal = () => {
+    setIsSignInModalOpen(!isSignInModalOpen);
+  };
+
+  const toggleRegisterModal = () => {
+    setIsRegisterModalOpen(!isRegisterModalOpen);
+  };
+
   return (
     <div className="app-container">
       <NavBar
         navItems={navItems}
-        authUser={authUser ?? undefined}
+        authUser={undefined}
         profileMenu={menuItem}
-        onResgister={() => {}}
-        onSignIn={() => {}}
+        onResgister={() => {
+          toggleRegisterModal();
+        }}
+        onSignIn={() => {
+          toggleSignInModal();
+        }}
       />
       <Home />
       <Footer />
+      <Login
+        isSignInModalOpen={isSignInModalOpen}
+        showSignInModal={toggleSignInModal}
+        showRegisterModal={toggleRegisterModal}
+      />
+      <Register
+        isSignInModalOpen={isRegisterModalOpen}
+        showRegisterModal={toggleRegisterModal}
+        showSignInModal={toggleSignInModal}
+      />
     </div>
   );
 }
