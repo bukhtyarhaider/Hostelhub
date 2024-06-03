@@ -28,7 +28,8 @@ const menuItem = [
   },
 ];
 
-const authUser: AuthUser = {
+// TODO : Temporary AuthUser
+export const authUser: AuthUser = {
   name: "user",
   image: "https://picsum.photos/200",
 };
@@ -39,7 +40,7 @@ function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  
+
   return (
     <div className="app-container">
       <Routes>
