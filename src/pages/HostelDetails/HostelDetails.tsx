@@ -12,8 +12,12 @@ import {
 } from "../../content";
 import AdCard from "../../components/AdCard/AdCard";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const HostelDetails = ({ authUser }) => {
+  const { id } = useParams();
+  console.log("Hostel ID from params:", id);
+
   const [filteredData, setFilteredData] = useState<AdCardItem[]>(adCardsData);
   const tabsMenuData = [
     {
@@ -27,8 +31,8 @@ const HostelDetails = ({ authUser }) => {
           />
           <div className={styles.description}>
             <h2>{hostelDetailsDescriptionData.title}</h2>
-            {hostelDetailsDescriptionData.description.map((data) => (
-              <p>{data}</p>
+            {hostelDetailsDescriptionData.description.map((data, index) => (
+              <p key={index}>{data}</p>
             ))}
           </div>
         </>
@@ -36,10 +40,11 @@ const HostelDetails = ({ authUser }) => {
     },
     {
       label: "How To Book",
-      key: "3",
+      key: "2",
       children: <HowToBook howToBookData={howToBookData} />,
     },
   ];
+  
   return (
     <>
       <div className={styles.hostelDetailsContainer}>
