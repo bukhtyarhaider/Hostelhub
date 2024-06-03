@@ -1,5 +1,4 @@
 import { AuthUser } from "./components/Navbar/NavbarProps";
-
 import "./main.scss";
 import Home from "./pages/Home/Home";
 import { arrowRight, logoutIcon } from "./assets";
