@@ -1,0 +1,87 @@
+@import "../../mixins";
+
+.hostelDetailsContainer {
+  margin-top: 120px;
+  margin-inline: 60px;
+  padding: 10px 69px;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.heading {
+  margin-top: 120px;
+  padding-bottom: 20px;
+  margin-inline: 60px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.cardsContainer {
+  margin-inline: 60px;
+}
+
+.description {
+  border: 1px solid #d8dfe0;
+  border-radius: 5px;
+  padding: 20px 30px;
+  margin: 30px 0;
+  color: #002f34;
+
+  h2 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 26px;
+    padding-bottom: 20px;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    padding-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hostelDetailsContainer {
+    margin-top: 100px;
+    margin-inline: 20px;
+    padding: 0px 20px;
+  }
+
+  .heading {
+    margin-top: 120px;
+    padding-bottom: 20px;
+    margin-inline: 60px;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 26px;
+  }
+
+  .cardsContainer {
+    margin-inline: 20px;
+  }
+
+  .description {
+    border: 1px solid #d8dfe0;
+    border-radius: 5px;
+    padding: 20px 30px;
+    margin: 30px 0;
+    color: #002f34;
+
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 26px;
+      padding-bottom: 20px;
+    }
+
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      padding-bottom: 20px;
+    }
+  }
+}

@@ -5,8 +5,10 @@ import { Filters } from "../../components/Filters/Filters";
 import AdCard from "../../components/AdCard/AdCard";
 import CTA from "../../components/CTA/CTA";
 import NoHostelFound from "../../components/NoHotelFound/NoHotelFound";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState<AdCardItem[]>(adCardsData);
 
   const handleFilterChange = (filters: {
@@ -49,7 +51,9 @@ const Home = () => {
                 description={item.description}
                 image={item.image}
                 location={item.location}
-                onShowDetails={() => {}}
+                onShowDetails={() => {
+                  navigate(`/hostel-details/${item.id}`);
+                }}
               />
             </div>
           ))
