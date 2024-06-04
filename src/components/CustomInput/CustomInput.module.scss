@@ -42,23 +42,6 @@
   }
 }
 
-.submitButton {
-  margin-top: 10px;
-  input {
-    background-color: #003b95;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-  }
-}
-
-.cancelButton {
-  margin-top: 10px;
-  input {
-    cursor: pointer;
-  }
-}
-
 .isDisabled {
   input {
     cursor: not-allowed;
