@@ -1,3 +1,5 @@
+import { User } from "../../types/types";
+
 /**
  * Interface for a menu item.
  */
@@ -24,21 +26,6 @@ export interface ProfileMenuItem {
 }
 
 /**
- * Interface for the user object.
- */
-export interface AuthUser {
-  /**
-   * The name of the user.
-   */
-  name: string;
-
-  /**
-   * The image of the user.
-   */
-  image: string;
-}
-
-/**
  * Interface for the Navbar component props.
  */
 export interface NavBarProps {
@@ -50,7 +37,7 @@ export interface NavBarProps {
   /**
    * The authenticated user object.
    */
-  authUser: AuthUser | undefined;
+  authUser: User | undefined;
 
   /**
    * An array of profile menu items.

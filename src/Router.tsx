@@ -2,8 +2,15 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import HostelDetails from "./pages/HostelDetails/HostelDetails";
+import { User } from "./types/types";
 
-const Router: React.FC = ({
+interface RouterProps {
+  authUser?: User;
+  toggleRegisterModal: () => void;
+  toggleSignInModal: () => void;
+}
+
+const Router: React.FC<RouterProps> = ({
   authUser,
   toggleRegisterModal,
   toggleSignInModal,
