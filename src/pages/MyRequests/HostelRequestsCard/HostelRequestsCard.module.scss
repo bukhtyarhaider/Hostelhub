@@ -1,0 +1,122 @@
+@import "../../../mixins";
+
+.hostelRequestsCardContainer {
+  position: relative;
+  @include flex(row, space-between, center);
+  background: var(--background);
+  border: 1px solid #f0f1f3;
+  border-radius: 6px;
+  padding-right: 50px;
+
+  .contentContainer {
+    @include flex(row, center, center);
+    gap: 20px;
+    .imgWrapper {
+      width: 290px;
+      height: 150px;
+
+      img {
+        height: 100%;
+        width: 100%;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+    }
+
+    .contentWrapper {
+      .content {
+        @include flex(column, center, start);
+        gap: 15px;
+        .title {
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 24px;
+        }
+
+        p {
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 17px;
+          color: var(--grey-100);
+        }
+      }
+
+      .button {
+        display: none;
+      }
+    }
+  }
+
+  .pending {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    padding: 5px 16px;
+    border-radius: 74px;
+    color: var(--info);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    border: 1px solid var(--info);
+    background: linear-gradient(
+        0deg,
+        rgba(255, 183, 0, 0.17),
+        rgba(255, 183, 0, 0.17)
+      ),
+      linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hostelRequestsCardContainer {
+    @include flex(column, space-between, center);
+    padding-right: 0px;
+
+    .contentContainer {
+      @include flex(column, center, start);
+      .imgWrapper {
+        width: -webkit-fill-available;
+        height: 150px;
+
+        img {
+          border-radius: 0%;
+        }
+      }
+
+      .contentWrapper {
+        @include flex(row, space-between, center);
+        width: 100%;
+        padding: 20px;
+        .content {
+          @include flex(column, center, start);
+          gap: 10px;
+          .title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+          }
+
+          p {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17px;
+            color: var(--grey-100);
+          }
+        }
+
+        .button {
+          display: block;
+        }
+      }
+    }
+
+    .rightSide {
+      display: none;
+    }
+
+    .pending {
+      right: 20px;
+      top: 54%;
+    }
+  }
+}

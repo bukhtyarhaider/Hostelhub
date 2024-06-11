@@ -10,6 +10,8 @@ import Router from "./Router";
 import { useEffect, useState } from "react";
 import Login from "./components/Auth/Login/Login";
 import Register from "./components/Auth/Register/Register";
+import HostelRequestsCard from "./pages/MyRequests/HostelRequestsCard/HostelRequestsCard";
+import MyRequests from "./pages/MyRequests/MyRequests";
 
 const menuItem = [
   {

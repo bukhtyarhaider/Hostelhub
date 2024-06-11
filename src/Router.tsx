@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import HostelDetails from "./pages/HostelDetails/HostelDetails";
+import MyRequests from "./pages/MyRequests/MyRequests";
 
 const Router: React.FC = ({
   authUser,
@@ -27,6 +28,7 @@ const Router: React.FC = ({
           index
           element={<HostelDetails authUser={authUser ?? undefined} />}
         />
+        <Route path="/my-requests" index element={<MyRequests />} />
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </div>

@@ -165,6 +165,41 @@ export const hostelDetailsTableData: DataType[] = [
   },
 ];
 
+// TODO : Dummy data just for testing
+export const hostelRequestsData = [
+  {
+    image: "https://picsum.photos/200",
+    title: "Downing Hostel",
+    location: "123, Downing Street, LA.",
+    type: "Single Room",
+    price: "PKR 15000",
+    status: "Pending",
+    decisionDetails: [],
+  },
+  {
+    image: "https://picsum.photos/210",
+    title: "Downing Hostel",
+    location: "123, Downing Street, LA.",
+    type: "Single Room",
+    price: "PKR 15000",
+    status: "Approved",
+    decisionDetails: [
+      "We’re pleased to inform you that your request for hostel accommodation has been approved. Please contact your immediate warden for payment and other details.",
+    ],
+  },
+  {
+    image: "https://picsum.photos/220",
+    title: "Downing Hostel",
+    location: "123, Downing Street, LA.",
+    type: "Single Room",
+    price: "PKR 15000",
+    status: "Rejected",
+    decisionDetails: [
+      "We’re regret to inform you that your request for hostel accommodation have been rejected. Please contact your immediate warden for reason of rejection and other details.",
+    ],
+  },
+];
+
 export const hostelDetailsDescriptionData = {
   title: "Description",
   description: [
