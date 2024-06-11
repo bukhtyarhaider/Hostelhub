@@ -6,8 +6,13 @@ import AdCard from "../../components/AdCard/AdCard";
 import CTA from "../../components/CTA/CTA";
 import NoHostelFound from "../../components/NoHotelFound/NoHotelFound";
 import { useNavigate } from "react-router-dom";
+import { HomeProps } from "./HomeProps";
 
-const Home = ({ authUser, toggleRegisterModal, toggleSignInModal }) => {
+const Home = ({
+  authUser,
+  toggleRegisterModal,
+  toggleSignInModal,
+}: HomeProps) => {
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState<AdCardItem[]>(adCardsData);
 

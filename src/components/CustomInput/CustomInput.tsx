@@ -14,19 +14,18 @@ const CustomInput: React.FC<CustomInputProps> = ({
 }) => {
   const inputClassName = `${styles["customInputContainer"]} ${
     disabled ? styles["isDisabled"] : ""
-  } ${name === "submit" ? styles["submitButton"] : ""} ${
-    name === "cancel" ? styles["cancelButton"] : ""
-  }`;
+  } `;
 
   return (
     <div className={inputClassName}>
       {label && <label>{label}</label>}
 
       <input
+        disabled={disabled}
         type={type}
         placeholder={placeholder}
         value={value}
-        disabled={disabled}
+        name={name}
         onChange={(e) => {
           onChange(e);
         }}

@@ -1,4 +1,3 @@
-import { AuthUser } from "./components/Navbar/NavbarProps";
 import "./main.scss";
 import Home from "./pages/Home/Home";
 import { arrowRight, logoutIcon } from "./assets";
@@ -10,8 +9,7 @@ import Router from "./Router";
 import { useEffect, useState } from "react";
 import Login from "./components/Auth/Login/Login";
 import Register from "./components/Auth/Register/Register";
-import HostelRequestsCard from "./pages/MyRequests/HostelRequestsCard/HostelRequestsCard";
-import MyRequests from "./pages/MyRequests/MyRequests";
+import { User } from "./types/types";
 
 const menuItem = [
   {
@@ -33,7 +31,7 @@ const menuItem = [
 ];
 
 // TODO : Temporary AuthUser
-export const authUser: AuthUser = {
+export const authUser: User = {
   name: "user",
   image: "https://picsum.photos/200",
 };
@@ -74,7 +72,7 @@ function App() {
                 }}
               />
               <Router
-                authUser={authUser ?? undefined}
+                authUser={authUser}
                 toggleRegisterModal={toggleRegisterModal}
                 toggleSignInModal={toggleSignInModal}
               />
@@ -82,7 +80,16 @@ function App() {
             </>
           }
         />
-        <Route path="*" element={<Home />} />
+        <Route
+          path="*"
+          element={
+            <Home
+              authUser={authUser}
+              toggleRegisterModal={toggleRegisterModal}
+              toggleSignInModal={toggleSignInModal}
+            />
+          }
+        />
       </Routes>
 
       <Login
