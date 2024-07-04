@@ -1,0 +1,38 @@
+@import "../../mixins";
+.myHostelContainer {
+  padding: 60px;
+  padding-top: 140px;
+
+  .tabs {
+    display: flex;
+    margin-bottom: 16px;
+
+    button {
+      padding: 10px 20px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 3px;
+      background-color: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 21px;
+    }
+
+    .activeTab {
+      background-color: var(--blue);
+      color: white;
+    }
+  }
+
+  .tabContent {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .myHostelContainer {
+    padding: 20px;
+    padding-top: 100px;
+  }
+}

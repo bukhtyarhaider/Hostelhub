@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import HostelDetails from "./pages/HostelDetails/HostelDetails";
 import { User } from "./types/types";
+import MyHostel from "./pages/MyHostel/MyHostel";
 
 interface RouterProps {
   authUser?: User;
@@ -33,6 +34,10 @@ const Router: React.FC<RouterProps> = ({
           path="/hostel-details/:id"
           index
           element={<HostelDetails authUser={authUser ?? undefined} />}
+        />
+        <Route
+          path="/my-hostel"
+          element={<MyHostel />}
         />
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>

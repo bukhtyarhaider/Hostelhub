@@ -193,6 +193,83 @@ export const howToBookData = [
   },
 ];
 
+export const hostelNoticeCardsData = [
+  {
+    title: "Urgent Notice!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Tristique leo sollicitudin volutpat nunc ac. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.",
+    detailedDescription: [
+      {
+        heading: "",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Arcu vitae proin nec amet sem. Tortor eu facilisi metus nulla libero. Nisl nunc tellus sodales elit. Mauris elementum velit sit ac ipsum nec accumsan porttitor. Lorem integer tincidunt quisque ipsum euismod. Cursus a vitae est hendrerit orci lacus non quam. Blandit vestibulum ut aliquet ante enim malesuada. Fringilla aliquam rutrum nibh fringilla. Ornare est mauris pellentesque ultrices aliquet lectus in tristique eget. Quis commodo maecenas aenean quam. Sed feugiat turpis magna tellus tristique arcu urna nibh cursus. Mi dignissim scelerisque condimentum congue eget gravida consectetur sed. Nulla ut ut faucibus aliquet lobortis id viverra pharetra. Massa montes tristique dolor porttitor parturient cursus tellus nullam id. Rutrum sed ut vitae sit senectus non penatibus. Volutpat mauris nulla sed fames consequat consequat. Amet in aenean ullamcorper semper mauris aliquam. Sed fermentum rhoncus dis tristique sit neque. Sit leo morbi et quam quam etiam egestas sodales urna",
+      },
+      {
+        heading: "Lorem ipsum dolor",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Arcu vitae proin nec amet sem. Tortor eu facilisi metus nulla libero. Nisl nunc tellus sodales elit. Mauris elementum velit sit ac ipsum nec accumsan porttitor. Lorem integer tincidunt quisque ipsum euismod. Cursus a vitae est hendrerit orci lacus non quam. Blandit vestibulum ut aliquet ante enim malesuada. Fringilla aliquam rutrum nibh fringilla",
+      },
+      {
+        heading: "Lorem ipsum dolor",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Arcu vitae proin nec amet sem. Tortor eu facilisi metus nulla libero. Nisl nunc tellus sodales elit. Mauris elementum velit sit ac ipsum nec accumsan porttitor. Lorem integer tincidunt quisque ipsum euismod. Cursus a vitae est hendrerit orci lacus non quam. Blandit vestibulum ut aliquet ante enim malesuada. Fringilla aliquam rutrum nibh fringilla. Ornare est mauris pellentesque ultrices aliquet lectus in tristique eget. Quis commodo maecenas aenean quam. Sed feugiat turpis magna tellus tristique arcu urna nibh cursus. Mi dignissim scelerisque condimentum congue eget gravida consectetur sed. Nulla ut ut faucibus aliquet lobortis id viverra pharetra. Massa montes tristique dolor porttitor parturient cursus tellus nullam id. Rutrum sed ut vitae sit senectus non penatibus. Volutpat mauris nulla sed fames consequat consequat. Amet in aenean ullamcorper semper mauris aliquam. Sed fermentum rhoncus dis tristique sit neque. Sit leo morbi et quam quam etiam egestas sodales urna.",
+      },
+    ],
+    wardenSign: "Warden Signature",
+    date: "12-May-2024",
+    newNotice: true,
+  },
+  {
+    title: "Urgent Notice!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Tristique leo sollicitudin volutpat nunc ac. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.",
+    detailedDescription: [
+      {
+        heading: "",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Arcu vitae proin nec amet sem. Tortor eu facilisi metus nulla libero. Nisl nunc tellus sodales elit. Mauris elementum velit sit ac ipsum nec accumsan porttitor. Lorem integer tincidunt quisque ipsum euismod. Cursus a vitae est hendrerit orci lacus non quam. Blandit vestibulum ut aliquet ante enim malesuada. Fringilla aliquam rutrum nibh fringilla. Ornare est mauris pellentesque ultrices aliquet lectus in tristique eget. Quis commodo maecenas aenean quam. Sed feugiat turpis magna tellus tristique arcu urna nibh cursus. Mi dignissim scelerisque condimentum congue eget gravida consectetur sed. Nulla ut ut faucibus aliquet lobortis id viverra pharetra. Massa montes tristique dolor porttitor parturient cursus tellus nullam id. Rutrum sed ut vitae sit senectus non penatibus. Volutpat mauris nulla sed fames consequat consequat. Amet in aenean ullamcorper semper mauris aliquam. Sed fermentum rhoncus dis tristique sit neque. Sit leo morbi et quam quam etiam egestas sodales urna",
+      },
+      {
+        heading: "Lorem ipsum dolor",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Arcu vitae proin nec amet sem. Tortor eu facilisi metus nulla libero. Nisl nunc tellus sodales elit. Mauris elementum velit sit ac ipsum nec accumsan porttitor. Lorem integer tincidunt quisque ipsum euismod. Cursus a vitae est hendrerit orci lacus non quam. Blandit vestibulum ut aliquet ante enim malesuada. Fringilla aliquam rutrum nibh fringilla",
+      },
+      {
+        heading: "Lorem ipsum dolor",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Arcu vitae proin nec amet sem. Tortor eu facilisi metus nulla libero. Nisl nunc tellus sodales elit. Mauris elementum velit sit ac ipsum nec accumsan porttitor. Lorem integer tincidunt quisque ipsum euismod. Cursus a vitae est hendrerit orci lacus non quam. Blandit vestibulum ut aliquet ante enim malesuada. Fringilla aliquam rutrum nibh fringilla. Ornare est mauris pellentesque ultrices aliquet lectus in tristique eget. Quis commodo maecenas aenean quam. Sed feugiat turpis magna tellus tristique arcu urna nibh cursus. Mi dignissim scelerisque condimentum congue eget gravida consectetur sed. Nulla ut ut faucibus aliquet lobortis id viverra pharetra. Massa montes tristique dolor porttitor parturient cursus tellus nullam id. Rutrum sed ut vitae sit senectus non penatibus. Volutpat mauris nulla sed fames consequat consequat. Amet in aenean ullamcorper semper mauris aliquam. Sed fermentum rhoncus dis tristique sit neque. Sit leo morbi et quam quam etiam egestas sodales urna.",
+      },
+    ],
+    wardenSign: "Warden Signature",
+    date: "12-May-2024",
+    newNotice: true,
+  },
+  {
+    title: "Urgent Notice!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur. Tristique leo sollicitudin volutpat nunc ac. Justo mattis nullam imperdiet aliquam pulvinar. Facilisis potenti pellentesque feugiat in dui. Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.Amet hendrerit aliquam fringilla turpis cursus blandit tortor diam.",
+    detailedDescription: [
+      {
+        heading: "",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Arcu vitae proin nec amet sem. Tortor eu facilisi metus nulla libero. Nisl nunc tellus sodales elit. Mauris elementum velit sit ac ipsum nec accumsan porttitor. Lorem integer tincidunt quisque ipsum euismod. Cursus a vitae est hendrerit orci lacus non quam. Blandit vestibulum ut aliquet ante enim malesuada. Fringilla aliquam rutrum nibh fringilla. Ornare est mauris pellentesque ultrices aliquet lectus in tristique eget. Quis commodo maecenas aenean quam. Sed feugiat turpis magna tellus tristique arcu urna nibh cursus. Mi dignissim scelerisque condimentum congue eget gravida consectetur sed. Nulla ut ut faucibus aliquet lobortis id viverra pharetra. Massa montes tristique dolor porttitor parturient cursus tellus nullam id. Rutrum sed ut vitae sit senectus non penatibus. Volutpat mauris nulla sed fames consequat consequat. Amet in aenean ullamcorper semper mauris aliquam. Sed fermentum rhoncus dis tristique sit neque. Sit leo morbi et quam quam etiam egestas sodales urna",
+      },
+      {
+        heading: "Lorem ipsum dolor",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Arcu vitae proin nec amet sem. Tortor eu facilisi metus nulla libero. Nisl nunc tellus sodales elit. Mauris elementum velit sit ac ipsum nec accumsan porttitor. Lorem integer tincidunt quisque ipsum euismod. Cursus a vitae est hendrerit orci lacus non quam. Blandit vestibulum ut aliquet ante enim malesuada. Fringilla aliquam rutrum nibh fringilla",
+      },
+      {
+        heading: "Lorem ipsum dolor",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. Arcu vitae proin nec amet sem. Tortor eu facilisi metus nulla libero. Nisl nunc tellus sodales elit. Mauris elementum velit sit ac ipsum nec accumsan porttitor. Lorem integer tincidunt quisque ipsum euismod. Cursus a vitae est hendrerit orci lacus non quam. Blandit vestibulum ut aliquet ante enim malesuada. Fringilla aliquam rutrum nibh fringilla. Ornare est mauris pellentesque ultrices aliquet lectus in tristique eget. Quis commodo maecenas aenean quam. Sed feugiat turpis magna tellus tristique arcu urna nibh cursus. Mi dignissim scelerisque condimentum congue eget gravida consectetur sed. Nulla ut ut faucibus aliquet lobortis id viverra pharetra. Massa montes tristique dolor porttitor parturient cursus tellus nullam id. Rutrum sed ut vitae sit senectus non penatibus. Volutpat mauris nulla sed fames consequat consequat. Amet in aenean ullamcorper semper mauris aliquam. Sed fermentum rhoncus dis tristique sit neque. Sit leo morbi et quam quam etiam egestas sodales urna.",
+      },
+    ],
+    wardenSign: "Warden Signature",
+    date: "12-May-2024",
+    newNotice: false,
+  },
+];
 export const socialIcons = [
   {
     icon: twitterIcon,

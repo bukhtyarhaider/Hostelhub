@@ -1,0 +1,121 @@
+@import "../../../mixins";
+
+.myHostelNoticesContainer {
+  padding: 20px 40px;
+  background: var(--background);
+  border-radius: 8px;
+
+  .noticeCard {
+    border: 1px solid #d0d5dd;
+    box-shadow: 0px 1px 2px 0px #1018280d;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+    .cardHeader {
+      @include flex(row, space-between, center);
+      .cardTitle {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 28px;
+        text-align: left;
+      }
+
+      .alert {
+        padding: 10px 32px;
+        gap: 8px;
+        border-radius: 74px;
+        border: 1px;
+        background: linear-gradient(
+            0deg,
+            rgba(1, 171, 49, 0.15),
+            rgba(1, 171, 49, 0.15)
+          ),
+          linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.2)
+          );
+        border: 1px solid var(--success);
+        color: var(--success);
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 20px;
+      }
+    }
+
+    .cardBody {
+      p {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 18px;
+        padding-top: 10px;
+      }
+
+      .date {
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 18px;
+        padding-bottom: 20px;
+      }
+    }
+
+    .cardFooter {
+      @include flex(row, end, center);
+      .buttons {
+        @include flex(row, center, center);
+        gap: 10px;
+      }
+    }
+  }
+
+  .noticeDetail {
+    .title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 28px;
+      text-align: center;
+      padding-bottom: 40px;
+    }
+
+    .detail {
+      h6 {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 18px;
+        padding-bottom: 20px;
+      }
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        padding-bottom: 20px;
+      }
+    }
+
+    .signature {
+      // font-family: Italianno;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 18px;
+      padding-bottom: 20px;
+    }
+
+    .date {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 18px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .myHostelNoticesContainer {
+    padding: 20px;
+
+    .noticeDetail {
+      .title {
+        padding-bottom: 0px;
+      }
+    }
+  }
+}
