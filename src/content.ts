@@ -24,6 +24,7 @@ export interface AdCard {
   description: string;
 }
 
+// TODO : Dummy data just for testing
 export const adCardsData: AdCard[] = [
   {
     id: 1,
@@ -108,6 +109,30 @@ export const adCardsData: AdCard[] = [
 ];
 
 // TODO : Dummy data just for testing
+export const hostelDetailsData = {
+  hostel_name: "Downing Hostel",
+  reservation_holder_details: {
+    holder_name: "Naomi Doe",
+    holder_email: "naomi@gmail.com",
+    holder_phone_number: "+1 (206) 349 9724",
+    start_date: "12-May-2024",
+    end_date: "12-May-2026",
+  },
+  hostel_details: {
+    warden_name: "Mr. John Doe",
+    warden_email: "warden@downinghostel.com",
+    warden_phone_number: "+1 (206) 349 9724",
+  },
+  reservation_overview: {
+    alert:
+      "Your profile details have been used for your reservation at “Downing Hostel”. These details can’t be changed manually by your user portal. Contact your warden if you wish to change anything.",
+    total_days: "30",
+    spent_days: "12",
+    remaining_days: "18",
+  },
+};
+
+// TODO : Dummy data just for testing
 export const hostelDetailsTableData: DataType[] = [
   {
     key: 1,
@@ -165,6 +190,7 @@ export const hostelDetailsTableData: DataType[] = [
   },
 ];
 
+// TODO : Dummy data just for testing
 export const hostelDetailsDescriptionData = {
   title: "Description",
   description: [
@@ -175,6 +201,7 @@ export const hostelDetailsDescriptionData = {
   ],
 };
 
+// TODO : Dummy data just for testing
 export const howToBookData = [
   {
     title: "Browse Through A Pool Of Choices",
@@ -193,6 +220,7 @@ export const howToBookData = [
   },
 ];
 
+// TODO : Dummy data just for testing
 export const hostelNoticeCardsData = [
   {
     title: "Urgent Notice!",
@@ -270,6 +298,7 @@ export const hostelNoticeCardsData = [
     newNotice: false,
   },
 ];
+
 export const socialIcons = [
   {
     icon: twitterIcon,

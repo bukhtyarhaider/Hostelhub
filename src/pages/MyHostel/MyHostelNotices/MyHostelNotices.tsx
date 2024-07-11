@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CustomButton from "../../../components/CustomButton/CustomButton";
 import { hostelNoticeCardsData } from "../../../content";
 import styles from "./MyHostelNotices.module.scss";
