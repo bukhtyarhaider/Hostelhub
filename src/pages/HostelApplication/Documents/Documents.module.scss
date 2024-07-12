@@ -18,6 +18,12 @@
       flex-direction: column;
       text-align: center;
       margin-bottom: 16px;
+
+      &.fileSelected .uploadBox {
+        border: 2px dashed var(--pale-blue);
+        background-color: #1366d91a;
+      }
+
       .label {
         margin-bottom: 30px;
         font-size: 16px;

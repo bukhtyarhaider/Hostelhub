@@ -6,6 +6,7 @@ interface DocumentsProps {
   formData: any;
   setFormData: (data: any) => void;
   errors: any;
+  setErrors: (errors: any) => void;
 }
 
 const documentsData = [
@@ -31,14 +32,22 @@ const UploadSection: React.FC<{
   formData: any;
   setFormData: (data: any) => void;
   errors: any;
-}> = ({ data, formData, setFormData, errors }) => {
+  setErrors: (errors: any) => void;
+}> = ({ data, formData, setFormData, errors, setErrors }) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files } = e.target;
     setFormData({ ...formData, [name]: files[0] });
+    setErrors({ ...errors, [name]: "" }); // Clear the error for the selected file
   };
 
+  console.log("errors", errors);
+
   return (
-    <div className={styles.uploadSection}>
+    <div
+      className={`${styles.uploadSection} ${
+        formData[data.name] ? styles.fileSelected : ""
+      }`}
+    >
       <label className={styles.label}>
         {data.label} {data.required && <span>*</span>}
       </label>
@@ -51,13 +60,19 @@ const UploadSection: React.FC<{
           onChange={handleFileChange}
         />
         <label htmlFor={data.name}>
-          <img src={uploadIcon} alt="upload" />
-          <div className={styles.uploadPrompt}>
-            Drag / Drop your image here or <span>choose file</span>
-          </div>
-          <div className={styles.uploadNote}>
-            Only pdfs below 25 mbs are allowed *
-          </div>
+          {formData[data.name] ? (
+            <div className={styles.fileName}>{formData[data.name].name}</div>
+          ) : (
+            <>
+              <img src={uploadIcon} alt="upload" />
+              <div className={styles.uploadPrompt}>
+                Drag / Drop your image here or <span>choose file</span>
+              </div>
+              <div className={styles.uploadNote}>
+                Only pdfs below 25 mbs are allowed *
+              </div>
+            </>
+          )}
         </label>
         {errors[data.name] && (
           <div className={styles.error}>{errors[data.name]}</div>
@@ -71,6 +86,7 @@ const Documents: React.FC<DocumentsProps> = ({
   formData,
   setFormData,
   errors,
+  setErrors,
 }) => {
   return (
     <div className={styles.documentsContainer}>
@@ -84,6 +100,7 @@ const Documents: React.FC<DocumentsProps> = ({
             formData={formData}
             setFormData={setFormData}
             errors={errors}
+            setErrors={setErrors}
           />
         ))}
       </form>

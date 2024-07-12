@@ -51,6 +51,7 @@ const HostelApplication: React.FC = () => {
           formData={formData}
           setFormData={setFormData}
           errors={errors}
+          setErrors={setErrors}
         />
       ),
     },
