@@ -8,3 +8,4 @@ export { default as cordIcon } from "./icons/cord-icon.svg";
 export { default as ctaBG } from "./images/cta-bg.png";
 export { default as locationIcon } from "./icons/location-icon.svg";
 export { default as uploadIcon } from "./icons/upload.svg";
+export { default as successIcon } from "./icons/success.svg";

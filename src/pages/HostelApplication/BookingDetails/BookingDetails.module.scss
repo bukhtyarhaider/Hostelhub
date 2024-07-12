@@ -26,6 +26,12 @@
       .input {
         width: 88%;
       }
+
+      .error {
+        color: var(--red);
+        font-size: 12px;
+        padding-top: 5px;
+      }
     }
   }
 }

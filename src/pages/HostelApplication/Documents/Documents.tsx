@@ -8,6 +8,24 @@ interface DocumentsProps {
   errors: any;
 }
 
+const documentsData = [
+  {
+    label: "CNIC Front Side",
+    required: true,
+    name: "cnicFront",
+  },
+  {
+    label: "CNIC Back Side",
+    required: true,
+    name: "cnicBack",
+  },
+  {
+    label: "Student ID (Optional)",
+    required: false,
+    name: "studentId",
+  },
+];
+
 const UploadSection: React.FC<{
   data: any;
   formData: any;
@@ -15,7 +33,8 @@ const UploadSection: React.FC<{
   errors: any;
 }> = ({ data, formData, setFormData, errors }) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    const { name, files } = e.target;
+    setFormData({ ...formData, [name]: files[0] });
   };
 
   return (
@@ -47,24 +66,6 @@ const UploadSection: React.FC<{
     </div>
   );
 };
-
-const documentsData = [
-  {
-    label: "CNIC Front Side",
-    required: true,
-    name: "cnicFront",
-  },
-  {
-    label: "CNIC Back Side",
-    required: true,
-    name: "cnicBack",
-  },
-  {
-    label: "Student ID (Optional)",
-    required: false,
-    name: "studentId",
-  },
-];
 
 const Documents: React.FC<DocumentsProps> = ({
   formData,

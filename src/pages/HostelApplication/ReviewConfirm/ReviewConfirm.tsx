@@ -15,27 +15,31 @@ const ReviewConfirm: React.FC<ReviewConfirmProps> = ({ formData }) => {
         <div className={styles.card}>
           <h4 className={styles.cardTitle}>Your Details</h4>
           <div className={styles.detail}>
-            <h5>Hostel Name:</h5>
+            <h5>Full Name:</h5>
+            <p>{formData.fullName}</p>
+          </div>
+          <div className={styles.detail}>
+            <h5>Email:</h5>
+            <p>{formData.email}</p>
+          </div>
+          <div className={styles.detail}>
+            <h5>Phone Number:</h5>
+            <p>{formData.phoneNumber}</p>
+          </div>
+          <div className={styles.detail}>
+            <h5>Selected Hostel:</h5>
             <p>{formData.hostelName}</p>
           </div>
           <div className={styles.detail}>
-            <h5>Hostel Type:</h5>
-            <p>{formData.hostelType}</p>
-          </div>
-          <div className={styles.detail}>
-            <h5>Hostel ID:</h5>
-            <p>{formData.hostelId}</p>
-          </div>
-          <div className={styles.detail}>
-            <h5>Room Number:</h5>
+            <h5>Selected Room:</h5>
             <p>{formData.roomNumber}</p>
           </div>
+        </div>
+
+        <div className={styles.card}>
+          <h4 className={styles.cardTitle}>Reservation Details</h4>
           <div className={styles.detail}>
-            <h5>Room Type:</h5>
-            <p>{formData.roomType}</p>
-          </div>
-          <div className={styles.detail}>
-            <h5>Stay Duration:</h5>
+            <h5>Duration:</h5>
             <p>{formData.stayDuration}</p>
           </div>
           <div className={styles.detail}>
@@ -46,29 +50,13 @@ const ReviewConfirm: React.FC<ReviewConfirmProps> = ({ formData }) => {
             <h5>End Date:</h5>
             <p>{formData.endDate}</p>
           </div>
-        </div>
-
-        <div className={styles.card}>
-          <h4 className={styles.cardTitle}>Reservation Details</h4>
-          <div className={styles.detail}>
-            <h5>Duration:</h5>
-            <p>{"duration"}</p>
-          </div>
-          <div className={styles.detail}>
-            <h5>Start Date:</h5>
-            <p>{"start_date"}</p>
-          </div>
-          <div className={styles.detail}>
-            <h5>End Date:</h5>
-            <p>{"end_date"}</p>
-          </div>
           <div className={styles.detail}>
             <h5>Hostel Type:</h5>
-            <p>{"hostel_type"}</p>
+            <p>{formData.hostelType}</p>
           </div>
           <div className={styles.detail}>
             <h5>Rent (per month):</h5>
-            <p>{"rent"}</p>
+            <p>Rs: {formData.hostelRent}</p>
           </div>
         </div>
 

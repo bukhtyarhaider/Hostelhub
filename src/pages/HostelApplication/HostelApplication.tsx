@@ -5,15 +5,20 @@ import BookingDetails from "./BookingDetails/BookingDetails";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Documents from "./Documents/Documents";
 import ReviewConfirm from "./ReviewConfirm/ReviewConfirm";
+import { useNavigate } from "react-router-dom";
 
 const { Step } = Steps;
 
 const initialFormData = {
+  fullName: "John Doe",
+  email: "LcH0O@example.com",
+  phoneNumber: "1234567890",
   hostelName: "Downing Hostel",
   hostelType: "Student Accommodation",
   hostelId: "142",
   roomNumber: "DH-04",
   roomType: "Single Room",
+  hostelRent: "1000",
   stayDuration: "3-months",
   startDate: null,
   endDate: null,
@@ -23,6 +28,7 @@ const initialFormData = {
 };
 
 const HostelApplication: React.FC = () => {
+  const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState<any>({});
@@ -83,6 +89,7 @@ const HostelApplication: React.FC = () => {
 
   const handleSubmit = () => {
     console.log("Form Data:", formData);
+    navigate("/application-sent");
     message.success("Application Submitted!");
   };
 

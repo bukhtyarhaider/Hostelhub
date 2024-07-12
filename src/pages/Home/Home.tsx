@@ -7,7 +7,6 @@ import CTA from "../../components/CTA/CTA";
 import NoHostelFound from "../../components/NoHotelFound/NoHotelFound";
 import { useNavigate } from "react-router-dom";
 import { HomeProps } from "./HomeProps";
-import HostelApplication from "../HostelApplication/HostelApplication";
 
 const Home = ({
   authUser,
@@ -38,9 +37,7 @@ const Home = ({
 
   return (
     <div className={homeStyles.homeContainer}>
-      <HostelApplication />
-
-      {/* <Filters onFilterChange={handleFilterChange} />
+      <Filters onFilterChange={handleFilterChange} />
 
       <div className={homeStyles.cardsContainer}>
         {filteredData.length > 0 ? (
@@ -72,7 +69,7 @@ const Home = ({
         ) : (
           <NoHostelFound />
         )}
-      </div> */}
+      </div>
     </div>
   );
 };

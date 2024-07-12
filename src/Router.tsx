@@ -3,6 +3,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import HostelDetails from "./pages/HostelDetails/HostelDetails";
 import { User } from "./types/types";
+import ApplicationSent from "./pages/HostelApplication/ApplicationSent/ApplicationSent";
+import HostelApplication from "./pages/HostelApplication/HostelApplication";
 
 interface RouterProps {
   authUser?: User;
@@ -34,6 +36,17 @@ const Router: React.FC<RouterProps> = ({
           index
           element={<HostelDetails authUser={authUser ?? undefined} />}
         />
+        <Route
+          path="/hostel-application"
+          index
+          element={<HostelApplication authUser={authUser ?? undefined} />}
+        />
+        <Route
+          path="/application-sent"
+          index
+          element={<ApplicationSent authUser={authUser ?? undefined} />}
+        />
+
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </div>
