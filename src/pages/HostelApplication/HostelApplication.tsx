@@ -5,7 +5,7 @@ import BookingDetails from "./BookingDetails/BookingDetails";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Documents from "./Documents/Documents";
 import ReviewConfirm from "./ReviewConfirm/ReviewConfirm";
-import { useNavigate } from "react-router-dom";
+import ApplicationSent from "./ApplicationSent/ApplicationSent";
 
 const { Step } = Steps;
 
@@ -28,10 +28,10 @@ const initialFormData = {
 };
 
 const HostelApplication: React.FC = () => {
-  const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState<any>({});
+  const [submitted, setSubmitted] = useState(false);
 
   const steps = [
     {
@@ -90,54 +90,60 @@ const HostelApplication: React.FC = () => {
 
   const handleSubmit = () => {
     console.log("Form Data:", formData);
-    navigate("/application-sent");
     message.success("Application Submitted!");
+    setSubmitted(true);
   };
 
   return (
-    <div className={styles.hostelApplicationContainer}>
-      <h2 className={styles.heading}>Hostel Application</h2>
+    <>
+      {!submitted ? (
+        <div className={styles.hostelApplicationContainer}>
+          <h2 className={styles.heading}>Hostel Application</h2>
 
-      <div className={styles.stepper}>
-        <Steps current={current} progressDot>
-          {steps.map((item, index) => (
-            <Step key={index} title={item.title} />
-          ))}
-        </Steps>
-      </div>
+          <div className={styles.stepper}>
+            <Steps current={current} progressDot>
+              {steps.map((item, index) => (
+                <Step key={index} title={item.title} />
+              ))}
+            </Steps>
+          </div>
 
-      <div className={styles.stepsContent}>{steps[current].content}</div>
+          <div className={styles.stepsContent}>{steps[current].content}</div>
 
-      <div className={styles.stepsAction}>
-        {current > 0 && (
-          <CustomButton
-            title="Previous"
-            variant="filled"
-            size="medium"
-            extraWidth
-            onClick={() => prev()}
-          />
-        )}
-        {current === steps.length - 1 && (
-          <CustomButton
-            title="Submit"
-            variant="filled"
-            size="medium"
-            extraWidth
-            onClick={() => handleSubmit()}
-          />
-        )}
-        {current < steps.length - 1 && (
-          <CustomButton
-            title="Next"
-            variant="outline"
-            size="medium"
-            extraWidth
-            onClick={() => next()}
-          />
-        )}
-      </div>
-    </div>
+          <div className={styles.stepsAction}>
+            {current > 0 && (
+              <CustomButton
+                title="Previous"
+                variant="filled"
+                size="medium"
+                extraWidth
+                onClick={() => prev()}
+              />
+            )}
+            {current === steps.length - 1 && (
+              <CustomButton
+                title="Submit"
+                variant="filled"
+                size="medium"
+                extraWidth
+                onClick={() => handleSubmit()}
+              />
+            )}
+            {current < steps.length - 1 && (
+              <CustomButton
+                title="Next"
+                variant="outline"
+                size="medium"
+                extraWidth
+                onClick={() => next()}
+              />
+            )}
+          </div>
+        </div>
+      ) : (
+        <ApplicationSent />
+      )}
+    </>
   );
 };
 

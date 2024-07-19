@@ -41,11 +41,6 @@ const Router: React.FC<RouterProps> = ({
           index
           element={<HostelApplication authUser={authUser ?? undefined} />}
         />
-        <Route
-          path="/application-sent"
-          index
-          element={<ApplicationSent authUser={authUser ?? undefined} />}
-        />
 
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
