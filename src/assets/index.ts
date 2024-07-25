@@ -9,3 +9,5 @@ export { default as ctaBG } from "./images/cta-bg.png";
 export { default as locationIcon } from "./icons/location-icon.svg";
 export { default as uploadIcon } from "./icons/upload.svg";
 export { default as successIcon } from "./icons/success.svg";
+export { default as infoIcon } from "./icons/info.svg";
+export { default as crossIcon } from "./icons/cross.svg";

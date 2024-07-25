@@ -11,34 +11,34 @@
 }
 
 .outline {
-  color: var(--blue);
-  border: 1.5px solid var(--blue);
-  background-color: var(--background);
+  color: #003b95;
+  border: 1.5px solid #003b95;
+  background-color: white;
   &:hover {
-    color: var(--secondary-text);
-    border: 1.5px solid var(--background);
-    background-color: var(--blue);
+    color: white;
+    border: 1.5px solid white;
+    background-color: #003b95;
   }
 }
 
 .filled {
-  background-color: var(--blue);
-  color: var(--secondary-text);
-  border: 1.5px solid var(--blue);
+  background-color: #003b95;
+  color: white;
+  border: 1.5px solid #003b95;
   &:hover {
-    color: var(--blue);
-    background-color: var(--background);
+    color: #003b95;
+    background-color: white;
   }
 }
 
 .isDisabled {
-  background-color: var(--background);
-  color: var(--grey-100);
-  border: 1.5px solid var(--grey-100);
+  background-color: white;
+  color: #858d9d;
+  border: 1.5px solid #858d9d;
   &:hover {
-    background-color: var(--background);
-    color: var(--grey-100);
-    border: 1.5px solid var(--grey-100);
+    background-color: white;
+    color: #858d9d;
+    border: 1.5px solid #858d9d;
     cursor: not-allowed;
   }
 }

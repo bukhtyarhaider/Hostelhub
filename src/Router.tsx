@@ -5,6 +5,8 @@ import HostelDetails from "./pages/HostelDetails/HostelDetails";
 import { User } from "./types/types";
 import ApplicationSent from "./pages/HostelApplication/ApplicationSent/ApplicationSent";
 import HostelApplication from "./pages/HostelApplication/HostelApplication";
+import MyHostel from "./pages/MyHostel/MyHostel";
+import MyRequests from "./pages/MyRequests/MyRequests";
 
 interface RouterProps {
   authUser?: User;
@@ -42,6 +44,10 @@ const Router: React.FC<RouterProps> = ({
           element={<HostelApplication authUser={authUser ?? undefined} />}
         />
 
+        <Route
+          path="/my-hostel"
+          element={<MyHostel />}
+        />
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </div>
