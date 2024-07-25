@@ -3,8 +3,10 @@ import { Table } from "antd";
 import type { TableColumnsType } from "antd";
 import CustomButton from "../../../../components/CustomButton/CustomButton";
 import { DataType } from "./DetailsTableProps";
+import { useNavigate } from "react-router-dom";
 
 const DetailsTable = ({ tableData, authUser }) => {
+  const navigate = useNavigate();
   const columns: TableColumnsType<DataType> = [
     { title: "Room Number", dataIndex: "roomNumber", key: "roomNumber" },
     { title: "Room Type", dataIndex: "roomType", key: "roomType" },
@@ -29,7 +31,7 @@ const DetailsTable = ({ tableData, authUser }) => {
       key: "x",
       render: (data) => (
         <CustomButton
-          onClick={() => console.log(data)}
+          onClick={() => applyForHostel(data)}
           title={"Apply"}
           variant={"filled"}
           size={"small"}
@@ -37,6 +39,10 @@ const DetailsTable = ({ tableData, authUser }) => {
       ),
     });
   }
+
+  const applyForHostel = (data) => {
+    navigate(`/hostel-application`);
+  };
 
   return (
     <div className={styles.detailsTableContainer}>
