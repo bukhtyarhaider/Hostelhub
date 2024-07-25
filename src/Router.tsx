@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import HostelDetails from "./pages/HostelDetails/HostelDetails";
 import { User } from "./types/types";
 import MyHostel from "./pages/MyHostel/MyHostel";
+import MyRequests from "./pages/MyRequests/MyRequests";
 
 interface RouterProps {
   authUser?: User;
