@@ -7,4 +7,5 @@ export { default as twitterIcon } from "./icons/twitter-icon.svg";
 export { default as cordIcon } from "./icons/cord-icon.svg";
 export { default as ctaBG } from "./images/cta-bg.png";
 export { default as locationIcon } from "./icons/location-icon.svg";
+export { default as infoIcon } from "./icons/info.svg";
 export { default as crossIcon } from "./icons/cross.svg";

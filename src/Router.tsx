@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import HostelDetails from "./pages/HostelDetails/HostelDetails";
 import { User } from "./types/types";
+import MyHostel from "./pages/MyHostel/MyHostel";
 import MyRequests from "./pages/MyRequests/MyRequests";
 
 interface RouterProps {
@@ -35,7 +36,10 @@ const Router: React.FC<RouterProps> = ({
           index
           element={<HostelDetails authUser={authUser ?? undefined} />}
         />
-        <Route path="/my-requests" index element={<MyRequests />} />
+        <Route
+          path="/my-hostel"
+          element={<MyHostel />}
+        />
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </div>
