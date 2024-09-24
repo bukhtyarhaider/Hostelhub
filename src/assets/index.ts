@@ -11,5 +11,3 @@ export { default as uploadIcon } from "./icons/upload.svg";
 export { default as successIcon } from "./icons/success.svg";
 export { default as infoIcon } from "./icons/info.svg";
 export { default as crossIcon } from "./icons/cross.svg";
-export { default as infoIcon } from "./icons/info.svg";
-export { default as crossIcon } from "./icons/cross.svg";

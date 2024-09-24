@@ -7,8 +7,6 @@ import ApplicationSent from "./pages/HostelApplication/ApplicationSent/Applicati
 import HostelApplication from "./pages/HostelApplication/HostelApplication";
 import MyHostel from "./pages/MyHostel/MyHostel";
 import MyRequests from "./pages/MyRequests/MyRequests";
-import MyHostel from "./pages/MyHostel/MyHostel";
-import MyRequests from "./pages/MyRequests/MyRequests";
 
 interface RouterProps {
   authUser?: User;
@@ -51,8 +49,8 @@ const Router: React.FC<RouterProps> = ({
           element={<MyHostel />}
         />
         <Route
-          path="/my-hostel"
-          element={<MyHostel />}
+          path="/my-requests"
+          element={<MyRequests />}
         />
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
