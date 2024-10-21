@@ -2,8 +2,10 @@ import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  signInWithEmailAndPassword,
   updateProfile,
   User,
+  UserCredential,
 } from "firebase/auth";
 import { doc, getFirestore, setDoc, Timestamp } from "firebase/firestore";
 import { SignUpForm } from "../types/types";
@@ -47,5 +49,25 @@ export const signUp = async (userData: SignUpForm) => {
   } catch (error: any) {
     console.error("Error during signup:", error);
     throw new Error(error.code || error.message);
+  }
+};
+
+export const signIn = async (
+  email: string,
+  password: string
+): Promise<UserCredential> => {
+  try {
+    const userCredential: UserCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return userCredential;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("An unknown error occurred during sign-in.");
+    }
   }
 };
