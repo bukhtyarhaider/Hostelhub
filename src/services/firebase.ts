@@ -9,8 +9,15 @@ import {
   User,
   UserCredential,
 } from "firebase/auth";
-import { doc, getFirestore, setDoc, Timestamp } from "firebase/firestore";
-import { SignUpForm } from "../types/types";
+import {
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+  Timestamp,
+} from "firebase/firestore";
+import { SignUpForm, UpdateProfileParams, UserProfile } from "../types/types";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -24,6 +31,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 export const signUp = async (userData: SignUpForm) => {
   const { fullName, email, password } = userData;
@@ -89,5 +97,85 @@ export const signOutUser = async () => {
     } else {
       throw new Error("An unknown error occurred during sign-out.");
     }
+  }
+};
+
+export const uploadImage = async (file: File, path: string) => {
+  try {
+    const imageRef = ref(storage, path);
+    const snapshot = await uploadBytes(imageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+
+    return downloadURL;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error("Failed to upload profile image: " + error.message);
+    } else {
+      throw new Error(
+        "Failed to upload profile image: An unexpected error occurred"
+      );
+    }
+  }
+};
+
+export const _updateProfile = async ({
+  fullName,
+  phoneNumber,
+  address,
+  state,
+  status,
+  photoURL,
+  dateOfBirth,
+}: UpdateProfileParams): Promise<string> => {
+  try {
+    const user = auth.currentUser;
+    if (user) {
+      await updateProfile(user, { displayName: fullName, photoURL });
+
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          phoneNumber: phoneNumber,
+          address: address,
+          state: state,
+          photoURL: photoURL,
+          dateOfBirth: dateOfBirth,
+          status: status,
+        },
+        { merge: true }
+      );
+
+      return "User profile updated successfully.";
+    } else {
+      throw new Error("No user is currently signed in.");
+    }
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export const getProfile = async (): Promise<UserProfile> => {
+  const user = auth.currentUser;
+
+  if (user) {
+    const userDocRef = doc(db, "users", user.uid);
+    const userDoc = await getDoc(userDocRef);
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      return {
+        fullName: user.displayName ?? "",
+        email: user.email ?? "",
+        photoURL: user.photoURL ?? "",
+        phoneNumber: userData?.phoneNumber ?? "",
+        currentState: userData?.state ?? "",
+        currentAddress: userData?.address ?? "",
+        dateOfBirth: userData?.dateOfBirth ?? "",
+        currentStatus: userData?.status ?? "",
+      };
+    } else {
+      throw new Error("User data not found.");
+    }
+  } else {
+    throw new Error("No user is currently signed in.");
   }
 };
