@@ -12,6 +12,7 @@
     margin-bottom: 20px;
     width: max-content;
     margin-inline: auto;
+    
 
     .profilePicture {
       width: 150px;
@@ -20,6 +21,17 @@
       padding: 5px;
       object-fit: cover;
       border: 3px solid #007bff; // Profile border color
+      background-color: #ffffff; // Default background color for placeholder
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      // Fallback for when no image is present
+      &:empty::before {
+        content: "No Image"; // Placeholder text for missing image
+        color: #bbb; // Placeholder text color
+        font-size: 14px; // Adjust font size for placeholder text
+      }
     }
 
     .cameraIcon {
