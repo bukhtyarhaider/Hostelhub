@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import styles from "../Auth.module.scss";
-import { Button, Modal } from "antd";
+import { Button, message, Modal } from "antd";
 import CustomInput from "../../CustomInput/CustomInput";
 import { RegisterProps } from "./RegisterProps";
+import { signUp } from "../../../services/firebase";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Register: React.FC<RegisterProps> = ({
   isSignInModalOpen,
   showRegisterModal,
   showSignInModal,
 }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [errors, setErrors] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const validate = () => {
     let newErrors = "";
@@ -34,14 +37,32 @@ const Register: React.FC<RegisterProps> = ({
     return newErrors;
   };
 
-  const onRegister = (e: React.FormEvent) => {
+  const onRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
       setErrors("");
-      // TODO:  Handle registration logic here
+      setIsLoading(true);
+      try {
+        await signUp({ fullName: name, email, password });
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+
+        message.success("Successfully signed up!");
+        showRegisterModal();
+      } catch (error: unknown) {
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred during signup. Please try again later.";
+        message.error(`Signup failed: ${errorMessage}`);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -60,7 +81,7 @@ const Register: React.FC<RegisterProps> = ({
           Welcome! Please enter your details to create an account.
         </p>
 
-        <form onSubmit={onRegister}>
+        <form onSubmit={isLoading ? () => {} : onRegister}>
           <CustomInput
             type="text"
             name="name"
@@ -101,7 +122,7 @@ const Register: React.FC<RegisterProps> = ({
           <div className={styles.errorMessage}>{errors}</div>
           <div className={styles.buttons}>
             <Button type="primary" htmlType="submit">
-              Register
+              {isLoading ? <ClipLoader size="25" color="white" /> : "Register"}
             </Button>
             <Button onClick={showRegisterModal}>Cancel</Button>
           </div>
