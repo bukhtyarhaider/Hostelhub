@@ -4,6 +4,7 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
   User,
   UserCredential,
@@ -77,4 +78,16 @@ export const observeAuthState = (callback: (user: User | null) => void) => {
   return onAuthStateChanged(auth, (user) => {
     callback(user);
   });
+};
+
+export const signOutUser = async () => {
+  try {
+    await signOut(auth);
+  } catch (error: any) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("An unknown error occurred during sign-out.");
+    }
+  }
 };

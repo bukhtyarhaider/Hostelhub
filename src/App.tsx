@@ -9,8 +9,9 @@ import Router from "./Router";
 import { useEffect, useState } from "react";
 import Login from "./components/Auth/Login/Login";
 import Register from "./components/Auth/Register/Register";
-import { observeAuthState } from "./services/firebase";
+import { observeAuthState, signOutUser } from "./services/firebase";
 import { User } from "firebase/auth";
+import { message } from "antd";
 
 const menuItem = [
   {
@@ -25,8 +26,18 @@ const menuItem = [
     to: "/login",
     label: "Logout",
     iconSrc: logoutIcon,
-    onClick: () => {
-      console.log("logout");
+    onClick: async () => {
+      try {
+        await signOutUser();
+        message.success("Successfully logged out!");
+      } catch (error: unknown) {
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred during logout. Please try again later.";
+        message.error(`Signup failed: ${errorMessage}`);
+      } finally {
+      }
     },
   },
 ];
