@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   updateProfile,
   User,
@@ -70,4 +71,10 @@ export const signIn = async (
       throw new Error("An unknown error occurred during sign-in.");
     }
   }
+};
+
+export const observeAuthState = (callback: (user: User | null) => void) => {
+  return onAuthStateChanged(auth, (user) => {
+    callback(user);
+  });
 };

@@ -9,7 +9,8 @@ import Router from "./Router";
 import { useEffect, useState } from "react";
 import Login from "./components/Auth/Login/Login";
 import Register from "./components/Auth/Register/Register";
-import { User } from "./types/types";
+import { observeAuthState } from "./services/firebase";
+import { User } from "firebase/auth";
 
 const menuItem = [
   {
@@ -30,20 +31,25 @@ const menuItem = [
   },
 ];
 
-// TODO : Temporary AuthUser
-export const authUser: User = {
-  name: "user",
-  image: "https://picsum.photos/200",
-};
-
 function App() {
   const { pathname } = useLocation();
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState<boolean>(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] =
+    useState<boolean>(false);
+
+  const [authUser, setAuthUser] = useState<User | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  useEffect(() => {
+    const unsubscribe = observeAuthState((user) => {
+      setAuthUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const toggleSignInModal = () => {
     setIsSignInModalOpen(!isSignInModalOpen);
@@ -62,7 +68,7 @@ function App() {
             <>
               <NavBar
                 navItems={navItems}
-                authUser={authUser ?? undefined}
+                authUser={authUser}
                 profileMenu={menuItem}
                 onResgister={() => {
                   toggleRegisterModal();
