@@ -1,4 +1,4 @@
-import { User } from "../../types/types";
+import { User } from "firebase/auth";
 
 /**
  * Interface for a menu item.
