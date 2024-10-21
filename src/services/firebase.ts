@@ -1,4 +1,12 @@
 import { initializeApp } from "firebase/app";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+  User,
+} from "firebase/auth";
+import { doc, getFirestore, setDoc, Timestamp } from "firebase/firestore";
+import { SignUpForm } from "../types/types";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -10,3 +18,34 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+export const signUp = async (userData: SignUpForm) => {
+  const { fullName, email, password } = userData;
+
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user: User = userCredential.user;
+
+    await updateProfile(user, {
+      displayName: fullName,
+    });
+
+    await setDoc(doc(db, "users", user.uid), {
+      id: user.uid,
+      fullName,
+      email,
+      createdAt: Timestamp.now(),
+    });
+
+    return user;
+  } catch (error: any) {
+    console.error("Error during signup:", error);
+    throw new Error(error.code || error.message);
+  }
+};
