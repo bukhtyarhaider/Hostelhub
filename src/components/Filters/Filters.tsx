@@ -5,7 +5,7 @@ import { FiltersProps } from "./FiltersProps";
 
 export const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
   const [filters, setFilters] = useState({
-    hostelName: "",
+    name: "",
     location: "",
     type: "",
   });
@@ -28,8 +28,8 @@ export const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
         <div className={styles.fieldsWrapper}>
           <CustomInput
             type="text"
-            name="hostelName"
-            value={filters.hostelName}
+            name="name"
+            value={filters.name}
             label=""
             placeholder="Hostel Name"
             onChange={handleInputChange}
@@ -49,9 +49,9 @@ export const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
             className={styles.customSelect}
           >
             <option value="">Select Type</option>
-            <option value="boys">Boys Hostel</option>
-            <option value="girls">Girls Hostel</option>
-            <option value="co-ed">Co-ed Hostel</option>
+            <option value="Student">Student</option>
+            <option value="Staff">Staff</option>
+            <option value="Vistor">Vistor</option>
           </select>
         </div>
       </div>
