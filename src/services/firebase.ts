@@ -10,13 +10,20 @@ import {
   UserCredential,
 } from "firebase/auth";
 import {
+  collection,
   doc,
   getDoc,
+  getDocs,
   getFirestore,
   setDoc,
   Timestamp,
 } from "firebase/firestore";
-import { SignUpForm, UpdateProfileParams, UserProfile } from "../types/types";
+import {
+  Hostel,
+  SignUpForm,
+  UpdateProfileParams,
+  UserProfile,
+} from "../types/types";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
@@ -177,5 +184,28 @@ export const getProfile = async (): Promise<UserProfile> => {
     }
   } else {
     throw new Error("No user is currently signed in.");
+  }
+};
+
+export const fetchHostel = async (): Promise<Hostel[]> => {
+  try {
+    const hostelsRef = collection(db, "hostels");
+    const snapshot = await getDocs(hostelsRef);
+    return snapshot.docs.map((hostel) => {
+      return {
+        id: hostel.id,
+        name: hostel.data()?.name ?? "",
+        email: hostel.data()?.email ?? "",
+        location: hostel.data()?.location ?? "",
+        contactNumber: hostel.data()?.contactNumber ?? "",
+        type: hostel.data()?.type ?? "",
+        description: hostel.data()?.description ?? "",
+        images: hostel.data()?.images ?? "",
+        rooms: hostel.data()?.rooms ?? "",
+      };
+    });
+  } catch (error: any) {
+    console.error("Error fetching Hostels:", error);
+    throw new Error(error.message);
   }
 };
