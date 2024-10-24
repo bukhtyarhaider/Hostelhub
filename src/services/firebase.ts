@@ -15,14 +15,18 @@ import {
   getDoc,
   getDocs,
   getFirestore,
+  query,
   setDoc,
   Timestamp,
+  where,
 } from "firebase/firestore";
 import {
   Hostel,
+  Room,
   SignUpForm,
   UpdateProfileParams,
   UserProfile,
+  Warden,
 } from "../types/types";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
@@ -191,19 +195,70 @@ export const fetchHostel = async (): Promise<Hostel[]> => {
   try {
     const hostelsRef = collection(db, "hostels");
     const snapshot = await getDocs(hostelsRef);
-    return snapshot.docs.map((hostel) => {
-      return {
-        id: hostel.id,
-        name: hostel.data()?.name ?? "",
-        email: hostel.data()?.email ?? "",
-        location: hostel.data()?.location ?? "",
-        contactNumber: hostel.data()?.contactNumber ?? "",
-        type: hostel.data()?.type ?? "",
-        description: hostel.data()?.description ?? "",
-        images: hostel.data()?.images ?? "",
-        rooms: hostel.data()?.rooms ?? "",
-      };
-    });
+
+    const hostels = await Promise.all(
+      snapshot.docs.map(async (hostel) => {
+        const hostelData: Hostel = {
+          id: hostel.id,
+          name: hostel.data()?.name ?? "",
+          email: hostel.data()?.email ?? "",
+          location: hostel.data()?.location ?? "",
+          contactNumber: hostel.data()?.contactNumber ?? "",
+          type: hostel.data()?.type ?? "",
+          description: hostel.data()?.description ?? "",
+          images: hostel.data()?.images ?? "",
+          rooms: [],
+          warden: {
+            wardenId: "",
+            email: "",
+            fullName: "",
+            phoneNumber: "",
+          },
+        };
+
+        const roomsRef = collection(db, `hostels/${hostel.id}/rooms`);
+        const roomsSnapshot = await getDocs(roomsRef);
+
+        hostelData.rooms = roomsSnapshot.docs.map((roomDoc) => {
+          const roomData = roomDoc.data();
+          return {
+            id: roomDoc.id,
+            roomNumber: roomData.roomNumber ?? 0,
+            price: roomData.price ?? "",
+            type: roomData.type ?? "",
+            numberOfBeds: roomData.numberOfBeds ?? 0,
+            washroom: roomData.washroom ?? 0,
+            rent: roomData.rent ?? 0,
+            seatsAvailable: roomData.seatsAvailable ?? 0,
+          } as unknown as Room;
+        });
+
+        // Fetch warden data from wardens collection using hostel ID
+        const wardensRef = collection(db, "wardens");
+        const wardenQuery = query(
+          wardensRef,
+          where("hostelId", "==", hostel.id)
+        );
+        const wardenSnapshot = await getDocs(wardenQuery);
+
+        const wardenDoc = wardenSnapshot.docs[0];
+        if (wardenDoc) {
+          const wardenData = wardenDoc.data();
+          hostelData.warden = {
+            id: wardenDoc.id,
+            wardenId: wardenData.wardenId ?? "",
+            email: wardenData.email ?? "",
+            fullName: wardenData.fullName ?? "",
+            phoneNumber: wardenData.phoneNumber ?? "",
+            photoURL: wardenData.photoURL ?? "",
+          } as Warden;
+        }
+
+        return hostelData;
+      })
+    );
+
+    return hostels;
   } catch (error: any) {
     console.error("Error fetching Hostels:", error);
     throw new Error(error.message);

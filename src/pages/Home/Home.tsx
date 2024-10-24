@@ -85,7 +85,14 @@ const Home = ({
                 description={hostel.description}
                 image={hostel.images[0]}
                 location={hostel.location}
-                onShowDetails={() => navigate(`/hostel-details/${hostel.id}`)}
+                // onShowDetails={() => navigate(`/hostel-details/${hostel.id}`)}
+                onShowDetails={() =>
+                  navigate("/hostel-details", {
+                    state: {
+                      hostelDetails: hostel,
+                    },
+                  })
+                }
               />
             </div>
           ))

@@ -3,20 +3,21 @@ import { Tabs } from "antd";
 import CustomGallery from "./components/CustomGallery/CustomGallery";
 import DetailsTable from "./components/DetailsTable/DetailsTable";
 import HowToBook from "./components/HowToBook/HowToBook";
-import {
-  adCardsData,
-  AdCard as IAdCard,
-  hostelDetailsDescriptionData,
-  hostelDetailsTableData,
-  howToBookData,
-} from "../../content";
+import { adCardsData, AdCard as IAdCard, howToBookData } from "../../content";
 import AdCard from "../../components/AdCard/AdCard";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { HostelDetailsProps } from "./HostelDetailsProps";
 
-const HostelDetails = ({ authUser }) => {
+const HostelDetails: React.FC<HostelDetailsProps> = ({ authUser }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams();
+  const hostelDetails = location.state?.hostelDetails;
+
+  if (!hostelDetails) {
+    navigate("/");
+  }
 
   const getSimilarHostels = (
     hostelId: string | undefined,
@@ -61,15 +62,10 @@ const HostelDetails = ({ authUser }) => {
       key: "1",
       children: (
         <>
-          <DetailsTable
-            tableData={hostelDetailsTableData}
-            authUser={authUser}
-          />
+          <DetailsTable tableData={hostelDetails?.rooms} authUser={authUser} />
           <div className={styles.description}>
-            <h2>{hostelDetailsDescriptionData.title}</h2>
-            {hostelDetailsDescriptionData.description.map((data, index) => (
-              <p key={index}>{data}</p>
-            ))}
+            <h2>Description</h2>
+            <p>{hostelDetails?.description}</p>
           </div>
         </>
       ),
@@ -85,14 +81,14 @@ const HostelDetails = ({ authUser }) => {
     <>
       <div className={styles.hostelDetailsContainer}>
         <CustomGallery
-          title={"Downing Hostel"}
-          subTitle={"Student Accommodation"}
-          images={[
-            "https://picsum.photos/200",
-            "https://picsum.photos/240",
-            "https://picsum.photos/230",
-            "https://picsum.photos/220",
-          ]}
+          title={hostelDetails?.name ?? ""}
+          subTitle={`${hostelDetails?.type ?? "Student"} Hostel`}
+          images={hostelDetails?.images ?? []}
+          location={hostelDetails?.location ?? ""}
+          wardenProfile={{
+            profileImageUrl: hostelDetails.warden.photoURL ?? "",
+            name: hostelDetails.warden.fullName ?? "",
+          }}
         />
 
         <Tabs defaultActiveKey="1" items={tabsMenuData} />
