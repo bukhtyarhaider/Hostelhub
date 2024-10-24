@@ -15,10 +15,7 @@ const HostelDetails: React.FC<HostelDetailsProps> = ({ authUser }) => {
   const { id } = useParams();
   const hostelDetails = location.state?.hostelDetails;
 
-  console.log(hostelDetails);
-
   if (!hostelDetails) {
-    console.log(hostelDetails);
     navigate("/");
   }
 
