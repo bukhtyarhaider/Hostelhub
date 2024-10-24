@@ -2,11 +2,11 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import HostelDetails from "./pages/HostelDetails/HostelDetails";
-import { User } from "./types/types";
 import HostelApplication from "./pages/HostelApplication/HostelApplication";
 import MyHostel from "./pages/MyHostel/MyHostel";
 import MyRequests from "./pages/MyRequests/MyRequests";
 import Profile from "./pages/Profile/Profile";
+import { User } from "firebase/auth";
 
 interface RouterProps {
   authUser?: User;
@@ -27,15 +27,15 @@ const Router: React.FC<RouterProps> = ({
           index
           element={
             <Home
-              authUser={authUser ?? undefined}
+              authUser={authUser}
               toggleRegisterModal={toggleRegisterModal}
               toggleSignInModal={toggleSignInModal}
             />
           }
         />
         <Route
-          path="/hostel-details/:id"
-          element={<HostelDetails authUser={authUser ?? undefined} />}
+          path="/hostel-details"
+          element={<HostelDetails authUser={authUser} />}
         />
         <Route
           path="/hostel-application"
