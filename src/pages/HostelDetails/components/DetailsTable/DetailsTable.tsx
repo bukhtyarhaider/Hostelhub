@@ -2,14 +2,15 @@ import styles from "./DetailsTable.module.scss";
 import { Table } from "antd";
 import type { TableColumnsType } from "antd";
 import CustomButton from "../../../../components/CustomButton/CustomButton";
-import { DataType } from "./DetailsTableProps";
+import { DetailsTableProps } from "./DetailsTableProps";
 import { useNavigate } from "react-router-dom";
+import { Room } from "../../../../types/types";
 
-const DetailsTable = ({ tableData, authUser }) => {
+const DetailsTable: React.FC<DetailsTableProps> = ({ tableData, authUser }) => {
   const navigate = useNavigate();
-  const columns: TableColumnsType<DataType> = [
+  const columns: TableColumnsType<Room> = [
     { title: "Room Number", dataIndex: "roomNumber", key: "roomNumber" },
-    { title: "Room Type", dataIndex: "roomType", key: "roomType" },
+    { title: "Room Type", dataIndex: "type", key: "type" },
     { title: "Number of Beds", dataIndex: "numberOfBeds", key: "numberOfBeds" },
     { title: "Washroom", dataIndex: "washroom", key: "washroom" },
     {
@@ -19,8 +20,8 @@ const DetailsTable = ({ tableData, authUser }) => {
     },
     {
       title: "Room Price/Seat",
-      dataIndex: "roomPricePerSeat",
-      key: "roomPricePerSeat",
+      dataIndex: "price",
+      key: "price",
     },
   ];
 
@@ -29,9 +30,9 @@ const DetailsTable = ({ tableData, authUser }) => {
       title: "Action",
       dataIndex: "",
       key: "x",
-      render: (data) => (
+      render: (room: Room) => (
         <CustomButton
-          onClick={() => applyForHostel(data)}
+          onClick={() => applyForHostel(room)}
           title={"Apply"}
           variant={"filled"}
           size={"small"}
@@ -40,7 +41,8 @@ const DetailsTable = ({ tableData, authUser }) => {
     });
   }
 
-  const applyForHostel = (data) => {
+  const applyForHostel = (room: Room) => {
+    console.log(room);
     navigate(`/hostel-application`);
   };
 
