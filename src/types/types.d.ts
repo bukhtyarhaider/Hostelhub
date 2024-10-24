@@ -26,6 +26,7 @@ export interface UserProfile {
 }
 
 export interface Hostel {
+  warden: Warden;
   id: string;
   name: string;
   email: string;
@@ -38,10 +39,21 @@ export interface Hostel {
 }
 
 export interface Room {
+  id?: string;
   roomNumber: string;
   type: "Single Room" | "Double Room" | "Shared Room" | "Bunker Room";
   numberOfBeds: number;
   washroom: number;
   seatsAvailable: number;
   price: number;
+}
+
+export interface Warden {
+  key?: string;
+  id?: string;
+  wardenId: string;
+  email: string;
+  fullName: string;
+  phoneNumber: string;
+  photoURL?: string;
 }
