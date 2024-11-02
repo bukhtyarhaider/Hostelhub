@@ -16,6 +16,22 @@ export const navItems = [
   },
 ];
 
+export const navItemsAsGuest = [
+  {
+    name: "Home",
+    url: "/",
+  },
+  {
+    name: "About",
+    url: "/about",
+  },
+  {
+    name: "Services",
+    url: "/services",
+  },
+]
+
+
 export interface AdCard {
   id: number;
   title: string;
