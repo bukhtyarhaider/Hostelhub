@@ -2,18 +2,20 @@
 
 .navBarContainer {
   @include flex(row, space-between, center);
-  padding: 30px 100px;
-  position: absolute;
+  padding: 20px 100px;
+  position: fixed;
   background-color: var(--blue);
   z-index: 1;
   right: 0;
   left: 0;
+
   .logoContainer {
     z-index: 1;
     animation: slideInFromLeft 1s;
     @include slideFromLeft;
     .logoWrapper {
-      width: 115px;
+      width: 125px;
+      height: auto;
       img {
         height: 100%;
         width: 100%;

@@ -34,6 +34,12 @@ export interface NavBarProps {
    */
   navItems: { name: string; url: string }[];
 
+
+   /**
+   * An array of navigation items as a guest, each containing a name and URL.
+   */
+  navItemsAsGuest: { name: string; url: string }[];
+
   /**
    * The authenticated user object.
    */

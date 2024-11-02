@@ -9,6 +9,7 @@ import { NavBarProps, ProfileMenuItem } from "./NavbarProps";
 
 const NavBar: React.FC<NavBarProps> = ({
   navItems,
+  navItemsAsGuest,
   authUser,
   profileMenu,
   onSignIn,
@@ -43,10 +44,25 @@ const NavBar: React.FC<NavBarProps> = ({
         </div>
       </div>
 
-      {authUser && (
+      {authUser ? (
         <div className={styles.menuContainer}>
           <ul>
             {navItems?.map((label, index) => (
+              <li key={label.name} onClick={() => setSelectedIndex(index)}>
+                <Link
+                  to={label.url}
+                  className={selectedIndex == index ? styles.active : ""}
+                >
+                  {label.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className={styles.menuContainer}>
+          <ul>
+            {navItemsAsGuest?.map((label, index) => (
               <li key={label.name} onClick={() => setSelectedIndex(index)}>
                 <Link
                   to={label.url}
