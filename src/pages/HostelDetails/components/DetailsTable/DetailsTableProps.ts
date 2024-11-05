@@ -1,7 +1,7 @@
 import { User } from "firebase/auth";
-import { Room } from "../../../../types/types";
+import { Hostel } from "../../../../types/types";
 
 export interface DetailsTableProps {
-  tableData: Room[];
+  tableData: Hostel;
   authUser: User | undefined;
 }

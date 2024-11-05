@@ -22,11 +22,38 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({
   };
 
   const handleSelectChange = (name: string, value: string) => {
-    setFormData({ ...formData, [name]: value });
+    if (name === "stayDuration") {
+      setFormData({ ...formData, startDate: "", endDate: "", [name]: value });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleDateChange = (name: string, date: any, dateString: string) => {
-    setFormData({ ...formData, [name]: dateString });
+    if (dateString) {
+      const startMoment = moment(dateString);
+      let endDate;
+
+      switch (formData.stayDuration) {
+        case "1-month":
+          endDate = startMoment.clone().add(1, "month");
+          break;
+        case "3-months":
+          endDate = startMoment.clone().add(3, "months");
+          break;
+        case "6-months":
+          endDate = startMoment.clone().add(6, "months");
+          break;
+        default:
+          return;
+      }
+
+      setFormData({
+        ...formData,
+        startDate: startMoment.format("YYYY-MM-DD"),
+        endDate: endDate.format("YYYY-MM-DD"),
+      });
+    }
   };
 
   return (
@@ -34,71 +61,28 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({
       <h3 className={styles.heading}>Booking Details</h3>
 
       <form className={styles.form}>
-        <div className={styles.inputContainer}>
-          <label>Hostel Name</label>
-          <div className={styles.input}>
-            <CustomInput
-              type="text"
-              name="hostelName"
-              placeholder="Downing Hostel"
-              label=""
-              disabled
-              value={formData.hostelName}
-              onChange={handleChange}
-            />
+        {["hostelName", "hostelType", "hostelId", "roomNumber"].map((field) => (
+          <div className={styles.inputContainer} key={field}>
+            <label>{field.replace(/([A-Z])/g, " $1")}</label>
+            <div className={styles.input}>
+              <CustomInput
+                type="text"
+                name={field}
+                placeholder={field === "hostelId" ? "142" : "Downing Hostel"}
+                label=""
+                disabled
+                value={formData[field]}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-        </div>
-
-        <div className={styles.inputContainer}>
-          <label>Hostel Type</label>
-          <div className={styles.input}>
-            <CustomInput
-              type="text"
-              name="hostelType"
-              placeholder="Student Accommodation"
-              label=""
-              disabled
-              value={formData.hostelType}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-
-        <div className={styles.inputContainer}>
-          <label>Hostel ID</label>
-          <div className={styles.input}>
-            <CustomInput
-              type="text"
-              name="hostelId"
-              placeholder="142"
-              label=""
-              disabled
-              value={formData.hostelId}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-
-        <div className={styles.inputContainer}>
-          <label>Room Number</label>
-          <div className={styles.input}>
-            <CustomInput
-              type="text"
-              name="roomNumber"
-              placeholder="DH-04"
-              label=""
-              disabled
-              value={formData.roomNumber}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
+        ))}
 
         <div className={styles.inputContainer}>
           <label>Room Type</label>
           <div className={styles.input}>
             <Select
-              defaultValue={formData.roomType}
+              value={formData.roomType}
               style={{ width: "100%" }}
               onChange={(value) => handleSelectChange("roomType", value)}
               disabled
@@ -113,7 +97,7 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({
           <label>Stay Duration</label>
           <div className={styles.input}>
             <Select
-              defaultValue={formData.stayDuration}
+              value={formData.stayDuration}
               style={{ width: "100%" }}
               onChange={(value) => handleSelectChange("stayDuration", value)}
             >
@@ -130,7 +114,7 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({
             <DatePicker
               style={{ width: "100%" }}
               onChange={(date, dateString) =>
-                handleDateChange("startDate", date, dateString)
+                handleDateChange("startDate", date, dateString[0])
               }
               placeholder="Select Date of Your Arrival"
               value={formData.startDate ? moment(formData.startDate) : null}
@@ -145,9 +129,10 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({
           <label>End Date</label>
           <div className={styles.input}>
             <DatePicker
+              disabled
               style={{ width: "100%" }}
               onChange={(date, dateString) =>
-                handleDateChange("endDate", date, dateString)
+                handleDateChange("endDate", date, dateString[0])
               }
               placeholder="Select Date of Your Departure"
               value={formData.endDate ? moment(formData.endDate) : null}

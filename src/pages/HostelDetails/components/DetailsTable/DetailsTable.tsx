@@ -42,13 +42,28 @@ const DetailsTable: React.FC<DetailsTableProps> = ({ tableData, authUser }) => {
   }
 
   const applyForHostel = (room: Room) => {
-    console.log(room);
-    navigate(`/hostel-application`);
+    const applicationDetails = {
+      fullName: authUser?.displayName,
+      email: authUser?.email,
+      phoneNumber: authUser?.phoneNumber,
+      hostelName: tableData.name,
+      hostelType: tableData.type,
+      hostelId: tableData.id,
+      roomNumber: room.roomNumber,
+      roomType: room.type,
+      hostelRent: room.price,
+    };
+
+    navigate(`/hostel-application`, {
+      state: {
+        applicationDetails: applicationDetails,
+      },
+    });
   };
 
   return (
     <div className={styles.detailsTableContainer}>
-      <Table columns={columns} dataSource={tableData} bordered />
+      <Table columns={columns} dataSource={tableData?.rooms} bordered />
     </div>
   );
 };

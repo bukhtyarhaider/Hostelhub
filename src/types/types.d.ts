@@ -57,3 +57,21 @@ export interface Warden {
   phoneNumber: string;
   photoURL?: string;
 }
+
+export interface BookingApplicationDetails {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  hostelName: string;
+  hostelType: string;
+  hostelId: string;
+  roomNumber: string;
+  roomType: string;
+  hostelRent: string;
+  stayDuration: string;
+  startDate: Date | null;
+  endDate: Date | null;
+  cnicFront: File | null;
+  cnicBack: File | null;
+  studentId: File | null;
+}
