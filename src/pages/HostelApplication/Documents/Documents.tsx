@@ -36,8 +36,11 @@ const UploadSection: React.FC<{
 }> = ({ data, formData, setFormData, errors, setErrors }) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files } = e.target;
-    setFormData({ ...formData, [name]: files[0] });
-    setErrors({ ...errors, [name]: "" }); // Clear the error for the selected file
+
+    if (files && files.length > 0) {
+      setFormData({ ...formData, [name]: files[0] });
+      setErrors({ ...errors, [name]: "" });
+    }
   };
 
   console.log("errors", errors);
