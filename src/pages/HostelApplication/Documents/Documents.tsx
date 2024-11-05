@@ -43,8 +43,6 @@ const UploadSection: React.FC<{
     }
   };
 
-  console.log("errors", errors);
-
   return (
     <div
       className={`${styles.uploadSection} ${
