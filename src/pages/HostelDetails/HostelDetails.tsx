@@ -62,7 +62,7 @@ const HostelDetails: React.FC<HostelDetailsProps> = ({ authUser }) => {
       key: "1",
       children: (
         <>
-          <DetailsTable tableData={hostelDetails?.rooms} authUser={authUser} />
+          <DetailsTable tableData={hostelDetails} authUser={authUser} />
           <div className={styles.description}>
             <h2>Description</h2>
             <p>{hostelDetails?.description}</p>
