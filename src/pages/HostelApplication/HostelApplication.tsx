@@ -23,6 +23,8 @@ const HostelApplication: React.FC = () => {
     fullName: applicationDetails?.fullName ?? "",
     email: applicationDetails?.email ?? "",
     phoneNumber: applicationDetails?.phoneNumber ?? "",
+    hostelLocation: applicationDetails?.hostelLocation ?? "",
+    hostelImage: applicationDetails?.hostelImage ?? "",
     hostelName: applicationDetails?.hostelName ?? "",
     hostelType: applicationDetails?.hostelType ?? "",
     hostelId: applicationDetails?.hostelId ?? "",

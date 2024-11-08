@@ -47,6 +47,8 @@ const DetailsTable: React.FC<DetailsTableProps> = ({ tableData, authUser }) => {
       email: authUser?.email,
       phoneNumber: authUser?.phoneNumber,
       hostelName: tableData.name,
+      hostelLocation: tableData.location,
+      hostelImage: tableData.images[0],
       hostelType: tableData.type,
       hostelId: tableData.id,
       roomNumber: room.roomNumber,
