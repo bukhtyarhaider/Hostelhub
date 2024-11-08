@@ -1,10 +1,36 @@
+import { useEffect, useState } from "react";
+
 import AdCard from "../../components/AdCard/AdCard";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import { adCardsData, hostelRequestsData } from "../../content";
+import { adCardsData } from "../../content";
 import HostelRequestsCard from "./HostelRequestsCard/HostelRequestsCard";
 import styles from "./MyRequests.module.scss";
+import { fetchMyBookingApplications } from "../../services/firebase";
+import { BookingApplication } from "../../types/types";
+import { message } from "antd";
+import { Loader } from "../../components/Loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 const MyRequests = () => {
+  const navigate = useNavigate();
+  const [requests, setRequests] = useState<BookingApplication[] | null>();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadRequests = async () => {
+      try {
+        const fetchedRequests = await fetchMyBookingApplications();
+        setRequests(fetchedRequests);
+      } catch (error) {
+        message.error(`Error fetching requests: ${error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadRequests();
+  }, []);
+
   return (
     <div className={styles.myRequestsContainer}>
       <div className={styles.hostelRequestsContainer}>
@@ -14,26 +40,29 @@ const MyRequests = () => {
             title={"Search More Hostels"}
             variant={"filled"}
             size={"medium"}
-            onClick={() => {}}
+            onClick={() => {
+              navigate("/");
+            }}
           />
         </div>
-
         <div className={styles.cardsContainer}>
-          {hostelRequestsData.map((data) => (
-            <div className={styles.card}>
-              <HostelRequestsCard
-                image={data.image}
-                title={data.title}
-                location={data.location}
-                type={data.type}
-                price={data.price}
-                status={data.status}
-                decisionDetails={data.decisionDetails}
-              />
-            </div>
-          ))}
+          {requests &&
+            requests.map((data, index) => (
+              <div key={index} className={styles.card}>
+                <HostelRequestsCard
+                  image={data.hostel.image}
+                  title={data.hostel.name}
+                  location={data.hostel.location}
+                  type={data.hostel.type}
+                  price={`Rs. ${data.booking.hostelRent}`}
+                  status={data.status}
+                  //decisionDetails={data?.decisionDetails ?? {}}
+                />
+              </div>
+            ))}
         </div>
       </div>
+      <Loader hide={!loading} />
 
       <h2 className={styles.heading}>More Hostels Like This</h2>
 
