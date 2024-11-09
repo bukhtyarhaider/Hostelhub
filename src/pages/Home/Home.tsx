@@ -5,11 +5,11 @@ import homeStyles from "./Home.module.scss";
 import { Filters } from "../../components/Filters/Filters";
 import AdCard from "../../components/AdCard/AdCard";
 import CTA from "../../components/CTA/CTA";
-import NoHostelFound from "../../components/NoHotelFound/NoHotelFound";
 import { HomeProps } from "./HomeProps";
 import { fetchHostel } from "../../services/firebase";
 import { Hostel } from "../../types/types";
 import { ClipLoader } from "react-spinners";
+import NotFound from "../../components/NotFound/NotFound";
 
 const Home = ({
   authUser,
@@ -97,7 +97,7 @@ const Home = ({
             </div>
           ))
         ) : (
-          <NoHostelFound />
+          <NotFound />
         )}
       </div>
     </div>

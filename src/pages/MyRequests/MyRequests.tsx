@@ -13,6 +13,7 @@ import { BookingApplication } from "../../types/types";
 import { message } from "antd";
 import { Loader } from "../../components/Loader/Loader";
 import { useNavigate } from "react-router-dom";
+import NotFound from "../../components/NotFound/NotFound";
 
 const MyRequests = () => {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ const MyRequests = () => {
           />
         </div>
         <div className={styles.cardsContainer}>
-          {requests &&
+          {requests && requests?.length > 0 ? (
             requests.map((data, index) => (
               <div key={index} className={styles.card}>
                 <HostelRequestsCard
@@ -84,7 +85,13 @@ const MyRequests = () => {
                   //decisionDetails={data?.decisionDetails ?? {}}
                 />
               </div>
-            ))}
+            ))
+          ) : (
+            <NotFound
+              title="No Hostel Requests Found"
+              message="After applying to any post, you will see the hostel requests here. Try applying to a room and come back to check your results."
+            />
+          )}
         </div>
       </div>
       <Loader hide={!loading} />
