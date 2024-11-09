@@ -5,7 +5,10 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import { adCardsData } from "../../content";
 import HostelRequestsCard from "./HostelRequestsCard/HostelRequestsCard";
 import styles from "./MyRequests.module.scss";
-import { fetchMyBookingApplications } from "../../services/firebase";
+import {
+  fetchMyBookingApplications,
+  observeAuthState,
+} from "../../services/firebase";
 import { BookingApplication } from "../../types/types";
 import { message } from "antd";
 import { Loader } from "../../components/Loader/Loader";
@@ -17,18 +20,40 @@ const MyRequests = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadRequests = async () => {
+    let isMounted = true;
+
+    const unsubscribe = observeAuthState(async (user) => {
+      if (user) {
+        await fetchData();
+      } else {
+        message.error("You need to sign in to view this page.");
+      }
+    });
+
+    const fetchData = async () => {
       try {
+        setLoading(true);
         const fetchedRequests = await fetchMyBookingApplications();
-        setRequests(fetchedRequests);
-      } catch (error) {
-        message.error(`Error fetching requests: ${error}`);
+        if (isMounted) {
+          setRequests(fetchedRequests);
+        }
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          message.error(`Error fetching requests: ${error.message}`);
+        } else {
+          message.error(
+            "Failed to fetch my requests data due to an unknown error."
+          );
+        }
       } finally {
         setLoading(false);
       }
     };
 
-    loadRequests();
+    return () => {
+      isMounted = false;
+      unsubscribe();
+    };
   }, []);
 
   return (
