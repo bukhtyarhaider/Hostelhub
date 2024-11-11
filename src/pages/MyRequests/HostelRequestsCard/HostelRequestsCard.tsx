@@ -11,7 +11,6 @@ const HostelRequestsCard: React.FC<HostelRequestsCardProps> = ({
   type,
   price,
   status,
-  decisionDetails,
 }) => {
   const [isDecisionModalOpen, setIsDecisionModalOpen] = useState(false);
 
@@ -41,30 +40,30 @@ const HostelRequestsCard: React.FC<HostelRequestsCardProps> = ({
                   toggleDecisionModal();
                 }}
                 size="small"
-                disabled={status === "Pending"}
+                disabled={status === "pending"}
               />
             </div>
           </div>
         </div>
         <div className={styles.rightSide}>
-          <CustomButton
-            title="Show Details"
-            variant="filled"
-            onClick={() => {
-              toggleDecisionModal();
-            }}
-            size="small"
-            disabled={status === "Pending"}
-          />
+          {status === "pending" ? (
+            <div className={styles.pending}>Pending</div>
+          ) : (
+            <CustomButton
+              title="Show Details"
+              variant="filled"
+              onClick={() => {
+                toggleDecisionModal();
+              }}
+              size="small"
+            />
+          )}
         </div>
-
-        {status === "Pending" && <div className={styles.pending}>Pending</div>}
       </div>
       <RequestDecisionModal
         isDecisionModalOpen={isDecisionModalOpen}
         toggleDecisionModal={toggleDecisionModal}
         status={status}
-        decisionDetails={decisionDetails}
       />
     </>
   );

@@ -8,7 +8,6 @@ const RequestDecisionModal: React.FC<RequestDecisionModalProps> = ({
   isDecisionModalOpen,
   toggleDecisionModal,
   status,
-  decisionDetails,
 }) => {
   return (
     <Modal
@@ -32,11 +31,9 @@ const RequestDecisionModal: React.FC<RequestDecisionModalProps> = ({
               <h3 className={styles.heading}>Decision Result:</h3>
               <div className={styles[status]}>{status}</div>
             </div>
+            {/* {TODO: Need to fix this Decision modal later} */}
             <div className={styles.cardContent}>
               <p className={styles.name}>Dear Miss Naomi!</p>
-              {decisionDetails.map((detail) => (
-                <p className={styles.inform}>{detail}</p>
-              ))}
 
               <p className={styles.signature}>Warden Signature</p>
               <p className={styles.date}>Dated: 2-May-2024</p>
@@ -51,7 +48,7 @@ const RequestDecisionModal: React.FC<RequestDecisionModalProps> = ({
             size={"medium"}
             onClick={toggleDecisionModal}
           />
-          {status === "Approved" && (
+          {status === "approved" && (
             <CustomButton
               title={"Book This Hostel"}
               variant={"filled"}

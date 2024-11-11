@@ -1,8 +1,4 @@
-/**
- * Props for the HostelRequestsCard component.
- */
-
-type Status = "Pending" | "Rejected" | "Approved";
+import { BookingApplicationStatus } from "../../../types/types";
 
 export interface HostelRequestsCardProps {
   /**
@@ -33,5 +29,5 @@ export interface HostelRequestsCardProps {
   /**
    * The status of the request decision.
    */
-  status: Status;
+  status: BookingApplicationStatus;
 }

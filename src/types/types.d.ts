@@ -1,3 +1,5 @@
+export type BookingApplicationStatus = "pending" | "approved" | "rejected";
+
 export interface SignUpForm {
   fullName: string;
   email: string;
@@ -62,6 +64,8 @@ export interface BookingApplicationDetails {
   fullName: string;
   email: string;
   phoneNumber: string;
+  hostelImage: string;
+  hostelLocation: string;
   hostelName: string;
   hostelType: string;
   hostelId: string;
@@ -74,4 +78,36 @@ export interface BookingApplicationDetails {
   cnicFront: File | null;
   cnicBack: File | null;
   studentId: File | null;
+}
+
+interface BookingApplication {
+  id: string;
+  userId: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  documents: {
+    cnicFront: string;
+    cnicBack: string;
+    studentId: string;
+  };
+  hostel: {
+    name: string;
+    type: string;
+    id: string;
+    location: string;
+    image: string;
+  };
+  booking: {
+    roomNumber: string;
+    roomType: string;
+    hostelRent: string;
+    stay: {
+      duration: string;
+      startDate: string;
+      endDate: string;
+    };
+  };
+  createdAt: Timestamp;
+  status: BookingApplicationStatus;
 }

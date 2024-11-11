@@ -21,6 +21,7 @@ import {
   where,
 } from "firebase/firestore";
 import {
+  BookingApplication,
   BookingApplicationDetails,
   Hostel,
   Room,
@@ -275,6 +276,8 @@ export const bookAHostel = async (
     phoneNumber,
     hostelName,
     hostelType,
+    hostelImage,
+    hostelLocation,
     hostelId,
     roomNumber,
     roomType,
@@ -297,7 +300,7 @@ export const bookAHostel = async (
   const queryConstraint = query(
     applicationsRef,
     where("userId", "==", currentUser.uid),
-    where("status", "==", "new"),
+    where("status", "==", "pending"),
     where("hostel.id", "==", hostelId),
     where("booking.roomNumber", "==", roomNumber)
   );
@@ -347,6 +350,8 @@ export const bookAHostel = async (
       name: hostelName,
       type: hostelType,
       id: hostelId,
+      location: hostelLocation,
+      image: hostelImage,
     },
     booking: {
       roomNumber,
@@ -359,8 +364,34 @@ export const bookAHostel = async (
       },
     },
     createdAt: Timestamp.now(),
-    status: "new",
+    status: "pending",
   });
 
   return "Booking application is successfully submitted.";
+};
+
+export const fetchMyBookingApplications = async (): Promise<
+  BookingApplication[]
+> => {
+  const currentUser = auth.currentUser;
+  if (!currentUser) {
+    throw new Error("No user is currently signed in.");
+  }
+
+  const applicationsRef = collection(db, "bookingApplications");
+
+  // Query to fetch booking applications of the current user
+  const userApplicationsQuery = query(
+    applicationsRef,
+    where("userId", "==", currentUser.uid)
+  );
+
+  const snapshot = await getDocs(userApplicationsQuery);
+
+  const applications: BookingApplication[] = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...(doc.data() as Omit<BookingApplication, "id">),
+  }));
+
+  return applications;
 };
