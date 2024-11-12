@@ -1,0 +1,54 @@
+@import "../../mixins";
+.authCTAContainer {
+  padding: 20px 30px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  background-color: var(--blue);
+  color: var(--secondary-text);
+  @include flex(row, space-between, center);
+  position: relative;
+
+  .contentWrapper {
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 28px;
+    }
+
+    p {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      margin: 0;
+    }
+  }
+
+  .buttonsWrapper {
+    @include flex(row, center, center);
+    gap: 10px;
+  }
+
+  .ctaBG {
+    position: absolute;
+    right: 29%;
+    bottom: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .authCTAContainer {
+    padding: 20px;
+    margin-inline: 20px;
+    @include flex(column, space-between, center);
+
+    .contentWrapper {
+      padding-bottom: 20px;
+    }
+
+    .buttonsWrapper {
+      z-index: 10;
+      @include flex(row, center, center);
+      gap: 10px;
+    }
+  }
+}
