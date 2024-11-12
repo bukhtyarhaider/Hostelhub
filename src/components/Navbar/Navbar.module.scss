@@ -2,8 +2,8 @@
 
 .navBarContainer {
   @include flex(row, space-between, center);
-  padding: 30px 100px;
-  position: absolute;
+  padding: 20px 100px;
+  position: fixed;
   background-color: var(--blue);
   z-index: 1;
   right: 0;
@@ -13,10 +13,9 @@
     z-index: 1;
     animation: slideInFromLeft 1s;
     @include slideFromLeft;
-
     .logoWrapper {
-      width: 115px;
-
+      width: 125px;
+      height: auto;
       img {
         height: 100%;
         width: 100%;
@@ -52,7 +51,6 @@
 
   .menuContainer {
     z-index: 1;
-
     ul {
       margin: 0;
       padding: 0;
@@ -62,7 +60,6 @@
       li {
         list-style: none;
         display: flex;
-
         a,
         .active {
           position: relative;
@@ -106,7 +103,6 @@
     margin: 0;
     width: 100% !important;
     cursor: pointer;
-
     .active {
       color: #ff0090;
     }
@@ -116,7 +112,6 @@
       cursor: pointer;
       font-weight: 500;
       width: 100% !important;
-
       li {
         border-radius: 8px;
         padding: 10px;
@@ -136,22 +131,10 @@
 .profile,
 .profileMobileView {
   @include flex(row, end, center);
-
   .profilePicWrapper {
     height: 32px;
     width: 32px;
-    background-color: #e0e0e0; 
-    border-radius: 50%; 
-
     img {
-      height: 100%;
-      width: 100%;
-      border-radius: 50%;
-    }
-
-    &:empty::before {
-      content: ""; 
-      display: block; 
       height: 100%;
       width: 100%;
       border-radius: 50%;
@@ -162,7 +145,6 @@
     padding-left: 10px;
     @include flex(row, center, center);
     color: white;
-
     p {
       padding-right: 10px;
       cursor: pointer;
@@ -191,7 +173,6 @@
     .logoContainer {
       .logoWrapper {
         width: 90px;
-
         img {
           height: 100%;
           width: 100%;

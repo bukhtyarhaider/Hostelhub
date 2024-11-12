@@ -2,7 +2,7 @@ import "./main.scss";
 import Home from "./pages/Home/Home";
 import { arrowRight, logoutIcon } from "./assets";
 import NavBar from "./components/Navbar/Navbar";
-import { navItems } from "./content";
+import { navItems, navItemsAsGuest } from "./content";
 import Footer from "./components/Footer/Footer";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Router from "./Router";
@@ -79,7 +79,8 @@ function App() {
             <>
               <NavBar
                 navItems={navItems}
-                authUser={authUser}
+                navItemsAsGuest={navItemsAsGuest}
+                authUser={authUser ?? null}
                 profileMenu={menuItem}
                 onResgister={() => {
                   toggleRegisterModal();

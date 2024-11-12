@@ -3,5 +3,5 @@ import { Hostel } from "../../../../types/types";
 
 export interface DetailsTableProps {
   tableData: Hostel;
-  authUser: User | undefined;
+  authUser: User | null;
 }
