@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-
-import AdCard from "../../components/AdCard/AdCard";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import { adCardsData } from "../../content";
 import HostelRequestsCard from "./HostelRequestsCard/HostelRequestsCard";
 import styles from "./MyRequests.module.scss";
 import {
@@ -95,22 +92,6 @@ const MyRequests = () => {
         </div>
       </div>
       <Loader hide={!loading} />
-
-      <h2 className={styles.heading}>More Hostels Like This</h2>
-
-      <div className={styles.cardsContainer}>
-        {adCardsData.slice(0, 2).map((item, index) => (
-          <div key={index}>
-            <AdCard
-              title={item.title}
-              description={item.description}
-              image={item.image}
-              location={item.location}
-              onShowDetails={() => {}}
-            />
-          </div>
-        ))}
-      </div>
     </div>
   );
 };

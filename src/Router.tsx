@@ -9,7 +9,7 @@ import Profile from "./pages/Profile/Profile";
 import { User } from "firebase/auth";
 
 interface RouterProps {
-  authUser?: User;
+  authUser?: User | null;
   toggleRegisterModal: () => void;
   toggleSignInModal: () => void;
 }
@@ -27,7 +27,7 @@ const Router: React.FC<RouterProps> = ({
           index
           element={
             <Home
-              authUser={authUser}
+              authUser={authUser ?? null}
               toggleRegisterModal={toggleRegisterModal}
               toggleSignInModal={toggleSignInModal}
             />
@@ -35,12 +35,9 @@ const Router: React.FC<RouterProps> = ({
         />
         <Route
           path="/hostel-details"
-          element={<HostelDetails authUser={authUser} />}
+          element={<HostelDetails authUser={authUser ?? null} />}
         />
-        <Route
-          path="/hostel-application"
-          element={<HostelApplication authUser={authUser ?? undefined} />}
-        />
+        <Route path="/hostel-application" element={<HostelApplication />} />
 
         <Route path="/my-hostel" element={<MyHostel />} />
         <Route path="/my-requests" element={<MyRequests />} />

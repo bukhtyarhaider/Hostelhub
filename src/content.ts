@@ -1,5 +1,4 @@
 import { cordIcon, facebookIcon, linkedInIcon, twitterIcon } from "./assets";
-import { DataType } from "./pages/HostelDetails/components/DetailsTable/DetailsTableProps";
 
 export const navItems = [
   {
@@ -130,109 +129,6 @@ export const hostelDetailsData = {
     spent_days: "12",
     remaining_days: "18",
   },
-};
-
-// TODO : Dummy data just for testing
-export const hostelDetailsTableData: DataType[] = [
-  {
-    key: 1,
-    roomNumber: "DH-01",
-    roomType: "Bunker Room",
-    numberOfBeds: "04",
-    washroom: "01",
-    seatsAvailable: "02",
-    roomPricePerSeat: "Rs. 14,000",
-  },
-  {
-    key: 2,
-    roomNumber: "DH-01",
-    roomType: "Bunker Room",
-    numberOfBeds: "04",
-    washroom: "01",
-    seatsAvailable: "02",
-    roomPricePerSeat: "Rs. 14,000",
-  },
-  {
-    key: 3,
-    roomNumber: "DH-01",
-    roomType: "Bunker Room",
-    numberOfBeds: "04",
-    washroom: "01",
-    seatsAvailable: "02",
-    roomPricePerSeat: "Rs. 14,000",
-  },
-  {
-    key: 4,
-    roomNumber: "DH-01",
-    roomType: "Bunker Room",
-    numberOfBeds: "04",
-    washroom: "01",
-    seatsAvailable: "02",
-    roomPricePerSeat: "Rs. 14,000",
-  },
-  {
-    key: 5,
-    roomNumber: "DH-01",
-    roomType: "Bunker Room",
-    numberOfBeds: "04",
-    washroom: "01",
-    seatsAvailable: "02",
-    roomPricePerSeat: "Rs. 14,000",
-  },
-  {
-    key: 6,
-    roomNumber: "DH-01",
-    roomType: "Bunker Room",
-    numberOfBeds: "04",
-    washroom: "01",
-    seatsAvailable: "02",
-    roomPricePerSeat: "Rs. 14,000",
-  },
-];
-
-// TODO : Dummy data just for testing
-export const hostelRequestsData = [
-  {
-    image: "https://picsum.photos/200",
-    title: "Downing Hostel",
-    location: "123, Downing Street, LA.",
-    type: "Single Room",
-    price: "PKR 15000",
-    status: "Pending",
-    decisionDetails: [],
-  },
-  {
-    image: "https://picsum.photos/210",
-    title: "Downing Hostel",
-    location: "123, Downing Street, LA.",
-    type: "Single Room",
-    price: "PKR 15000",
-    status: "Approved",
-    decisionDetails: [
-      "We’re pleased to inform you that your request for hostel accommodation has been approved. Please contact your immediate warden for payment and other details.",
-    ],
-  },
-  {
-    image: "https://picsum.photos/220",
-    title: "Downing Hostel",
-    location: "123, Downing Street, LA.",
-    type: "Single Room",
-    price: "PKR 15000",
-    status: "Rejected",
-    decisionDetails: [
-      "We’re regret to inform you that your request for hostel accommodation have been rejected. Please contact your immediate warden for reason of rejection and other details.",
-    ],
-  },
-];
-
-export const hostelDetailsDescriptionData = {
-  title: "Description",
-  description: [
-    "Lorem ipsum dolor sit amet consectetur. Lobortis quis ornare est velit cursus quam gravida tellus lobortis. Eget ut adipiscing convallis fames pretium sed pellentesque sit eget. Tristique dignissim vel tortor adipiscing quis ultricies. Massa odio duis risus orci maecenas in massa eget eget.",
-    "Lorem ipsum dolor sit amet consectetur. Vitae sagittis eget diam lacus. Sapien cras mauris sollicitudin dolor nec enim imperdiet.",
-    "Lorem ipsum dolor sit amet consectetur. At nibh pretium turpis tellus. Sit gravida non praesent nunc. Congue aliquam convallis malesuada amet diam orci vitae at vel. Maecenas sapien vestibulum morbi placerat id. Posuere venenatis mauris quam nisl aenean sed nulla vel. Tellus aliquet curabitur risus quis molestie iaculis pretium viverra vulputate. Libero porttitor quam vestibulum congue luctus amet. Et eget pharetra quis ac adipiscing eros sagittis justo lacus. Nibh cras tempus aenean mauris gravida lectus. Volutpat tincidunt enim arcu turpis est varius condimentum ut. Duis congue nunc faucibus turpis porttitor.",
-    "Lorem ipsum dolor sit amet consectetur. In dictum ipsum quis ullamcorper elit malesuada eget augue. Vel sed neque vulputate lectus urna faucibus ac pellentesque.",
-  ],
 };
 
 // TODO : Dummy data just for testing

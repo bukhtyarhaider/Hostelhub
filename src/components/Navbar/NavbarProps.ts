@@ -37,7 +37,7 @@ export interface NavBarProps {
   /**
    * The authenticated user object.
    */
-  authUser: User | undefined;
+  authUser: User | null;
 
   /**
    * An array of profile menu items.
