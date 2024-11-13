@@ -1,4 +1,4 @@
-import { BookingApplicationStatus } from "../../../types/types";
+import { BookingApplication } from "../../../types/types";
 
 export interface RequestDecisionModalProps {
   /**
@@ -11,8 +11,5 @@ export interface RequestDecisionModalProps {
    */
   toggleDecisionModal: () => void;
 
-  /**
-   * The status of the request decision.
-   */
-  status: BookingApplicationStatus;
+  applicationData: BookingApplication;
 }

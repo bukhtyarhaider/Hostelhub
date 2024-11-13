@@ -5,12 +5,7 @@ import styles from "./HostelRequestsCard.module.scss";
 import { HostelRequestsCardProps } from "./HostelRequestsCardProps";
 
 const HostelRequestsCard: React.FC<HostelRequestsCardProps> = ({
-  image,
-  title,
-  location,
-  type,
-  price,
-  status,
+  applicationData,
 }) => {
   const [isDecisionModalOpen, setIsDecisionModalOpen] = useState(false);
 
@@ -22,14 +17,14 @@ const HostelRequestsCard: React.FC<HostelRequestsCardProps> = ({
       <div className={styles.hostelRequestsCardContainer}>
         <div className={styles.contentContainer}>
           <div className={styles.imgWrapper}>
-            <img src={image} alt="Hostel" />
+            <img src={applicationData.hostel.image} alt="Hostel" />
           </div>
           <div className={styles.contentWrapper}>
             <div className={styles.content}>
-              <h2 className={styles.title}>{title}</h2>
-              <p>{location}</p>
-              <p>{type}</p>
-              <p>{price}</p>
+              <h2 className={styles.title}>{applicationData.hostel.name}</h2>
+              <p>{applicationData.hostel.location}</p>
+              <p>{applicationData.hostel.type}</p>
+              <p>{`Rs. ${applicationData.booking.hostelRent}`}</p>
             </div>
             <div className={styles.button}>
               <CustomButton
@@ -40,13 +35,13 @@ const HostelRequestsCard: React.FC<HostelRequestsCardProps> = ({
                   toggleDecisionModal();
                 }}
                 size="small"
-                disabled={status === "pending"}
+                disabled={applicationData.status === "pending"}
               />
             </div>
           </div>
         </div>
         <div className={styles.rightSide}>
-          {status === "pending" ? (
+          {applicationData.status === "pending" ? (
             <div className={styles.pending}>Pending</div>
           ) : (
             <CustomButton
@@ -63,7 +58,7 @@ const HostelRequestsCard: React.FC<HostelRequestsCardProps> = ({
       <RequestDecisionModal
         isDecisionModalOpen={isDecisionModalOpen}
         toggleDecisionModal={toggleDecisionModal}
-        status={status}
+        applicationData={applicationData}
       />
     </>
   );

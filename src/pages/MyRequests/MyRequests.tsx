@@ -72,15 +72,7 @@ const MyRequests = () => {
           {requests && requests?.length > 0 ? (
             requests.map((data, index) => (
               <div key={index} className={styles.card}>
-                <HostelRequestsCard
-                  image={data.hostel.image}
-                  title={data.hostel.name}
-                  location={data.hostel.location}
-                  type={data.hostel.type}
-                  price={`Rs. ${data.booking.hostelRent}`}
-                  status={data.status}
-                  //decisionDetails={data?.decisionDetails ?? {}}
-                />
+                <HostelRequestsCard applicationData={data} />
               </div>
             ))
           ) : (
