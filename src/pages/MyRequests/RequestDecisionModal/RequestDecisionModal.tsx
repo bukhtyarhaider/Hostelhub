@@ -9,6 +9,7 @@ const RequestDecisionModal: React.FC<RequestDecisionModalProps> = ({
   isDecisionModalOpen,
   toggleDecisionModal,
   applicationData,
+  onBookThisHostel,
 }) => {
   interface NoticeProps {
     application: BookingApplication;
@@ -131,6 +132,7 @@ const RequestDecisionModal: React.FC<RequestDecisionModalProps> = ({
           />
           {applicationData.status === "approved" && (
             <CustomButton
+              onClick={onBookThisHostel}
               title={"Book This Hostel"}
               variant={"filled"}
               size={"medium"}
