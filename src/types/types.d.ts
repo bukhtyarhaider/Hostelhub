@@ -61,6 +61,7 @@ export interface Warden {
 }
 
 export interface BookingApplicationDetails {
+  roomId: string;
   fullName: string;
   email: string;
   phoneNumber: string;
@@ -99,6 +100,7 @@ interface BookingApplication {
     image: string;
   };
   booking: {
+    roomId: string;
     roomNumber: string;
     roomType: string;
     hostelRent: string;

@@ -8,7 +8,7 @@ import ReviewConfirm from "./ReviewConfirm/ReviewConfirm";
 import ApplicationSent from "./ApplicationSent/ApplicationSent";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
-import { bookAHostel } from "../../services/firebase";
+import { bookingApplication } from "../../services/firebase";
 import { BookingApplicationDetails } from "../../types/types";
 
 const { Step } = Steps;
@@ -29,6 +29,7 @@ const HostelApplication: React.FC = () => {
     hostelType: applicationDetails?.hostelType ?? "",
     hostelId: applicationDetails?.hostelId ?? "",
     roomNumber: applicationDetails?.roomNumber ?? "",
+    roomId: applicationDetails?.roomId ?? "",
     roomType: applicationDetails?.roomType ?? "",
     hostelRent: applicationDetails?.hostelRent ?? "",
     stayDuration: "3-months",
@@ -110,7 +111,7 @@ const HostelApplication: React.FC = () => {
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
-      const response = await bookAHostel(formData);
+      const response = await bookingApplication(formData);
       console.log(response);
       message.success("Application Submitted!");
     } catch (error) {
@@ -120,8 +121,6 @@ const HostelApplication: React.FC = () => {
       setSubmitted(true);
       setIsLoading(false);
     }
-
-    navigate("/");
   };
 
   return (

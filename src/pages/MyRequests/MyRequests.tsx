@@ -4,6 +4,7 @@ import HostelRequestsCard from "./HostelRequestsCard/HostelRequestsCard";
 import styles from "./MyRequests.module.scss";
 import {
   fetchMyBookingApplications,
+  makeReservation,
   observeAuthState,
 } from "../../services/firebase";
 import { BookingApplication } from "../../types/types";
@@ -54,6 +55,18 @@ const MyRequests = () => {
     };
   }, []);
 
+  const BookThisHostel = async (application: BookingApplication) => {
+    try {
+      setLoading(true);
+      await makeReservation(application);
+      message.success("Application Submitted!");
+    } catch (error) {
+      message.error(`Error: ${error}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={styles.myRequestsContainer}>
       <div className={styles.hostelRequestsContainer}>
@@ -72,7 +85,12 @@ const MyRequests = () => {
           {requests && requests?.length > 0 ? (
             requests.map((data, index) => (
               <div key={index} className={styles.card}>
-                <HostelRequestsCard applicationData={data} />
+                <HostelRequestsCard
+                  applicationData={data}
+                  onBookThisHostel={() => {
+                    BookThisHostel(data);
+                  }}
+                />
               </div>
             ))
           ) : (
