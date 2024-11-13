@@ -6,12 +6,14 @@ import { HostelRequestsCardProps } from "./HostelRequestsCardProps";
 
 const HostelRequestsCard: React.FC<HostelRequestsCardProps> = ({
   applicationData,
+  onBookThisHostel,
 }) => {
   const [isDecisionModalOpen, setIsDecisionModalOpen] = useState(false);
 
   const toggleDecisionModal = () => {
     setIsDecisionModalOpen(!isDecisionModalOpen);
   };
+
   return (
     <>
       <div className={styles.hostelRequestsCardContainer}>
@@ -59,6 +61,10 @@ const HostelRequestsCard: React.FC<HostelRequestsCardProps> = ({
         isDecisionModalOpen={isDecisionModalOpen}
         toggleDecisionModal={toggleDecisionModal}
         applicationData={applicationData}
+        onBookThisHostel={() => {
+          toggleDecisionModal();
+          onBookThisHostel();
+        }}
       />
     </>
   );

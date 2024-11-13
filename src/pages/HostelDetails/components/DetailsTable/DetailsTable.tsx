@@ -54,6 +54,7 @@ const DetailsTable: React.FC<DetailsTableProps> = ({ tableData, authUser }) => {
       roomNumber: room.roomNumber,
       roomType: room.type,
       hostelRent: room.price,
+      roomId: room.id,
     };
 
     navigate(`/hostel-application`, {

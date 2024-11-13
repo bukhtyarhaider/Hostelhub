@@ -12,4 +12,6 @@ export interface RequestDecisionModalProps {
   toggleDecisionModal: () => void;
 
   applicationData: BookingApplication;
+
+  onBookThisHostel: () => void;
 }

@@ -118,6 +118,9 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({
               }
               placeholder="Select Date of Your Arrival"
               value={formData.startDate ? moment(formData.startDate) : null}
+              disabledDate={(current) =>
+                current && current < moment().startOf("day")
+              }
             />
             {errors.startDate && (
               <div className={styles.error}>{errors.startDate}</div>

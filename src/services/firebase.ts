@@ -18,6 +18,7 @@ import {
   query,
   setDoc,
   Timestamp,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import {
@@ -267,7 +268,7 @@ export const fetchHostel = async (): Promise<Hostel[]> => {
   }
 };
 
-export const bookAHostel = async (
+export const bookingApplication = async (
   applicationData: BookingApplicationDetails
 ) => {
   const {
@@ -288,6 +289,7 @@ export const bookAHostel = async (
     cnicFront,
     cnicBack,
     studentId,
+    roomId,
   } = applicationData;
 
   const currentUser = auth.currentUser;
@@ -305,7 +307,6 @@ export const bookAHostel = async (
     where("booking.roomNumber", "==", roomNumber)
   );
   const snapshot = await getDocs(queryConstraint);
-  console.log("snapshot:", snapshot);
 
   if (!snapshot.empty) {
     throw new Error("You already have a pending application for this room.");
@@ -354,6 +355,7 @@ export const bookAHostel = async (
       image: hostelImage,
     },
     booking: {
+      roomId,
       roomNumber,
       roomType,
       hostelRent,
@@ -394,4 +396,72 @@ export const fetchMyBookingApplications = async (): Promise<
   }));
 
   return applications;
+};
+
+export const makeReservation = async (application: BookingApplication) => {
+  try {
+    const reservationRef = doc(collection(db, "reservations"), application.id);
+
+    // Fetch warden details using hostelId
+    const wardensRef = collection(db, "wardens");
+    const wardenQuery = query(
+      wardensRef,
+      where("hostelId", "==", application.hostel.id)
+    );
+    const wardenSnapshot = await getDocs(wardenQuery);
+
+    let wardenDetails = {};
+    if (!wardenSnapshot.empty) {
+      const wardenDoc = wardenSnapshot.docs[0];
+      wardenDetails = wardenDoc.data();
+    }
+
+    // Fetch the room details to check availability and decrease seats
+    const roomRef = doc(
+      db,
+      `hostels/${application.hostel.id}/rooms`,
+      application.booking.roomId
+    );
+    const roomDoc = await getDoc(roomRef);
+
+    if (!roomDoc.exists()) {
+      throw new Error("Room not found.");
+    }
+
+    const roomData = roomDoc.data();
+    const seatsAvailable = roomData.seatsAvailable;
+
+    if (seatsAvailable <= 0) {
+      throw new Error("No seats available in this room.");
+    }
+
+    // Decrease seats available by one
+    await setDoc(
+      roomRef,
+      { seatsAvailable: seatsAvailable - 1 },
+      { merge: true }
+    );
+
+    // Create the reservation
+    const data = {
+      reservationDetails: application.booking,
+      hostel: application.hostel,
+      wardenDetails: wardenDetails,
+      createdAt: Timestamp.now(),
+    };
+
+    await setDoc(reservationRef, data);
+
+    const bookingApplicationRef = doc(
+      db,
+      "bookingApplications",
+      application.id
+    );
+    await updateDoc(bookingApplicationRef, { status: "reserved" });
+
+    return "Reservation successfully created.";
+  } catch (error: any) {
+    console.error("Error creating reservation:", error);
+    throw new Error(error.message || "Failed to create reservation.");
+  }
 };
