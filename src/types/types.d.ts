@@ -158,3 +158,12 @@ export interface Reservation {
   wardenDetails: WardenDetails;
   createdAt: Timestamp;
 }
+export interface HostelNotice {
+  id: string;
+  wardenId: string;
+  hostelId: string;
+  title: string;
+  body: string;
+  date: string;
+  viewed: boolean;
+}
