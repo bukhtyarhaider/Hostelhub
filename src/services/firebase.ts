@@ -25,6 +25,7 @@ import {
   BookingApplication,
   BookingApplicationDetails,
   Hostel,
+  Reservation,
   Room,
   SignUpForm,
   UpdateProfileParams,
@@ -442,8 +443,16 @@ export const makeReservation = async (application: BookingApplication) => {
       { merge: true }
     );
 
+    const reservationHolder = {
+      fullName: application.fullName,
+      userId: application.userId,
+      email: application.email,
+      phoneNumber: application.phoneNumber,
+    };
+
     // Create the reservation
     const data = {
+      reservationHolder: reservationHolder,
       reservationDetails: application.booking,
       hostel: application.hostel,
       wardenDetails: wardenDetails,
@@ -463,5 +472,47 @@ export const makeReservation = async (application: BookingApplication) => {
   } catch (error: any) {
     console.error("Error creating reservation:", error);
     throw new Error(error.message || "Failed to create reservation.");
+  }
+};
+
+export const fetchCurrentUserReservation = async (): Promise<Reservation> => {
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
+
+  if (!currentUser) {
+    throw new Error("No user is currently signed in.");
+  }
+
+  try {
+    // Query to fetch the current user's reservation
+    const reservationsRef = collection(db, "reservations");
+    const userReservationQuery = query(
+      reservationsRef,
+      where("reservationHolder.userId", "==", currentUser.uid)
+    );
+
+    const reservationSnapshot = await getDocs(userReservationQuery);
+
+    if (reservationSnapshot.empty) {
+      throw new Error("No reservation found for the current user.");
+    }
+
+    const reservationDoc = reservationSnapshot.docs[0];
+    const reservationData = reservationDoc.data();
+
+    const roomRef = doc(
+      db,
+      `hostels/${reservationData.hostel.id}/rooms`,
+      reservationData.reservationDetails.roomId
+    );
+    const roomDoc = await getDoc(roomRef);
+
+    if (roomDoc.exists()) {
+      reservationData.roomDetails = roomDoc.data();
+    }
+    return reservationData as Reservation;
+  } catch (error: any) {
+    console.error("Error fetching reservation:", error);
+    throw new Error(error.message || "Failed to fetch reservation.");
   }
 };
