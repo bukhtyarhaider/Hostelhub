@@ -91,16 +91,24 @@ const MyHostelNotices = () => {
     try {
       await markNoticeAsRead(noticeId);
       message.success(`Notice marked as read successfully.`);
+
+      const updatedNotices = notices.map((notice) => {
+        if (notice.id === noticeId) {
+          return { ...notice, viewed: true };
+        }
+        return notice;
+      });
+      setNotices(updatedNotices);
     } catch (error: unknown) {
       if (error instanceof Error) {
         message.error(error.message);
       } else {
-        message.error(`${error}`);
+        message.error(`An error occurred: ${error}`);
       }
     }
   };
 
-  if (!notices) {
+  if (!loading && notices.length === 0) {
     return (
       <div className={styles.myHostelNoticesContainer}>
         <NotFound
@@ -127,10 +135,7 @@ const MyHostelNotices = () => {
             <div className={styles.cardBody}>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: `${notice.body.slice(
-                    0,
-                    notice.body.length / 3
-                  )}......`,
+                  __html: `${notice.body.slice(0, 150)}......`,
                 }}
               />
               <br />
