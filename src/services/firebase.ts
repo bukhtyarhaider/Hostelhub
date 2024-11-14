@@ -25,6 +25,7 @@ import {
   BookingApplication,
   BookingApplicationDetails,
   Hostel,
+  HostelNotice,
   Reservation,
   Room,
   SignUpForm,
@@ -514,5 +515,65 @@ export const fetchCurrentUserReservation = async (): Promise<Reservation> => {
   } catch (error: any) {
     console.error("Error fetching reservation:", error);
     throw new Error(error.message || "Failed to fetch reservation.");
+  }
+};
+
+export const fetchHostelNotices = async () => {
+  try {
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+      throw new Error("No user is currently signed in.");
+    }
+
+    const reservationsRef = collection(db, "reservations");
+    const queryReservations = query(
+      reservationsRef,
+      where("reservationHolder.userId", "==", currentUser.uid)
+    );
+    const reservationSnapshot = await getDocs(queryReservations);
+
+    console.log(reservationSnapshot.docs[0].data());
+
+    if (reservationSnapshot.empty) {
+      throw new Error("No reservations found for the current user.");
+    }
+
+    const reservation = reservationSnapshot.docs[0].data();
+    if (!reservation.hostel.id) {
+      throw new Error("No hostel ID found in the reservation.");
+    }
+    const hostelId = reservation.hostel.id;
+
+    const noticesRef = collection(db, "notices");
+    const queryNotices = query(noticesRef, where("hostelId", "==", hostelId));
+    const noticesSnapshot = await getDocs(queryNotices);
+
+    if (noticesSnapshot.empty) {
+      console.log("No notices found for this hostel.");
+      return []; // Returning empty array if no notices found
+    }
+
+    return noticesSnapshot.docs.map(
+      (doc) =>
+        ({
+          id: doc.id,
+          ...doc.data(),
+        } as HostelNotice)
+    );
+  } catch (error: any) {
+    console.error("Error fetching hostel notices:", error);
+    throw new Error(error.message || "Failed to fetch hostel notices.");
+  }
+};
+
+export const markNoticeAsRead = async (noticeId: string) => {
+  try {
+    const noticeRef = doc(db, "notices", noticeId);
+    await updateDoc(noticeRef, {
+      viewed: true,
+    });
+  } catch (error: any) {
+    console.error("Error updating notice:", error);
+    throw new Error(error.message || "Error updating notice");
   }
 };

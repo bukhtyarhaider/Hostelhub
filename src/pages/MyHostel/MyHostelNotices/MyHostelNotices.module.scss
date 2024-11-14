@@ -3,6 +3,7 @@
 .myHostelNoticesContainer {
   padding: 20px 40px;
   background: var(--background);
+  min-height: 50vh;
   border-radius: 8px;
 
   .noticeCard {
@@ -69,6 +70,13 @@
   }
 
   .noticeDetail {
+
+    .backBtnContainer{
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+    }
+
     .title {
       font-size: 20px;
       font-weight: 700;
