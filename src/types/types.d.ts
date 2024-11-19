@@ -10,6 +10,7 @@ export interface UpdateProfileParams {
   fullName: string;
   phoneNumber: string;
   address: string;
+  gender: string;
   state: string;
   status: string;
   photoURL: string;
@@ -22,6 +23,7 @@ export interface UserProfile {
   dateOfBirth: string;
   email: string;
   currentStatus: string;
+  gender: string;
   phoneNumber: string;
   currentAddress: string;
   currentState: string;

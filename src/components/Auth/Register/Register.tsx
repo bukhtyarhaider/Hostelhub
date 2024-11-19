@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "../Auth.module.scss";
-import { Button, message, Modal } from "antd";
+import { Button, Col, message, Modal, Row } from "antd";
 import CustomInput from "../../CustomInput/CustomInput";
 import { RegisterProps } from "./RegisterProps";
 import { signUp } from "../../../services/firebase";
@@ -13,6 +13,8 @@ const Register: React.FC<RegisterProps> = ({
 }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [gender, setGender] = useState<string>(""); // Added state for gender
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [errors, setErrors] = useState<string>("");
@@ -33,6 +35,9 @@ const Register: React.FC<RegisterProps> = ({
     } else if (password !== confirmPassword) {
       newErrors = "Passwords do not match";
     }
+    if (!gender) newErrors = "Gender is required"; // Added gender validation
+
+    if (!phone) newErrors = "Phone is required";
 
     return newErrors;
   };
@@ -46,9 +51,11 @@ const Register: React.FC<RegisterProps> = ({
       setErrors("");
       setIsLoading(true);
       try {
-        await signUp({ fullName: name, email, password });
+        await signUp({ fullName: name, email, password, phone, gender }); // Added gender to signUp
         setName("");
         setEmail("");
+        setPhone("");
+        setGender(""); // Reset gender
         setPassword("");
         setConfirmPassword("");
 
@@ -101,23 +108,53 @@ const Register: React.FC<RegisterProps> = ({
             required
           />
           <CustomInput
-            type="password"
-            name="password"
-            value={password}
-            label="Password"
-            placeholder="Enter your password"
-            onChange={(e) => setPassword(e.target.value)}
+            type="text"
+            name="phone"
+            value={phone}
+            label="Phone Number"
+            placeholder="Enter your phone number"
+            onChange={(e) => setPhone(e.target.value)}
             required
           />
-          <CustomInput
-            type="password"
-            name="confirmPassword"
-            value={confirmPassword}
-            label="Confirm Password"
-            placeholder="Enter your confirm password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
+          <div className={styles.selectContainer}>
+            <label>Gender</label>
+            <select
+              name="gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              required
+            >
+              <option value="">Select your gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <Row gutter={16}>
+            <Col span={12}>
+              <CustomInput
+                type="password"
+                name="password"
+                value={password}
+                label="Password"
+                placeholder="Enter password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </Col>
+            <Col span={12}>
+              <CustomInput
+                type="password"
+                name="confirmPassword"
+                value={confirmPassword}
+                label="Confirm Password"
+                placeholder="Enter confirm password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </Col>
+          </Row>
 
           <div className={styles.errorMessage}>{errors}</div>
           <div className={styles.buttons}>
