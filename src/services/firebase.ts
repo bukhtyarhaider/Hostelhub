@@ -50,7 +50,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 export const signUp = async (userData: SignUpForm) => {
-  const { fullName, email, password } = userData;
+  const { fullName, email, password, phoneNumber, gender } = userData;
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -69,6 +69,8 @@ export const signUp = async (userData: SignUpForm) => {
       fullName,
       email,
       createdAt: Timestamp.now(),
+      phoneNumber,
+      gender,
     });
 
     return user;
@@ -187,6 +189,7 @@ export const getProfile = async (): Promise<UserProfile> => {
         currentAddress: userData?.address ?? "",
         dateOfBirth: userData?.dateOfBirth ?? "",
         currentStatus: userData?.status ?? "",
+        gender: userData?.status ?? "",
       };
     } else {
       throw new Error("User data not found.");
@@ -213,6 +216,7 @@ export const fetchHostel = async (): Promise<Hostel[]> => {
           description: hostel.data()?.description ?? "",
           images: hostel.data()?.images ?? "",
           rooms: [],
+          gender: hostel.data()?.gender ?? "",
           warden: {
             wardenId: "",
             email: "",
