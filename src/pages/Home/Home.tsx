@@ -45,15 +45,17 @@ const Home = ({
     name: string;
     location: string;
     type: string;
+    gender: string;
   }) => {
-    const { name, location, type } = filters;
+    const { name, location, type, gender } = filters;
 
     const filtered = hostelData.filter(
       (item) =>
         (!name || item.name.toLowerCase().includes(name.toLowerCase())) &&
         (!location ||
           item.location.toLowerCase().includes(location.toLowerCase())) &&
-        (!type || item.type.toLowerCase().includes(type.toLowerCase()))
+        (!type || item.type.toLowerCase().includes(type.toLowerCase())) &&
+        (!gender || item?.gender.toLowerCase().includes(gender?.toLowerCase()))
     );
 
     setFilteredData(filtered);
@@ -85,7 +87,6 @@ const Home = ({
                 description={hostel.description}
                 image={hostel.images[0]}
                 location={hostel.location}
-                // onShowDetails={() => navigate(`/hostel-details/${hostel.id}`)}
                 onShowDetails={() =>
                   navigate("/hostel-details", {
                     state: {
