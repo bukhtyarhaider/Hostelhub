@@ -14,7 +14,7 @@ const Register: React.FC<RegisterProps> = ({
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
-  const [gender, setGender] = useState<string>(""); // Added state for gender
+  const [gender, setGender] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [errors, setErrors] = useState<string>("");
@@ -35,7 +35,7 @@ const Register: React.FC<RegisterProps> = ({
     } else if (password !== confirmPassword) {
       newErrors = "Passwords do not match";
     }
-    if (!gender) newErrors = "Gender is required"; // Added gender validation
+    if (!gender) newErrors = "Gender is required";
 
     if (!phone) newErrors = "Phone is required";
 
@@ -51,11 +51,17 @@ const Register: React.FC<RegisterProps> = ({
       setErrors("");
       setIsLoading(true);
       try {
-        await signUp({ fullName: name, email, password, phone, gender }); // Added gender to signUp
+        await signUp({
+          fullName: name,
+          email,
+          phoneNumber: phone,
+          gender,
+          password,
+        });
         setName("");
         setEmail("");
         setPhone("");
-        setGender(""); // Reset gender
+        setGender("");
         setPassword("");
         setConfirmPassword("");
 
