@@ -121,6 +121,10 @@ const Profile = () => {
       newErrors.currentState = "Current State is required";
     }
 
+    if (!userData?.gender) {
+      newErrors.gender = "Gender is required";
+    }
+
     return newErrors;
   };
 
@@ -155,6 +159,7 @@ const Profile = () => {
             address: userData?.currentAddress,
             state: userData?.currentState,
             status: userData?.currentStatus,
+            gender: userData?.gender,
             photoURL: profileImageUrl,
             dateOfBirth: userData?.dateOfBirth,
           });
@@ -281,6 +286,23 @@ const Profile = () => {
           {errors.currentStatus && (
             <div className={styles.error}>{errors.currentStatus}</div>
           )}
+        </div>
+
+        <div className={styles.inputContainer}>
+          <label>Gender</label>
+          <div className={styles.input}>
+            <Select
+              defaultValue={userData?.gender}
+              value={userData?.gender}
+              style={{ width: "100%" }}
+              onChange={(value) => handleSelectChange("gender", value)}
+            >
+              <Option value="Male">Male</Option>
+              <Option value="Female">Female</Option>
+              <Option value="Other">Other</Option>
+            </Select>
+          </div>
+          {errors.gender && <div className={styles.error}>{errors.gender}</div>}
         </div>
 
         <div className={styles.inputContainer}>

@@ -3,13 +3,17 @@ export type BookingApplicationStatus = "pending" | "approved" | "rejected";
 export interface SignUpForm {
   fullName: string;
   email: string;
+  gender: string;
+  phoneNumber: string;
   password: string;
+  comfirmPassword?: string;
 }
 
 export interface UpdateProfileParams {
   fullName: string;
   phoneNumber: string;
   address: string;
+  gender: string;
   state: string;
   status: string;
   photoURL: string;
@@ -22,6 +26,7 @@ export interface UserProfile {
   dateOfBirth: string;
   email: string;
   currentStatus: string;
+  gender: string;
   phoneNumber: string;
   currentAddress: string;
   currentState: string;
@@ -37,6 +42,7 @@ export interface Hostel {
   type: "Student" | "Staff" | "Vistor";
   description: string;
   images: string[];
+  gender: "male" | "female" | "both";
   rooms?: Room[];
 }
 

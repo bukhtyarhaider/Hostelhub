@@ -13,5 +13,6 @@ export interface FiltersProps {
     name: string;
     location: string;
     type: string;
+    gender: string;
   }) => void;
 }

@@ -82,6 +82,30 @@
       }
     }
   }
+
+  .selectContainer {
+    label {
+      padding: 5px 0;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    select {
+      width: 100%;
+      height: 50px;
+      border: 0.5px solid #858d9d;
+      border-radius: 5px;
+      padding: 0 10px;
+    }
+  }
+
+  .inputGroup {
+    display: flex;
+
+    input {
+      width: 50%;
+    }
+  }
 }
 
 @media screen and (max-width: 767px) {
