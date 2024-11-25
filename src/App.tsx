@@ -90,7 +90,7 @@ function App() {
                 }}
               />
               <Router
-                authUser={authUser}
+                authUser={authUser ?? null}
                 toggleRegisterModal={toggleRegisterModal}
                 toggleSignInModal={toggleSignInModal}
               />

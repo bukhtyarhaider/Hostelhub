@@ -11,7 +11,7 @@ import Services from "./pages/Services/Services";
 import { User } from "firebase/auth";
 
 interface RouterProps {
-  authUser?: User;
+  authUser?: User | null;
   toggleRegisterModal: () => void;
   toggleSignInModal: () => void;
 }
