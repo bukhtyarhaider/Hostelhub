@@ -125,6 +125,11 @@ interface ReservationHolder {
   userId: string;
   email: string;
   phoneNumber: string;
+  documents: {
+    cnicFront: string;
+    cnicBack: string;
+    studentId?: string;
+  };
 }
 
 interface StayDetails {

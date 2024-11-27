@@ -453,6 +453,7 @@ export const makeReservation = async (application: BookingApplication) => {
       userId: application.userId,
       email: application.email,
       phoneNumber: application.phoneNumber,
+      documents: application.documents,
     };
 
     // Create the reservation
@@ -554,7 +555,7 @@ export const fetchHostelNotices = async () => {
 
     if (noticesSnapshot.empty) {
       console.log("No notices found for this hostel.");
-      return []; // Returning empty array if no notices found
+      return [];
     }
 
     return noticesSnapshot.docs.map(
