@@ -463,10 +463,12 @@ export const makeReservation = async (application: BookingApplication) => {
       hostel: application.hostel,
       wardenDetails: wardenDetails,
       createdAt: Timestamp.now(),
+      id: application.id,
     };
 
     await setDoc(reservationRef, data);
 
+    // Update booking application status
     const bookingApplicationRef = doc(
       db,
       "bookingApplications",
@@ -474,7 +476,24 @@ export const makeReservation = async (application: BookingApplication) => {
     );
     await updateDoc(bookingApplicationRef, { status: "reserved" });
 
-    return "Reservation successfully created.";
+    const paymentsRef = collection(
+      db,
+      `reservations/${application.id}/payments`
+    );
+    const paymentId = doc(paymentsRef).id;
+
+    const paymentData = {
+      status: "pending",
+      dueDate: application.booking.stay.startDate,
+      method: "",
+      amount: application.booking.hostelRent,
+      createdAt: Timestamp.now(),
+      id: paymentId,
+    };
+
+    await setDoc(doc(paymentsRef, paymentId), paymentData);
+
+    return "Hostel room is successfully reserved.";
   } catch (error: any) {
     console.error("Error creating reservation:", error);
     throw new Error(error.message || "Failed to create reservation.");
