@@ -113,10 +113,13 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({
           <div className={styles.input}>
             <DatePicker
               style={{ width: "100%" }}
-              onChange={(date, dateString) =>
-                handleDateChange("startDate", date, dateString[0])
-              }
-              placeholder="Select Date of Your Arrival"
+              onChange={(date, dateString) => {
+                const dateStr = Array.isArray(dateString)
+                  ? dateString[0]
+                  : dateString;
+                handleDateChange("startDate", date, dateStr);
+              }}
+              placeholder="Select Date of Birth"
               value={formData.startDate ? moment(formData.startDate) : null}
               disabledDate={(current) =>
                 current && current < moment().startOf("day")
