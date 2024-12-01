@@ -1,0 +1,106 @@
+@import "../../../mixins";
+.modalBody {
+  padding: 10px 30px;
+  .header {
+    @include flex(row, space-between, center);
+    .title {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 38px;
+    }
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  .body {
+    padding-top: 40px;
+    .card {
+      border-radius: 6px;
+      border: 1px;
+      border: 1px solid #f0f1f3;
+      padding: 20px;
+      .cardHeader {
+        @include flex(row, space-between, center);
+        .heading {
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 18px;
+        }
+
+        .Approved,
+        .Rejected {
+          padding: 8px 28px;
+          border-radius: 74px;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 20px;
+        }
+
+        .Rejected {
+          color: #ed2034;
+          background: linear-gradient(
+              0deg,
+              rgba(237, 32, 52, 0.15),
+              rgba(237, 32, 52, 0.15)
+            ),
+            linear-gradient(
+              0deg,
+              rgba(255, 255, 255, 0.2),
+              rgba(255, 255, 255, 0.2)
+            );
+
+          border: 1px solid #ed2034;
+        }
+
+        .Approved {
+          color: #01ab31;
+          background: linear-gradient(
+              0deg,
+              rgba(1, 171, 49, 0.15),
+              rgba(1, 171, 49, 0.15)
+            ),
+            linear-gradient(
+              0deg,
+              rgba(255, 255, 255, 0.2),
+              rgba(255, 255, 255, 0.2)
+            );
+          border: 1px solid #01ab31;
+        }
+      }
+
+      .cardContent {
+        .name,
+        .inform {
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 18px;
+          padding-top: 20px;
+          color: #1a1a1a;
+        }
+        .signature {
+          font-family: "Italianno", cursive;
+          font-size: 22.4px;
+          font-weight: 400;
+          line-height: 14.4px;
+          color: #1a1a1a;
+          padding-top: 20px;
+          padding-bottom: 5px;
+        }
+
+        .date {
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 18px;
+        }
+      }
+    }
+  }
+
+  .footer {
+    @include flex(row, center, center);
+    gap: 20px;
+    padding: 30px 0;
+  }
+}
