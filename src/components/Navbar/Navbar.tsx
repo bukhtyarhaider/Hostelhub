@@ -79,7 +79,7 @@ const NavBar: React.FC<NavBarProps> = ({
       {authUser ? (
         <div className={styles.profile}>
           <div className={styles.profilePicWrapper}>
-            <img src={authUser.image || "https://picsum.photos/200"} />
+            <img src={authUser?.photoURL ?? "https://picsum.photos/200"} />
           </div>
 
           <Dropdown
@@ -89,7 +89,7 @@ const NavBar: React.FC<NavBarProps> = ({
             }}
           >
             <div className={styles.nameWrapper}>
-              <p>{authUser.name}</p>
+              <p>{authUser?.displayName ?? ""}</p>
               <DownOutlined />
             </div>
           </Dropdown>
@@ -128,7 +128,7 @@ const NavBar: React.FC<NavBarProps> = ({
           <div className={styles.mobileView}>
             <div className={styles.profileMobileView}>
               <div className={styles.profilePicWrapper}>
-                <img src="https://picsum.photos/200" />
+                <img src={authUser?.photoURL ?? "https://picsum.photos/200"} />
               </div>
 
               <Dropdown
@@ -138,7 +138,7 @@ const NavBar: React.FC<NavBarProps> = ({
                 }}
               >
                 <div className={styles.nameWrapper}>
-                  <p>{authUser.name}</p>
+                  <p>{authUser.displayName}</p>
                   <DownOutlined />
                 </div>
               </Dropdown>

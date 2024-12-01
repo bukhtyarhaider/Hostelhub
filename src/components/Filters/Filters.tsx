@@ -5,9 +5,10 @@ import { FiltersProps } from "./FiltersProps";
 
 export const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
   const [filters, setFilters] = useState({
-    hostelName: "",
+    name: "",
     location: "",
     type: "",
+    gender: "",
   });
 
   const handleInputChange = (
@@ -24,12 +25,12 @@ export const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
   return (
     <div className={styles.filtersContainer}>
       <div className={styles.imgContainer}>
-        <h2>Let’s Find Your Next Home</h2>
+        <h2>Let's Find Your Next Home</h2>
         <div className={styles.fieldsWrapper}>
           <CustomInput
             type="text"
-            name="hostelName"
-            value={filters.hostelName}
+            name="name"
+            value={filters.name}
             label=""
             placeholder="Hostel Name"
             onChange={handleInputChange}
@@ -42,17 +43,32 @@ export const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
             placeholder="Location"
             onChange={handleInputChange}
           />
-          <select
-            name="type"
-            value={filters.type}
-            onChange={handleInputChange}
-            className={styles.customSelect}
-          >
-            <option value="">Select Type</option>
-            <option value="boys">Boys Hostel</option>
-            <option value="girls">Girls Hostel</option>
-            <option value="co-ed">Co-ed Hostel</option>
-          </select>
+          <div className={styles.selectContainer}>
+            <select
+              name="type"
+              value={filters.type}
+              onChange={handleInputChange}
+              className={styles.select}
+            >
+              <option value="">Select Type</option>
+              <option value="Student">Student</option>
+              <option value="Staff">Staff</option>
+              <option value="Vistor">Vistor</option>
+            </select>
+          </div>
+          <div className={styles.selectContainer}>
+            <select
+              name="gender"
+              value={filters.gender}
+              onChange={handleInputChange}
+              className={styles.select}
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="both">Both</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>

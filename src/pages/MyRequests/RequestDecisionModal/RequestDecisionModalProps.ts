@@ -1,6 +1,5 @@
-/**
- * Props for the RequestDecisionModal component.
- */
+import { BookingApplication } from "../../../types/types";
+
 export interface RequestDecisionModalProps {
   /**
    * Flag to determine if the decision modal is open.
@@ -12,8 +11,7 @@ export interface RequestDecisionModalProps {
    */
   toggleDecisionModal: () => void;
 
-  /**
-   * The status of the request decision.
-   */
-  status: 'Approved' | 'Rejected' | 'Pending';
+  applicationData: BookingApplication;
+
+  onBookThisHostel: () => void;
 }

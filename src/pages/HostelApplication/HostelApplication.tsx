@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Steps, message } from "antd";
 import styles from "./HostelApplication.module.scss";
 import BookingDetails from "./BookingDetails/BookingDetails";
@@ -6,32 +6,52 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import Documents from "./Documents/Documents";
 import ReviewConfirm from "./ReviewConfirm/ReviewConfirm";
 import ApplicationSent from "./ApplicationSent/ApplicationSent";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Loader } from "../../components/Loader/Loader";
+import { bookingApplication } from "../../services/firebase";
+import { BookingApplicationDetails } from "../../types/types";
 
 const { Step } = Steps;
 
-const initialFormData = {
-  fullName: "John Doe",
-  email: "LcH0O@example.com",
-  phoneNumber: "1234567890",
-  hostelName: "Downing Hostel",
-  hostelType: "Student Accommodation",
-  hostelId: "142",
-  roomNumber: "DH-04",
-  roomType: "Single Room",
-  hostelRent: "1000",
-  stayDuration: "3-months",
-  startDate: null,
-  endDate: null,
-  cnicFront: null,
-  cnicBack: null,
-  studentId: null,
-};
-
 const HostelApplication: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const applicationDetails: any = location.state?.applicationDetails;
+
+  const initialFormData: BookingApplicationDetails = {
+    fullName: applicationDetails?.fullName ?? "",
+    email: applicationDetails?.email ?? "",
+    phoneNumber: applicationDetails?.phoneNumber ?? "",
+    hostelLocation: applicationDetails?.hostelLocation ?? "",
+    hostelImage: applicationDetails?.hostelImage ?? "",
+    hostelName: applicationDetails?.hostelName ?? "",
+    hostelType: applicationDetails?.hostelType ?? "",
+    hostelId: applicationDetails?.hostelId ?? "",
+    roomNumber: applicationDetails?.roomNumber ?? "",
+    roomId: applicationDetails?.roomId ?? "",
+    roomType: applicationDetails?.roomType ?? "",
+    hostelRent: applicationDetails?.hostelRent ?? "",
+    stayDuration: "3-months",
+    startDate: null,
+    endDate: null,
+    cnicFront: null,
+    cnicBack: null,
+    studentId: null,
+  };
+
   const [current, setCurrent] = useState(0);
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] =
+    useState<BookingApplicationDetails>(initialFormData);
   const [errors, setErrors] = useState<any>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!applicationDetails) {
+      navigate("/");
+    }
+  }, [applicationDetails, navigate]);
 
   const steps = [
     {
@@ -88,10 +108,19 @@ const HostelApplication: React.FC = () => {
     setCurrent(current - 1);
   };
 
-  const handleSubmit = () => {
-    console.log("Form Data:", formData);
-    message.success("Application Submitted!");
-    setSubmitted(true);
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+      const response = await bookingApplication(formData);
+      console.log(response);
+      message.success("Application Submitted!");
+    } catch (error) {
+      console.error("Error uploading user data and images:", error);
+      message.error(`Error: ${error}`);
+    } finally {
+      setSubmitted(true);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -126,7 +155,9 @@ const HostelApplication: React.FC = () => {
                 variant="filled"
                 size="medium"
                 extraWidth
-                onClick={() => handleSubmit()}
+                onClick={() => {
+                  handleSubmit();
+                }}
               />
             )}
             {current < steps.length - 1 && (
@@ -135,10 +166,13 @@ const HostelApplication: React.FC = () => {
                 variant="outline"
                 size="medium"
                 extraWidth
-                onClick={() => next()}
+                onClick={() => {
+                  next();
+                }}
               />
             )}
           </div>
+          {<Loader hide={!isLoading} />}
         </div>
       ) : (
         <ApplicationSent />

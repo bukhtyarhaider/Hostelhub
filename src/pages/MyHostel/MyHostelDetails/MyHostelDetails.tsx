@@ -1,90 +1,181 @@
+import { differenceInDays } from "date-fns";
+import { useEffect, useState } from "react";
 import { infoIcon } from "../../../assets";
-import { hostelDetailsData } from "../../../content";
+import { Flex, message, Progress } from "antd";
 import styles from "./MyHostelDetails.module.scss";
-import { Flex, Progress } from "antd";
+import {
+  fetchCurrentUserReservation,
+  observeAuthState,
+} from "../../../services/firebase";
+import { Loader } from "../../../components/Loader/Loader";
+import { Reservation } from "../../../types/types";
+import NotFound from "../../../components/NotFound/NotFound";
 
 const MyHostelDetails = () => {
-  const spentDays = hostelDetailsData.reservation_overview.spent_days;
-  const totalDays = hostelDetailsData.reservation_overview.total_days;
-  const percent = (spentDays / totalDays) * 100;
+  const [reservationData, setReservationData] = useState<Reservation>();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const unsubscribe = observeAuthState(async (user) => {
+      if (user) {
+        await fetchData();
+      } else {
+        message.error("You need to sign in to view this page.");
+      }
+    });
+
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = (await fetchCurrentUserReservation()) as Reservation;
+        if (isMounted) setReservationData(data);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          message.error(`Error fetching reservation: ${error.message}`);
+        } else {
+          message.error(
+            "Failed to fetch reservation data due to an unknown error."
+          );
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    return () => {
+      isMounted = false;
+      unsubscribe();
+    };
+  }, []);
+
+  if (loading) {
+    return (
+      <div className={styles.myHostelDetailsContainer}>
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!reservationData) {
+    return (
+      <div className={styles.myHostelDetailsContainer}>
+        <NotFound
+          title={"No reservation found"}
+          message={"No Hostel is reserved yet."}
+        />
+      </div>
+    );
+  }
+
+  const { hostel, reservationDetails, wardenDetails, reservationHolder } =
+    reservationData;
+  // Calculate total days of reservation
+  const startDate = new Date(reservationDetails.stay.startDate);
+  const endDate = new Date(reservationDetails.stay.endDate);
+  const currentDate = new Date();
+
+  const totalDays = differenceInDays(endDate, startDate);
+  const spentDays = differenceInDays(currentDate, startDate);
+  const remainingDays = differenceInDays(endDate, currentDate);
+  const daysUntilStart = differenceInDays(startDate, currentDate);
+
+  // Calculate the percentage of days spent
+  const percent = ((spentDays / totalDays) * 100).toFixed(2);
+  // Check if the reservation has started
+  const hasStarted = currentDate >= startDate;
 
   return (
     <div className={styles.myHostelDetailsContainer}>
-      <h3 className={styles.title}>{hostelDetailsData.hostel_name}</h3>
-
+      <h3 className={styles.title}>{hostel.name}</h3>
       <div className={styles.cardsContainer}>
         <div className={styles.card}>
           <h4 className={styles.cardTitle}>Reservation Holder Details</h4>
           <div className={styles.detail}>
             <h5>Reservation Holder Name:</h5>
-            <p>{hostelDetailsData.reservation_holder_details.holder_name}</p>
+            <p>{reservationHolder.fullName}</p>
           </div>
           <div className={styles.detail}>
             <h5>Reservation Holder Email:</h5>
-            <p>{hostelDetailsData.reservation_holder_details.holder_email}</p>
+            <p>{reservationHolder.email}</p>
           </div>
           <div className={styles.detail}>
             <h5>Reservation Holder Phone Number:</h5>
-            <p>
-              {hostelDetailsData.reservation_holder_details.holder_phone_number}
-            </p>
+            <p>{reservationHolder.phoneNumber}</p>
           </div>
           <div className={styles.detail}>
             <h5>Start Date:</h5>
-            <p>{hostelDetailsData.reservation_holder_details.start_date}</p>
+            <p>{reservationDetails.stay.startDate}</p>
           </div>
           <div className={styles.detail}>
             <h5>End Date:</h5>
-            <p>{hostelDetailsData.reservation_holder_details.end_date}</p>
+            <p>{reservationDetails.stay.endDate}</p>
           </div>
         </div>
         <div className={styles.card}>
           <h4 className={styles.cardTitle}>Reservation Overview</h4>
           <div className={styles.notice}>
             <div className={styles.iconWrapper}>
-              <img src={infoIcon} />
+              <img src={infoIcon} alt="Info Icon" />
             </div>
             <div className={styles.contentWrapper}>
               <h2>Important:</h2>
-              <p>{hostelDetailsData.reservation_overview.alert}</p>
+              <p>
+                {`Your profile details have been used for your reservation at “${hostel.name}”. These details can't be changed manually by your user portal. Contact your warden if you wish to change anything`}
+              </p>
             </div>
           </div>
-
           <div className={styles.daysDetails}>
             <div className={styles.daysHeader}>
               <h2>Days</h2>
               <h2>
-                {hostelDetailsData.reservation_overview.spent_days} of{" "}
-                {hostelDetailsData.reservation_overview.total_days} Days
+                {spentDays} of {totalDays} Days
               </h2>
             </div>
             <Flex vertical gap="small">
               <Progress
                 strokeLinecap="butt"
-                percent={percent}
+                percent={Number(percent)}
                 showInfo={false}
               />
             </Flex>
-
-            <p className={styles.daysDescription}>
-              {hostelDetailsData.reservation_overview.remaining_days} days
-              remaining until your reservation
-            </p>
+            {!hasStarted ? (
+              <p className={styles.daysDescription}>
+                Your reservation will start in {daysUntilStart} days.
+              </p>
+            ) : remainingDays >= 0 ? (
+              <p className={styles.daysDescription}>
+                {remainingDays} days remaining until your reservation ends.
+              </p>
+            ) : (
+              <p className={styles.daysDescription}>
+                Your reservation is over. Contact admin to renew.
+              </p>
+            )}
           </div>
         </div>
         <div className={styles.card}>
           <h4 className={styles.cardTitle}>Hostel Details</h4>
           <div className={styles.detail}>
+            <h5>Hostel Name:</h5>
+            <p>{hostel.name}</p>
+          </div>
+          <div className={styles.detail}>
+            <h5>Hostel Location:</h5>
+            <p>{hostel.location}</p>
+          </div>
+          <div className={styles.detail}>
             <h5>Warden Name:</h5>
-            <p>{hostelDetailsData.hostel_details.warden_name}</p>
+            <p>{wardenDetails.fullName}</p>
           </div>
           <div className={styles.detail}>
             <h5>Warden Email:</h5>
-            <p>{hostelDetailsData.hostel_details.warden_email}</p>
+            <p>{wardenDetails.email}</p>
           </div>
           <div className={styles.detail}>
             <h5>Warden Number:</h5>
-            <p>{hostelDetailsData.hostel_details.warden_phone_number}</p>
+            <p>{wardenDetails.phoneNumber}</p>
           </div>
         </div>
       </div>

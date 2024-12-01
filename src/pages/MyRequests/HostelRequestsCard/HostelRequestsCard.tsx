@@ -5,32 +5,28 @@ import styles from "./HostelRequestsCard.module.scss";
 import { HostelRequestsCardProps } from "./HostelRequestsCardProps";
 
 const HostelRequestsCard: React.FC<HostelRequestsCardProps> = ({
-  image,
-  title,
-  location,
-  type,
-  price,
-  status,
-  decisionDetails,
+  applicationData,
+  onBookThisHostel,
 }) => {
   const [isDecisionModalOpen, setIsDecisionModalOpen] = useState(false);
 
   const toggleDecisionModal = () => {
     setIsDecisionModalOpen(!isDecisionModalOpen);
   };
+
   return (
     <>
       <div className={styles.hostelRequestsCardContainer}>
         <div className={styles.contentContainer}>
           <div className={styles.imgWrapper}>
-            <img src={image} alt="Hostel" />
+            <img src={applicationData.hostel.image} alt="Hostel" />
           </div>
           <div className={styles.contentWrapper}>
             <div className={styles.content}>
-              <h2 className={styles.title}>{title}</h2>
-              <p>{location}</p>
-              <p>{type}</p>
-              <p>{price}</p>
+              <h2 className={styles.title}>{applicationData.hostel.name}</h2>
+              <p>{applicationData.hostel.location}</p>
+              <p>{applicationData.hostel.type}</p>
+              <p>{`Rs. ${applicationData.booking.hostelRent}`}</p>
             </div>
             <div className={styles.button}>
               <CustomButton
@@ -41,30 +37,34 @@ const HostelRequestsCard: React.FC<HostelRequestsCardProps> = ({
                   toggleDecisionModal();
                 }}
                 size="small"
-                disabled={status === "Pending"}
+                disabled={applicationData.status === "pending"}
               />
             </div>
           </div>
         </div>
         <div className={styles.rightSide}>
-          <CustomButton
-            title="Show Details"
-            variant="filled"
-            onClick={() => {
-              toggleDecisionModal();
-            }}
-            size="small"
-            disabled={status === "Pending"}
-          />
+          {applicationData.status === "pending" ? (
+            <div className={styles.pending}>Pending</div>
+          ) : (
+            <CustomButton
+              title="Show Details"
+              variant="filled"
+              onClick={() => {
+                toggleDecisionModal();
+              }}
+              size="small"
+            />
+          )}
         </div>
-
-        {status === "Pending" && <div className={styles.pending}>Pending</div>}
       </div>
       <RequestDecisionModal
         isDecisionModalOpen={isDecisionModalOpen}
         toggleDecisionModal={toggleDecisionModal}
-        status={status}
-        decisionDetails={decisionDetails}
+        applicationData={applicationData}
+        onBookThisHostel={() => {
+          toggleDecisionModal();
+          onBookThisHostel();
+        }}
       />
     </>
   );

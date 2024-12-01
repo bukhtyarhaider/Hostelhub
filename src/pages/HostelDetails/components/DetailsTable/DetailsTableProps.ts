@@ -1,9 +1,7 @@
-export interface DataType {
-  key: React.Key;
-  roomNumber: string;
-  roomType: string;
-  numberOfBeds: string;
-  washroom: string;
-  seatsAvailable: string;
-  roomPricePerSeat: string;
+import { User } from "firebase/auth";
+import { Hostel } from "../../../../types/types";
+
+export interface DetailsTableProps {
+  tableData: Hostel;
+  authUser: User | null;
 }

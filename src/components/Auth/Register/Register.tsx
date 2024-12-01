@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import styles from "../Auth.module.scss";
-import { Button, Modal } from "antd";
+import { Button, Col, message, Modal, Row } from "antd";
 import CustomInput from "../../CustomInput/CustomInput";
 import { RegisterProps } from "./RegisterProps";
+import { signUp } from "../../../services/firebase";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Register: React.FC<RegisterProps> = ({
   isSignInModalOpen,
   showRegisterModal,
   showSignInModal,
 }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [gender, setGender] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [errors, setErrors] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const validate = () => {
     let newErrors = "";
@@ -30,18 +35,47 @@ const Register: React.FC<RegisterProps> = ({
     } else if (password !== confirmPassword) {
       newErrors = "Passwords do not match";
     }
+    if (!gender) newErrors = "Gender is required";
+
+    if (!phone) newErrors = "Phone is required";
 
     return newErrors;
   };
 
-  const onRegister = (e: React.FormEvent) => {
+  const onRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
       setErrors("");
-      // TODO:  Handle registration logic here
+      setIsLoading(true);
+      try {
+        await signUp({
+          fullName: name,
+          email,
+          phoneNumber: phone,
+          gender,
+          password,
+        });
+        setName("");
+        setEmail("");
+        setPhone("");
+        setGender("");
+        setPassword("");
+        setConfirmPassword("");
+
+        message.success("Successfully signed up!");
+        showRegisterModal();
+      } catch (error: unknown) {
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred during signup. Please try again later.";
+        message.error(`Signup failed: ${errorMessage}`);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -60,7 +94,7 @@ const Register: React.FC<RegisterProps> = ({
           Welcome! Please enter your details to create an account.
         </p>
 
-        <form onSubmit={onRegister}>
+        <form onSubmit={isLoading ? () => {} : onRegister}>
           <CustomInput
             type="text"
             name="name"
@@ -80,28 +114,58 @@ const Register: React.FC<RegisterProps> = ({
             required
           />
           <CustomInput
-            type="password"
-            name="password"
-            value={password}
-            label="Password"
-            placeholder="Enter your password"
-            onChange={(e) => setPassword(e.target.value)}
+            type="text"
+            name="phone"
+            value={phone}
+            label="Phone Number"
+            placeholder="Enter your phone number"
+            onChange={(e) => setPhone(e.target.value)}
             required
           />
-          <CustomInput
-            type="password"
-            name="confirmPassword"
-            value={confirmPassword}
-            label="Confirm Password"
-            placeholder="Enter your confirm password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
+          <div className={styles.selectContainer}>
+            <label>Gender</label>
+            <select
+              name="gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              required
+            >
+              <option value="">Select your gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <Row gutter={16}>
+            <Col span={12}>
+              <CustomInput
+                type="password"
+                name="password"
+                value={password}
+                label="Password"
+                placeholder="Enter password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </Col>
+            <Col span={12}>
+              <CustomInput
+                type="password"
+                name="confirmPassword"
+                value={confirmPassword}
+                label="Confirm Password"
+                placeholder="Enter confirm password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </Col>
+          </Row>
 
           <div className={styles.errorMessage}>{errors}</div>
           <div className={styles.buttons}>
             <Button type="primary" htmlType="submit">
-              Register
+              {isLoading ? <ClipLoader size="25" color="white" /> : "Register"}
             </Button>
             <Button onClick={showRegisterModal}>Cancel</Button>
           </div>

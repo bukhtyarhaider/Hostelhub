@@ -1,8 +1,15 @@
 import { useState } from "react";
 import styles from "./CustomGallery.module.scss";
 import { locationIcon } from "../../../../assets";
+import { CustomGalleryProps } from "./CustomGalleryProps";
 
-const CustomGallery = ({ title, subTitle, images }) => {
+const CustomGallery = ({
+  title,
+  subTitle,
+  images,
+  wardenProfile,
+  location,
+}: CustomGalleryProps) => {
   const [galleryImages, setGalleryImages] = useState<string[]>(images);
 
   function moveToZeroIndex(index: number) {
@@ -10,11 +17,11 @@ const CustomGallery = ({ title, subTitle, images }) => {
       throw new Error("Index out of bounds");
     }
 
-    const updatedImages = [...galleryImages]; // Create a copy of the current images
-    const element = updatedImages.splice(index, 1)[0]; // Remove the element at the specified index
-    updatedImages.unshift(element); // Insert the removed element at the beginning
+    const updatedImages = [...galleryImages];
+    const element = updatedImages.splice(index, 1)[0];
+    updatedImages.unshift(element);
 
-    setGalleryImages(updatedImages); // Update the state with the new array
+    setGalleryImages(updatedImages);
   }
 
   return (
@@ -22,7 +29,13 @@ const CustomGallery = ({ title, subTitle, images }) => {
       <div className={styles.top}>
         <div className={styles.imageContainer}>
           <div className={styles.imageWrapper}>
-            <img src={galleryImages[0]} alt="Main" />
+            {galleryImages.length > 0 ? (
+              <img src={galleryImages[0]} alt="Main" />
+            ) : (
+              <div className={styles.noImagePlaceholder}>
+                No hostel photos available yet
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.contentContainer}>
@@ -30,37 +43,47 @@ const CustomGallery = ({ title, subTitle, images }) => {
             <div className={styles.profileCard}>
               <div className={styles.profile}>
                 <div className={styles.profilePicWrapper}>
-                  <img src="https://picsum.photos/200" />
+                  {wardenProfile?.profileImageUrl ? (
+                    <img
+                      src={wardenProfile.profileImageUrl}
+                      alt="Warden Profile"
+                    />
+                  ) : (
+                    <div className={styles.avatarPlaceholder}>
+                      {wardenProfile?.name?.charAt(0) ?? "W"}
+                    </div>
+                  )}
                 </div>
                 <div className={styles.profileContent}>
-                  <h2>Robert Morris</h2>
+                  <h2>{wardenProfile.name ?? "Warden Name"}</h2>
                   <p>Hostel Warden</p>
                 </div>
               </div>
             </div>
+            {/* Location Card */}
             <div className={styles.LocationCard}>
               <h2>Location</h2>
               <p>
                 <span>
-                  <img src={locationIcon} />
+                  <img src={locationIcon} alt="Location Icon" />
                 </span>
-                123, downing street, LA.
+                {location}
               </p>
             </div>
           </div>
           <div className={styles.imagesList}>
-            {galleryImages.slice(1).map((image: string, index: number) => (
-              <div
-                className={styles.imgWrapper}
-              
-                onClick={() => {
-                  moveToZeroIndex(index + 1); // Adjust index to account for slicing
-                }}
-                key={index}
-              >
-                <img src={image} alt={`Thumbnail ${index + 1}`} />
-              </div>
-            ))}
+            {Array.isArray(galleryImages) &&
+              galleryImages.slice(1).map((image: string, index: number) => (
+                <div
+                  className={styles.imgWrapper}
+                  onClick={() => {
+                    moveToZeroIndex(index + 1);
+                  }}
+                  key={index}
+                >
+                  <img src={image} alt={`Thumbnail ${index + 1}`} />
+                </div>
+              ))}
           </div>
         </div>
       </div>

@@ -2,16 +2,16 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import HostelDetails from "./pages/HostelDetails/HostelDetails";
-import { User } from "./types/types";
 import HostelApplication from "./pages/HostelApplication/HostelApplication";
 import MyHostel from "./pages/MyHostel/MyHostel";
 import MyRequests from "./pages/MyRequests/MyRequests";
 import Profile from "./pages/Profile/Profile";
 import About from "./pages/About/About";
 import Services from "./pages/Services/Services";
+import { User } from "firebase/auth";
 
 interface RouterProps {
-  authUser?: User;
+  authUser?: User | null;
   toggleRegisterModal: () => void;
   toggleSignInModal: () => void;
 }
@@ -29,20 +29,17 @@ const Router: React.FC<RouterProps> = ({
           index
           element={
             <Home
-              authUser={authUser ?? undefined}
+              authUser={authUser ?? null}
               toggleRegisterModal={toggleRegisterModal}
               toggleSignInModal={toggleSignInModal}
             />
           }
         />
         <Route
-          path="/hostel-details/:id"
-          element={<HostelDetails authUser={authUser ?? undefined} />}
+          path="/hostel-details/"
+          element={<HostelDetails authUser={authUser ?? null} />}
         />
-        <Route
-          path="/hostel-application"
-          element={<HostelApplication authUser={authUser ?? undefined} />}
-        />
+        <Route path="/hostel-application" element={<HostelApplication />} />
 
         <Route path="/my-hostel" element={<MyHostel />} />
         <Route path="/my-requests" element={<MyRequests />} />

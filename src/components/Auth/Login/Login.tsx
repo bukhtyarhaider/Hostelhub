@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styles from "../Auth.module.scss";
-import { Modal, Button } from "antd";
+import { Modal, Button, message } from "antd";
 import CustomInput from "../../CustomInput/CustomInput";
 import { Link } from "react-router-dom";
 import { LoginProps } from "./LoginProps";
+import { signIn } from "../../../services/firebase";
+import { ClipLoader } from "react-spinners";
 
 /**
  * Login component renders a login modal.
@@ -16,9 +18,10 @@ const Login: React.FC<LoginProps> = ({
   showSignInModal,
   showRegisterModal,
 }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const validate = () => {
     let newErrors = "";
@@ -29,7 +32,7 @@ const Login: React.FC<LoginProps> = ({
     return newErrors;
   };
 
-  const onSignIn = (e: React.FormEvent) => {
+  const onSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const validationErrors = validate();
@@ -37,7 +40,22 @@ const Login: React.FC<LoginProps> = ({
       setErrors(validationErrors);
     } else {
       setErrors("");
-      // TODO: onSignIn Handle sign-in logic here
+      setIsLoading(true);
+      try {
+        await signIn(email, password);
+        setEmail("");
+        setPassword("");
+        showSignInModal();
+        message.success("Successfully signed up!");
+      } catch (error: unknown) {
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred during signup. Please try again later.";
+        message.error(`Signup failed: ${errorMessage}`);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -91,7 +109,7 @@ const Login: React.FC<LoginProps> = ({
 
           <div className={styles.buttons}>
             <Button type="primary" htmlType="submit">
-              Sign in
+              {isLoading ? <ClipLoader size="25" color="white" /> : "Sign in"}
             </Button>
             <Button onClick={showSignInModal}>Cancel</Button>
           </div>
