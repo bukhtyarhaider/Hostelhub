@@ -56,7 +56,7 @@ export const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
               <option value="Vistor">Vistor</option>
             </select>
           </div>
-          <div className={styles.selectContainer}>
+          {/* <div className={styles.selectContainer}>
             <select
               name="gender"
               value={filters.gender}
@@ -68,7 +68,7 @@ export const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
               <option value="female">Female</option>
               <option value="both">Both</option>
             </select>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

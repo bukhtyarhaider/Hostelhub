@@ -2,6 +2,7 @@
 
 .customInputContainer {
   @include flex(column, center, start);
+  min-width: 350px;
 
   label {
     font-size: 14px;
