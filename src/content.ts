@@ -247,15 +247,15 @@ export const hostelNoticeCardsData = [
 export const socialIcons = [
   {
     icon: twitterIcon,
-    url: "/",
+    url: "https://twitter.com/",
   },
   {
     icon: linkedInIcon,
-    url: "/",
+    url: "https://www.linkedin.com/feed/",
   },
   {
     icon: facebookIcon,
-    url: "/",
+    url: "https://www.facebook.com/",
   },
   {
     icon: cordIcon,
