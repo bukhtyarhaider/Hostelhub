@@ -140,6 +140,7 @@ const Register: React.FC<RegisterProps> = ({
           <Row gutter={16}>
             <Col span={12}>
               <CustomInput
+                size="small"
                 type="password"
                 name="password"
                 value={password}
@@ -151,6 +152,7 @@ const Register: React.FC<RegisterProps> = ({
             </Col>
             <Col span={12}>
               <CustomInput
+                size="small"
                 type="password"
                 name="confirmPassword"
                 value={confirmPassword}
