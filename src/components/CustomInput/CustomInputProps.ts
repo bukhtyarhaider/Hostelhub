@@ -1,12 +1,10 @@
-import React from "react";
-
 /**
  * Props for the CustomInput component.
  */
 export interface CustomInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
-   * The type of the input field.
+   * The type of the input field (e.g., "text", "password", "email").
    */
   type: string;
 
@@ -29,6 +27,12 @@ export interface CustomInputProps
    * The label text for the input field.
    */
   label?: string;
+
+  /**
+   * The size of the input field.
+   * Default is "small". Other sizes can be added later.
+   */
+  size?: "small" | "default";
 
   /**
    * Event handler for the input change.

@@ -9,12 +9,15 @@ const CustomInput: React.FC<CustomInputProps> = ({
   disabled,
   value,
   label,
+  size = "default",
   onChange,
   ...rest
 }) => {
-  const inputClassName = `${styles["customInputContainer"]} ${
-    disabled ? styles["isDisabled"] : ""
-  } `;
+  const inputClassName = `
+    ${styles.customInputContainer} 
+    ${size === "small" ? styles["customInputContainer--small"] : ""} 
+    ${disabled ? styles["isDisabled"] : ""}
+  `.trim();
 
   return (
     <div className={inputClassName}>

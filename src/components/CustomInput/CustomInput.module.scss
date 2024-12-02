@@ -21,6 +21,7 @@
     width: 100%; // Ensure the input takes full width within its container
   }
 
+  
   @media (max-width: 768px) {
     input {
       min-width: 300px; // Adjust minimum width for tablets
@@ -42,9 +43,18 @@
   }
 }
 
+.customInputContainer--small {
+  min-width: 200px;
+
+  input {
+    min-width: 200px; 
+  }
+}
+
 .isDisabled {
   input {
     cursor: not-allowed;
     background-color: #f0f1f3;
   }
 }
+
